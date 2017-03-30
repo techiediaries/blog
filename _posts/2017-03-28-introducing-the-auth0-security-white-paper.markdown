@@ -67,7 +67,7 @@ Below, you can view the table of contents for the whitepaper. The whole document
 - Summary
 ```
 
-We hope that by releasing the security whitepaper, we can achieve greater transparency with our customers and the whole community of developers, partners, security experts, and etc. We also hope that by making this information publicly available and concise in one document, interested parties will feel more confident about Auth0's practices and processes.
+We hope that by releasing the security whitepaper, we can achieve greater transparency with our customers and the whole community of developers, security experts and partners. We also hope that by making this information publicly available and concise in one document, interested parties will feel more confident about Auth0's practices and processes.
 
 Lastly, we’d really love to encourage interested parties to analyze, question, and comment our approach to security. Please, feel free to ping us if you have any doubts or suggestions.
 
