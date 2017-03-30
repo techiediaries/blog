@@ -11,7 +11,7 @@ author:
   avatar: "https://www.gravatar.com/avatar/76ea40cbf67675babe924eecf167b9b8?s=60"
 design:
   bg_color: #000
-  image: <A PATH TO A 200x200 IMAGE>
+  image: https://cdn.auth0.com/blog/security-whitepaper/logo.png
 tags:
 - auth0
 - security
