@@ -34,11 +34,11 @@ In this tutorial, we'll learn how to set up Vapor framework, learn its essential
 
 ## Swift Server Side Prerequisites
 
-You need a machine running Mac OS X 10.11+ or Linux. Apple builds and tests binaries for Ubuntu 14.04, 16.04, and 16.10, but it's possible to build the language from source in other Linux distributions. You can download the binaries [here](https://swift.org/download/).
+You will need a machine running Mac OS X 10.11+ or Linux. Apple builds and tests binaries for Ubuntu 14.04, 16.04, and 16.10, but it's possible to build the language from source in other Linux distributions. You can download the binaries [here](https://swift.org/download/).
 
 ## Setting up Swift and Vapor
 
-First of all, we need to [download and install Swift 3](https://swift.org/download/) (the steps are different for Ubuntu and macOS). After that, it's necessary to install the [Vapor Toolbox](https://github.com/vapor/toolbox), a command line interface for common Vapor tasks, as `build` and `serve`. Run the following script to install the Toolbox.
+First of all, we will need to [download and install Swift 3](https://swift.org/download/) (the steps are different for Ubuntu and macOS). After that, it's necessary to install the [Vapor Toolbox](https://github.com/vapor/toolbox), a command line interface for common Vapor tasks, like `build` and `serve`. Run the following script to install the Toolbox.
 
 ```
 curl -sL toolbox.vapor.sh | bash
@@ -90,10 +90,9 @@ vapor run serve
 
 And it should be done. Now Vapor is serving its HelloWorld page on `localhost:8080`. To check that things are working out, just open your browser and type [`http://localhost:8080`](http://localhost:8080).
 
-
 ## Bulding a Contacts App
 
-Now that we have our server-side Swift environment working with Vapor, we are going to create our Contacts App. This application will have two features: add a new contact and retrieve all contacts. But first of all, let's check out how Droplet works.
+Now that we have our server-side Swift environment working with Vapor, we are going to create our Contacts App. This application will enable users to add new contacts and to retrieve all contacts. But first of all, let's check out how Droplet works.
 
 ### Playing with Droplet
 
@@ -118,7 +117,7 @@ drop.get("hello") { request in
 }
 ```
 
-The first parameter is the endpoint, and the closure returns a response to the request. The returned value must be of a type that conforms to the [`ResponseRepresentable` protocol](https://vapor.github.io/documentation/http/response-representable.html). Strings and JSON already conform to this protocol, but it's also possible to create a [custom response](https://vapor.github.io/documentation/http/response-representable.html).
+The first parameter is the endpoint URN, and the closure returns a response to the request. The returned value must be of a type that conforms to the [`ResponseRepresentable` protocol](https://vapor.github.io/documentation/http/response-representable.html). Strings and JSON already conform to this protocol, but it's also possible to create a [custom response](https://vapor.github.io/documentation/http/response-representable.html).
 
 ```swift
 drop.get("hello") { request in
@@ -146,9 +145,7 @@ curl -i -H "Content-Type: application/json" \
   "localhost:8080/contacts/create"
 ```
 
-
 Don't forget to run `vapor build` and `vapor run serve` before testing it.
-
 
 ### MySQL installation
 
@@ -199,7 +196,7 @@ Run `vapor build` to install them. After that, you'll need to manually [create a
   "encoding": "utf8"
 }
 ```
-> Note: Replace `your-user-name` and `your-password` with the username and passwords that you defined when creating the database.
+> Note: Replace `<your-user-name>` and `<your-password>` with the username and passwords that you defined when creating the database.
 
 Still in the `/config` subdirectory, create a new subdirectory named `/secrets`. Copy and paste the `mysql.json` file above in the secrets subdirectory.
 
@@ -277,7 +274,7 @@ func makeNode(context: Context) throws -> Node {
 }
 ```
 
-Finally, the it's necessary to add an identifier to the model. Just add this single line as another `Contact` property:
+Finally, it's necessary to add an identifier to the model. Just add this single line as another `Contact` property:
 
 ```swift
 var id: Node?
@@ -354,7 +351,7 @@ Content-Length: 39
 {"message":"Contacts must have a name"}
 ```
 
-If the sent data passes the validation, a new contact is created, saved in the database and returned as a response, so the client is able to know the contact id. The following command create John, with john@gmail.com email address, in the database.
+If the data sent passes the validation, a new contact is created, saved in the database and returned as a response, so the client is able to know the contact id. The following command create John, with john@gmail.com email address, in the database.
 
 ```
 curl -i -H "Content-Type: application/json" -X POST -d '{"name": "John", "email": "john@gmail.com"}' "localhost:8080/contacts/create"
