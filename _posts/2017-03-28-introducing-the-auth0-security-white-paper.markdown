@@ -25,14 +25,14 @@ related:
 
 At Auth0, we have built state-of-the-art security into our product so our customers can take advantage of cutting edge features designed to protect their users and business. But features aren't enough. We go beyond best practices in our security program, so other businesses can rely on us to help keep the bad guys out, and simplify letting the good guys in. Need proof? Check out the [security whitepaper that we have just released](https://auth0.com/security).
 
-This whitepaper is an analysis and explanation of how we handle security. In this document, we have detailed our approach to this subject from many different perspectives. We discuss how we deal with *People and Processes*, how we handle *Disaster Recovery and Backup* and much more. With this information, our customers can better understand how their data is protected and what measures we actively take to guarantee that sensitive data won't fall into the wrong hands.
+This whitepaper is an analysis and explanation of how we handle security. In this document, we have detailed our approach to this subject from many different perspectives. We discuss how we deal with *People and Processes*, how we handle *Disaster Recovery and Backup*, and much more. With this information, our customers can better understand how their data is protected and what measures we actively take to guarantee that sensitive data won't fall into the wrong hands.
 
 Below, you can view the table of contents for the whitepaper. The whole document can be found [here](https://auth0.com/security).
 
 ```bash
 - Introduction
 - Dedicated Security Team
-- People and Processes
+  |- People and Processes
   |- Background Checks
   |- Security Awareness
   |- Access Requests
@@ -67,7 +67,7 @@ Below, you can view the table of contents for the whitepaper. The whole document
 - Summary
 ```
 
-We hope that by releasing the security whitepaper, we can achieve greater transparency with our customers and the whole community of developers, security experts and partners. We also hope that by making this information publicly available and concise in one document, interested parties will feel more confident about Auth0's practices and processes.
+We hope that by releasing the security whitepaper, we can achieve greater transparency with our customers and the whole community of developers, security experts, and partners. We also hope that by making this information publicly available and concise in one document, interested parties will feel more confident about Auth0's practices and processes.
 
 Lastly, we’d really love to encourage interested parties to analyze, question, and comment our approach to security. Please, feel free to ping us if you have any doubts or suggestions.
 
