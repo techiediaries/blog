@@ -40,9 +40,14 @@ is_post: true
         </div>
         <div id="disqus_thread"></div>
       </section>
-      <aside class="col-md-4 sidebar-column" data-sticky-padding="90" itemscope="" itemtype="http://schema.org/WPSideBar">
+      <aside class="col-md-4 sidebar-column" data-sticky-padding="20" itemscope="" itemtype="http://schema.org/WPSideBar">
+        {% include share_post.html %}
+        <hr />
         {% include newsletter.html %}
+        <hr class="overlap-margin" />
         {% include widget_guest_author.html %}
+        <hr />
+        {% include join_auth0.html %}
       </aside>
     </div>
     <div itemprop='publisher' itemscope='itemscope' itemtype='https://schema.org/Organization'>
