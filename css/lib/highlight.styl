@@ -1,158 +1,113 @@
-color_gray_1 = #F8F8F9 // Light bg gray
-color_gray_2 = #E8EAEB // Light border gray
-color_gray_3 = #9DA2A8 // Light text gray
-color_gray_4 = #5C666F // Dark bg gray
-
-// Auth0 Colors
-color_blue = #44c7f4
-color_red = #eb5424
-color_orange = #ff9a57
-color_yellow = #eaca2c
-color_green = #01b48f
-color_pink = #c879b2
 code_color_bg = #5C666F
-code_color_green = #00FCD4
-code_color_blue = #44C7F4
-code_color_yellow = #EACA2C
-code_color_orange = #FF9A57
-code_color_violet = #FF9CE3
 
-pre
-  color: white;
-  background-color: color_gray_2;
+.hljs
+  .subst,
+  .lisp .title,
+  .clojure .built_in,
+  .nginx .title
+    color #5c666f
 
-pre
-  code
-    display block
-    padding 0.5em
-  .markdown
-    .emphasis
-      font-style italic
-  .nginx
-    .built_in
-      font-weight normal
+  .string,
+  .title,
+  .constant,
+  .parent,
+  .tag .value,
+  .rules .value,
+  .rules .value .number,
+  .preprocessor,
+  .ruby .symbol,
+  .ruby .symbol .string,
+  .aggregate,
+  .template_tag,
+  .django .variable,
+  .smalltalk .class,
+  .addition,
+  .flow,
+  .stream,
+  .bash .variable,
+  .apache .tag,
+  .apache .cbracket,
+  .tex .command,
+  .tex .special,
+  .erlang_repl .function_or_atom,
+  .markdown .header
+    color darken(#00FBCA, 40%) // green
 
-pre code,
-pre .subst,
-pre .lisp .title,
-pre .clojure .built_in,
-pre .nginx .title
-  color white
+  .comment,
+  .annotation,
+  .template_comment,
+  .diff .header,
+  .chunk,
+  .markdown .blockquote
+    color darken(#899FAB, 40%) // oil light
 
-pre .string,
-pre .title,
-pre .constant,
-pre .parent,
-pre .tag .value,
-pre .rules .value,
-pre .rules .value .number,
-pre .preprocessor,
-pre .ruby .symbol,
-pre .ruby .symbol .string,
-pre .aggregate,
-pre .template_tag,
-pre .django .variable,
-pre .smalltalk .class,
-pre .addition,
-pre .flow,
-pre .stream,
-pre .bash .variable,
-pre .apache .tag,
-pre .apache .cbracket,
-pre .tex .command,
-pre .tex .special,
-pre .erlang_repl .function_or_atom,
-pre .markdown .header
-  color code_color_green
+  .number,
+  .title,
+  .date,
+  .regexp,
+  .literal,
+  .smalltalk .symbol,
+  .smalltalk .char,
+  .go .constant,
+  .change,
+  .markdown .bullet,
+  .markdown .link_url
+    color darken(#42C7F4, 40%) // blue light
 
-pre .comment,
-pre .annotation,
-pre .template_comment,
-pre .diff .header,
-pre .chunk,
-pre .markdown .blockquote
-  color darken(color_gray_2, 30%)
+  .label,
+  .tag,
+  .javadoc,
+  .ruby .string,
+  .decorator,
+  .filter .argument,
+  .localvars,
+  .array,
+  .attr_selector,
+  .important,
+  .pseudo,
+  .pi,
+  .doctype,
+  .deletion,
+  .envvar,
+  .shebang,
+  .apache .sqbracket,
+  .nginx .built_in,
+  .tex .formula,
+  .erlang_repl .reserved,
+  .prompt,
+  .markdown .link_label,
+  .vhdl .attribute,
+  .clojure .attribute,
+  .coffeescript .property
+    color darken(#FFA0E7, 40%) // pink
 
 
-pre .number,
-pre .title,
-pre .date,
-pre .regexp,
-pre .literal,
-pre .smalltalk .symbol,
-pre .smalltalk .char,
-pre .go .constant,
-pre .change,
-pre .markdown .bullet,
-pre .markdown .link_url
-  color code_color_blue
+  .id,
+  .phpdoc,
+  .built_in,
+  .aggregate,
+  .css .tag,
+  .javadoctag,
+  .phpdoc,
+  .yardoctag,
+  .smalltalk .class,
+  .winutils,
+  .bash .variable,
+  .apache .tag,
+  .go .typename,
+  .tex .command,
+  .markdown .strong,
+  .request,
+  .status,
+  .tag .title,
+  .keyword
+    color darken(#FF9A56, 40%) // orange
 
-pre .label,
-pre .tag,
-pre .javadoc,
-pre .ruby .string,
-pre .decorator,
-pre .filter .argument,
-pre .localvars,
-pre .array,
-pre .attr_selector,
-pre .important,
-pre .pseudo,
-pre .pi,
-pre .doctype,
-pre .deletion,
-pre .envvar,
-pre .shebang,
-pre .apache .sqbracket,
-pre .nginx .built_in,
-pre .tex .formula,
-pre .erlang_repl .reserved,
-pre .prompt,
-pre .markdown .link_label,
-pre .vhdl .attribute,
-pre .clojure .attribute,
-pre .coffeescript .property
-  color code_color_violet
-
-pre .id,
-pre .phpdoc,
-pre .built_in,
-pre .aggregate,
-pre .css .tag,
-pre .javadoctag,
-pre .phpdoc,
-pre .yardoctag,
-pre .smalltalk .class,
-pre .winutils,
-pre .bash .variable,
-pre .apache .tag,
-pre .go .typename,
-pre .tex .command,
-pre .markdown .strong,
-pre .request,
-pre .status,
-pre .tag .title,
-pre .keyword
-  color code_color_orange
-
-pre .coffeescript .javascript,
-pre .javascript .xml,
-pre .tex .formula,
-pre .xml .javascript,
-pre .xml .vbscript,
-pre .xml .css,
-pre .xml .cdata
-  opacity: 1;
-
-// pre::-webkit-scrollbar,
-// figure .highlight::-webkit-scrollbar {
-//     height: .5em;
-//     background: rgba(255,255,255,0.25)
-// }
-
-// pre::-webkit-scrollbar-thumb:horizontal,
-// figure .highlight::-webkit-scrollbar-thumb:horizontal {
-//     background: rgba(0,0,0,0.15);
-//     -webkit-border-radius: 4px;
-//     border-radius: 4px
-// }
+  .coffeescript .javascript,
+  .javascript .xml,
+  .tex .formula,
+  .xml .javascript,
+  .xml .vbscript,
+  .xml .css,
+  .xml .cdata
+    opacity: 1;
