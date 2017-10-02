@@ -610,6 +610,18 @@
         }
 
         setEvents();
+
+        function addAnchorToHeader() {
+            $( "main.blog-post :header" ).each(function(idx, element) {
+                var title = element.innerText;
+                var anchor = title.toLowerCase()
+                    .replace(/[^\w ]+/g,'')
+                    .replace(/ +/g,'-');
+                $(this).html('<a name="' + anchor + '" class="post-anchor" href="#' + anchor + '">#</a> ' + title);
+            });
+        }
+
+        $( document ).ready(addAnchorToHeader);
       });
     </script>
 
