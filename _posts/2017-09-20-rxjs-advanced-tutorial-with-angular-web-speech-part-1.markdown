@@ -20,8 +20,8 @@ tags:
 - javascript
 - web api
 related:
-- 2017-06-28-real-world-angular-series-part-1
-- 2017-02-13-making-use-of-rxjs-angular
+- 2017-09-28-developing-restful-apis-with-python-and-flask
+- 2017-09-29-how-dpm-works
 ---
 
 **TL;DR:** In this 2-part tutorial series, we'll learn how to build a small app with some big concepts. We'll cover reactive programming with [Reactive Extensions (Rx*)](http://reactivex.io/), JS framework component interaction in [Angular](https://angular.io), and speech recognition with the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). The completed Madlibs app code can be found at [this GitHub repo](https://github.com/auth0-blog/madlibs).
