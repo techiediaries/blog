@@ -12,6 +12,10 @@
     z-index: 200;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 
+  +breakpoint("desktop")
+    &.is_stuck
+      visibility: hidden;
+
   .btn-success
     +breakpoint("mobile-landscape", "max")
       font-size: 13px;
