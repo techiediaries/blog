@@ -613,20 +613,21 @@
         setEvents();
 
         function addAnchorToHeader() {
-            $( "main.blog-post :header" ).each(function(idx, element) {
+            $("main.blog-post :header").each(function (idx, element) {
+                var legacyAnchor = $(this).children('span[id]')[0];
                 var title = element.innerText;
-                var anchor = title.toLowerCase()
-                    .replace(/[^\w ]+/g,'')
-                    .replace(/ +/g,'-');
-                $(this).html('<a name="' + anchor + '" class="post-anchor" href="#' + anchor + '">#</a> ' + title);
+                var anchorId = legacyAnchor ? legacyAnchor.getAttribute('id') : title.toLowerCase()
+                    .replace(/[^\w ]+/g, '')
+                    .replace(/ +/g, '-');
+                var anchorLink = '<a name="' + anchorId + '" class="post-anchor" href="#' + anchorId + '">#</a>';
+                var anchor = '<span id="' + anchorId + '"></span>';
+                $(this).html(anchorLink + ' ' + anchor + ' ' + title);
             });
         }
 
         $( document ).ready(addAnchorToHeader);
       });
     </script>
-
-
 
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
