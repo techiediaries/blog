@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Real-Time Applications with Spring Reactive, Redis, and Websockets"
-description: "Let's use the brand-new reactive module of Spring 5 to create a real-time application."
+title: "Real-time app with Spring, Project Reactor, Redis, and Websockets"
+description: "Let's use Spring and Project Reactor to create a real-time chat application."
 date: 2017-11-15 10:03
 category: Technical Guide, Java, Spring
 author:
@@ -25,4 +25,6 @@ related:
 - 2017-04-28-incrementally-changing-your-database-with-java-and-flyway
 ---
 
-**TL;DR:** In this article, we are going to use ...
+**TL;DR:** In this article, we are going to use Spring, Project Reactor, Redis, and Websocket to create a real-time chat application. Users are going to identify themselves through Auth0 and will be able to send messages to each other on a single channel that is supported by Redis. You can find the complete app in [this GitHub repository](https://github.com/auth0-blog/spring-reactive-websocket).
+
+![Real-time chat application written with Spring, Project Reactor, Redis, and Websockets](https://cdn.auth0.com/blog/spring-reactive/real-time-chap.png)
