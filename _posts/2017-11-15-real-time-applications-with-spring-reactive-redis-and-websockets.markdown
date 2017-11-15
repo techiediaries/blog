@@ -24,3 +24,5 @@ related:
 - 2017-08-10-implementing-jwt-authentication-on-spring-boot
 - 2017-04-28-incrementally-changing-your-database-with-java-and-flyway
 ---
+
+**TL;DR:** In this article, we are going to use ...
