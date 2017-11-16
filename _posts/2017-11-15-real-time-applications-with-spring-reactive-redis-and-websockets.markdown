@@ -35,7 +35,15 @@ While non-blocking is a mainstream topic on other platforms like Node.js, Java d
 
 ## What is Redis
 
-## What is a WebSocket
+[Redis](https://redis.io/) is an open source project that can be used as a database, a cache engine, or as a message broker. In this article, we are going to use Redis to implement the [Publish/Subscribe messaging pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern). To get messages in real-time, clients of our application will use a specific Redis channel to send and receive (publish and subscribe) messages. The process of exchanging messages will occur through WebSockets.
+
+## What is WebSocket
+
+[WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) is a protocol that provides two-way communication channels over TCP connections. Differently from HTTP, a WebSocket connection (or session) stays open as long as needed and accepts asynchronous messages from both ends. We will see this in action, but to better illustrate the concept, let's imagine that we have a web application that enables users to analyze logs from a server. If this application relied purely on HTTP connections, it would have to keep sending regular requests to get the latest logs. Besides not being a real-time communication, these requests could have no value at all, because they would end up as empty responses when no new logs were available.
+
+However, if the web app was built upon the WebSocket protocol, there was no need to send any other request besides the [handshake](https://en.wikipedia.org/wiki/WebSocket#Protocol_handshake). Since the protocol leaves connections open as long as needed, the server could send new logs when they occur, in real-time.
+
+Note that, although these protocols are different, [RFC 6455](https://tools.ietf.org/html/rfc6455) states that the WebSocket protocol is designed to work over HTTP ports 80 and 443 as well as to support HTTP proxies and intermediaries. That is, the WebSocket and the HTTP protocols are compatible.
 
 ## What Will We Build
 
