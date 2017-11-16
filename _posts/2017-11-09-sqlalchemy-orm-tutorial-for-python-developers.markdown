@@ -25,7 +25,7 @@ tags:
 - auth0
 related:
 - 2017-09-28-developing-restful-apis-with-python-and-flask
-- 2017-04-20-image-processing-in-python-with-pillow
+- 2017-06-28-real-world-angular-series-part-1
 ---
 
 **TL;DR:** In this article, we will learn how to use SQLAlchemy as the ORM (Object Relational Database) library to communicate with relational database engines. First, we will learn about some core concepts of SQLAlchemy (like engines and connection pools), then we will learn how to map Python classes and its relationships to database tables, and finally we will learn how to retrieve (query) data from these tables. [The code snippets used in this article can be found in this GitHub repository](https://github.com/auth0-blog/sqlalchemy-orm-tutorial).
