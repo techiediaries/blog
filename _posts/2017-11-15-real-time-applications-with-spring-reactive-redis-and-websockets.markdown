@@ -29,6 +29,10 @@ related:
 
 ## What is Project Reactor
 
+As stated by [the official website](https://projectreactor.io/), Project Reactor is a fourth-generation Reactive library that helps developers build non-blocking apps on the Java Virtual Machine (JVM). Being a fourth-generation library means that Project Reactor has a fluent API that can interoperate with other Reactive libraries (such as [RxJava](https://github.com/ReactiveX/RxJava)) while handling backpressure and cancellation across the library boundaries. To learn more about the differences among all generations, take a look at [this article written by David Karnok](https://akarnokd.blogspot.com.br/2016/03/operator-fusion-part-1.html).
+
+While non-blocking is a mainstream topic on other platforms like Node.js, Java developers are just starting to take this approach seriously. For example, only on its latest release, Spring (the most popular Java framework) [enabled developers to create for reactive HTTP  server](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html). However, as we will see, creating non-blocking code on Java is already easy.
+
 ## What is Redis
 
 ## What is a WebSocket
