@@ -47,11 +47,43 @@ Note that, although these protocols are different, [RFC 6455](https://tools.ietf
 
 ## What Will We Build
 
-In the following sections, we are going to spin up a Spring Boot 2.0 (the first version based on Spring 5) project that will handle WebSocket connections from a real-time chat application built with Angular. As Angular is not the focus of this article, we will simply clone a repository that already contains the chat client implemented so we can focus on the backend development. After going through all sections, we will end up with a backend that supports different users exchanging messages as shown in the following image.
+In the following sections, we are going to spin up a Spring Boot 2.0 (the first version based on Spring 5) project that will handle WebSocket connections from a real-time chat application built with Angular. As Angular is not the focus of this article, we will simply clone a repository that already contains the chat client implemented so we can focus on the backend development. After going through all sections, we will end up with a backend that supports different users exchanging messages as shown in the following screenshot.
 
 ![Real-time chat application written with Spring, Project Reactor, Redis, and WebSockets](https://cdn.auth0.com/blog/spring-reactive/real-time-chap.png)
 
+To clone and start the Angular client, let's issue the following commands:
+
+```bash
+# clone the client from GitHub
+git clone https://github.com/auth0-blog/websocket-angular-client.git
+
+# move working directory to the client root dir
+cd websocket-angular-client
+
+# install all dependencies
+npm install
+
+# start the client application
+npm start
+```
+
 ### Creating an Auth0 Client
+
+To manage the [identity of our users](https://auth0.com/user-management), we are going to rely on [Auth0](https://auth0.com). Therefore, the first step is to [create a free Auth0 account](javascript:signup\(\)) (i.e. if we don't have one yet). After that, we will go to the [Clients page](https://manage.auth0.com/#/clients) and click on the "+ Create Client" button. In the pop up that appears, we will add a name to our client, something like "Real-time chat", choose the "Single Page Web App" type, and hit the "Create" button. The Auth0 management dashboard will redirect us to the recently created client. On that page, we will open the "Settings" tab, add `http://localhost:4200/callback` in the "Allowed Callback URLs" text box, and hit the "Save Changes" button.
+
+Lastly, we will copy two values from this page ("Client ID" and "Domain") and use them to replace the placeholders in the `./src/app/auth/auth0-variables.ts` file of the Angular project:
+
+```typescript
+// ...
+
+export const AUTH_CONFIG: AuthConfig = {
+  CLIENT_ID: 'CLIENT_ID_PLACEHOLDER',
+  CLIENT_DOMAIN: 'AUTH0_DOMAIN_PLACEHOLDER',
+  // ...
+};
+```
+
+We can now close the Auth0 dashboard for good and start focusing on the backend of our application.
 
 ## Bootstrapping a Spring 5 App
 
