@@ -87,6 +87,17 @@ We can now close the Auth0 dashboard for good and start focusing on the backend 
 
 ## Bootstrapping a Spring 5 App
 
+As previously stated, instead of [manually configuring a Spring 5 project](https://auth0.com/blog/spring-5-embedded-tomcat-8-gradle-tutorial/), we are going to use [Spring Boot 2.0](https://projects.spring.io/spring-boot/). The manual process does give us more flexibility and a more streamlined Spring project, but is a little bit longer as well. Therefore, to keep things simple and fast, let's issue the following command to get a Spring Boot 2.0 project pre-configured:
+
+```bash
+curl https://start.spring.io/starter.tgz
+  -d bootVersion=2.0.0.M6 \
+  -d type=gradle-project \
+  -d packageName=com.auth0.samples \
+  -d name=spring-reactive-websocket \
+  -d baseDir=spring-reactive-websocket | tar -xzvf -
+```
+
 ### Adding the Dependencies
 
 ### Configuring Redis
