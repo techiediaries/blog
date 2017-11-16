@@ -47,6 +47,8 @@ Note that, although these protocols are different, [RFC 6455](https://tools.ietf
 
 ## What Will We Build
 
+In the following sections, we are going to spin up a Spring Boot 2.0 (the first version based on Spring 5) project that will handle WebSocket connections from a real-time chat application built with Angular. As Angular is not the focus of this article, we will simply clone a repository that already contains the chat client implemented so we can focus on the backend development. After going through all sections, we will end up with a backend that supports different users exchanging messages as shown in the following image.
+
 ![Real-time chat application written with Spring, Project Reactor, Redis, and WebSockets](https://cdn.auth0.com/blog/spring-reactive/real-time-chap.png)
 
 ### Creating an Auth0 Client
