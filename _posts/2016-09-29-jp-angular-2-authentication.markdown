@@ -19,11 +19,10 @@ tags:
 - angular2-jwt
 - angular2-authentication
 related:
-- angular-2-ngmodules
-- introducing-angular2-jwt-a-library-for-angular2-authentication
-- create-a-desktop-app-with-angular-2-and-electron
+- jp-reactjs-authentication
+- jp-vuejs2-authentication
 lang: jp
-alternate_locale_en: 2016-09-29-angular-2-authentication
+alternate_locale_en: angular-2-authentication
 ---
 
 **このブログは2016/09/29に掲載されたものを翻訳したものです。**
