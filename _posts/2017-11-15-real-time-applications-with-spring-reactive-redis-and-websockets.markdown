@@ -25,6 +25,30 @@ related:
 - 2017-04-28-incrementally-changing-your-database-with-java-and-flyway
 ---
 
-**TL;DR:** In this article, we are going to use Spring, Project Reactor, Redis, and Websocket to create a real-time chat application. Users are going to identify themselves through Auth0 and will be able to send messages to each other on a single channel that is supported by Redis. You can find the complete app in [this GitHub repository](https://github.com/auth0-blog/spring-reactive-websocket).
+**TL;DR:** In this article, we are going to use Spring, Project Reactor, Redis, and WebSocket to create a real-time chat application. Users are going to identify themselves through Auth0 and will be able to send messages to each other over a channel supported by Redis. You can find the complete app in [this GitHub repository](https://github.com/auth0-blog/spring-reactive-websocket).
 
-![Real-time chat application written with Spring, Project Reactor, Redis, and Websockets](https://cdn.auth0.com/blog/spring-reactive/real-time-chap.png)
+## What is Project Reactor
+
+## What is Redis
+
+## What is a WebSocket
+
+## What Will We Build
+
+![Real-time chat application written with Spring, Project Reactor, Redis, and WebSockets](https://cdn.auth0.com/blog/spring-reactive/real-time-chap.png)
+
+### Creating an Auth0 Client
+
+## Bootstrapping a Spring 5 App
+
+### Adding the Dependencies
+
+### Configuring Redis
+
+### Mapping Messages
+
+### Forwarding Messages
+
+### Handling WebSockets Sessions
+
+## Conclusion
