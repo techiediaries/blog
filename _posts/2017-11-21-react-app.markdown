@@ -54,25 +54,17 @@ npm install -g create-react-app
 create-react-app personal-finance
 
 cd personal-finance
-
 ```
 
-Explain ESLint and why use it.
+### Keeping Code Style Consistent with EditorConfig
 
-```bash
-# tell reader to install an ESLint plugin
-touch .eslintrc
-echo '{
-  "extends": "react-app"
-}' > .eslintrc
-```
+More often than not, more than one developer will support and submit updates to a particular React application. When this time comes, it will be nice to have some mechanism that helps keeping the code style consistent throughout the multiple files and commits. This is exactly the goal of [EditorConfig](http://editorconfig.org/). Only by creating a single file with a small number of properties, we can help developers to be more productive by not thinking too much about code styling. We delegate this responsibility to the IDE through a plugin. Fortunately, [both Visual Studio Code and WebStorm](http://editorconfig.org/#download) already ship with these plugins pre-installed.
 
-Explain Editor Config and why use it. Talk briefly about [the source of this code snippet](https://github.com/airbnb/javascript).
+In our application, we will copy the contents of the `.editorconfig` file available on [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript#airbnb-javascript-style-guide-). This is a great resource when it comes to best practices as these style guides are heavily used by the community.
 
-```bash
-#
-touch .editorconfig
-echo '
+In the root directory of our app, let's create a new file called `.editorconfig` and add to it the following properties:
+
+```editorconfig
 root = true
 
 [*]
@@ -84,5 +76,18 @@ insert_final_newline = true
 end_of_line = lf
 # editorconfig-tools is unable to ignore longs strings or urls
 max_line_length = null
-' > .editorconfig
+```
+
+That's it. We don't need anything else if we are using Visual Studio Code or WebStorm.
+
+### ESLint
+
+Explain ESLint and why use it.
+
+```bash
+# tell reader to install an ESLint plugin
+touch .eslintrc
+echo '{
+  "extends": "react-app"
+}' > .eslintrc
 ```
