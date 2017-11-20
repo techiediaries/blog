@@ -21,3 +21,17 @@ tags:
 related:
 - 2017-08-10-implementing-jwt-authentication-on-spring-boot
 ---
+
+```bash
+create-react-app personal-finance
+
+cd personal-finance
+
+# tell reader to install an ESLint plugin
+touch .eslintrc
+echo '{
+  "extends": "react-app"
+}' > .eslintrc
+
+
+```
