@@ -36,9 +36,11 @@ Redux is a predictable state container that helps developers managing data in Ja
 
 ## A Word About IDEs
 
-As per [this doc](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor), only Visual Studio Code and WebStorm support debugging. Refer to this document to properly tie up debugging in your editor. It is a valuable asset.
+Before moving onto the practical sections of this article, let's talk about IDEs (Integrated Development Environments). Professionals that create reliable applications, frequently equip themselves with tools that help them avoid mistakes. On program errors that will eventually occur, these tools must enable developers to fight and debug these errors. With this in mind, and considering that [only Visual Studio Code and WebStorm](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor) are capable of connecting to browsers to debug React apps, it is highly advised to choose one of these IDEs.
 
-It works perfectly on WebStorm.
+After choosing and installing a IDE, please, refer to [this document to properly tie up debugging in this editor](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor). It is a valuable asset.
+
+As it's possible to see in the following screenshot, this feature works perfectly on WebStorm.
 
 ![Debugging React and Redux applications on WebStorm](https://cdn.auth0.com/blog/react-redux-app/debugging-with-webstorm.png)
 
