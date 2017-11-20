@@ -15,12 +15,16 @@ design:
 tags:
 - react
 - redux
+- eslint
+- editorconfig
 - javascript
 - auth0
 - real-world
 related:
 - 2017-08-10-implementing-jwt-authentication-on-spring-boot
 ---
+
+**TL;DR:** In this article, we are going to start creating a production-ready React and Redux application. We will begin by installing basic tools and setting up a solid foundation to develop scalable Single Page Applications (SPAs). We will take into account best practices and configure development tools like ESLint and EditorConfig. We will also configure [Auth0 as the identity manager of our application](https://auth0.com/user-management) to support state-of-the-art features, like [Social Login](https://auth0.com/learn/social-login/) and [Multifactor Authentication](https://auth0.com/learn/multifactor-authentication/). We can find the code produced throughout this article in [this GitHub Pull Request](https://github.com/auth0-blog/real-world-react-redux/pull/1).
 
 ## Why React and Redux
 
@@ -35,6 +39,8 @@ Redux is a predictable state container that helps developers managing data in Ja
 As per [this doc](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor), only Visual Studio Code and WebStorm support debugging. Refer to this document to properly tie up debugging in your editor. It is a valuable asset.
 
 It works perfectly on WebStorm.
+
+![Debugging React and Redux applications on WebStorm](https://cdn.auth0.com/blog/react-redux-app/debugging-with-webstorm.png)
 
 ## Creating the Project
 
