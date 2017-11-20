@@ -1,0 +1,78 @@
+---
+layout: post
+title: "Creating Production-Ready React and Redux Apps"
+description: "Let's create a React and Redux application that is production-ready. We will rely on best-practices and address security from the beginning to achieve this."
+date: 2017-11-21 09:48
+category: Technical Guide, React
+author:
+  name: "Bruno Krebs"
+  url: "https://twitter.com/brunoskrebs"
+  mail: "bruno.krebs@auth0.com"
+  avatar: "https://www.gravatar.com/avatar/76ea40cbf67675babe924eecf167b9b8?s=60"
+design:
+  bg_color: "#1B1C20"
+  image: https://cdn.auth0.com/blog/spring5-embedded/logo-spring-tomcat-gradle.png
+tags:
+- react
+- redux
+- javascript
+- auth0
+- real-world
+related:
+- 2017-08-10-implementing-jwt-authentication-on-spring-boot
+---
+
+## Why React and Redux
+
+I'll be brief about this topic for _three_ reasons. One, both React and Redux are consolidated JavaScript libraries that are supported by huge, thriving communities. Second, there are many articles ([like this one](https://www.madetech.com/blog/the-pros-and-cons-of-react-plus-redux)) that talks about the advantages and disadvantages of using them. Third, the idea is to focus on creating production-ready applications with React and Redux rather than discussing pros and cons.
+
+Nevertheless, a few words about both libraries sounds like a good idea. Let's begin with React. [React, originally developed by Jordan Walke and Denis Popov, was released on March 2013](https://en.wikipedia.org/wiki/React_\(JavaScript_library\)#History). It main goal is to to provide developers a platform where they can express applications through composable components. Usually, developers rely on the JSX pseudo-language
+
+## A Word About IDEs
+
+As per [this doc](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor), only Visual Studio Code and WebStorm support debugging. Refer to this document to properly tie up debugging in your editor. It is a valuable asset.
+
+It works perfectly on WebStorm.
+
+## Creating the Project
+
+[Good resource about `create-react-app`](https://github.com/facebookincubator/create-react-app/tree/master/packages/react-scripts/template). [The `create-react-app` website](https://github.com/facebookincubator/create-react-app).
+
+```bash
+npm install -g create-react-app
+
+create-react-app personal-finance
+
+cd personal-finance
+
+```
+
+Explain ESLint and why use it.
+
+```bash
+# tell reader to install an ESLint plugin
+touch .eslintrc
+echo '{
+  "extends": "react-app"
+}' > .eslintrc
+```
+
+Explain Editor Config and why use it. Talk briefly about [the source of this code snippet](https://github.com/airbnb/javascript).
+
+```bash
+#
+touch .editorconfig
+echo '
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+# editorconfig-tools is unable to ignore longs strings or urls
+max_line_length = null
+' > .editorconfig
+```
