@@ -24,9 +24,11 @@ related:
 
 ## Why React and Redux
 
-I'll be brief about this topic for _three_ reasons. One, both React and Redux are consolidated JavaScript libraries that are supported by huge, thriving communities. Second, there are many articles ([like this one](https://www.madetech.com/blog/the-pros-and-cons-of-react-plus-redux)) that talks about the advantages and disadvantages of using them. Third, the idea is to focus on creating production-ready applications with React and Redux rather than discussing pros and cons.
+I'll be brief about this topic for _three_ reasons. One, both [React](https://github.com/facebook/react) and [Redux](https://github.com/reactjs/redux) are consolidated JavaScript libraries that are supported by huge, thriving communities. Second, there are many articles ([like this one](https://www.madetech.com/blog/the-pros-and-cons-of-react-plus-redux)) that talks about the advantages and disadvantages of using them. Third, the idea is to focus on creating production-ready applications with React and Redux rather than discussing pros and cons.
 
-Nevertheless, a few words about both libraries sounds like a good idea. Let's begin with React. [React, originally developed by Jordan Walke and Denis Popov, was released on March 2013](https://en.wikipedia.org/wiki/React_\(JavaScript_library\)#History). It main goal is to to provide developers a platform where they can express applications through composable components. Usually, developers rely on the JSX pseudo-language
+Nevertheless, a few words about both libraries sounds like a good idea. Let's begin with React. [React, originally developed by Jordan Walke and Denis Popov, was released on March 2013](https://en.wikipedia.org/wiki/React_\(JavaScript_library\)#History). Its main goal is to provide developers a platform where they can express applications through composable components. Usually, developers rely on the [JSX pseudo-language, preprocessor](https://reactjs.org/docs/jsx-in-depth.html) to create these components. We will see these concepts in action, but previous knowledge would be valuable.
+
+Redux is a predictable state container that helps developers managing data in JavaScript applications. This library is based on simple, easy to learn concepts and techniques. Basically, there is a central _storage facility_ that is only updated through `actions` dispatched to `reducers`. [Check out this practical tutorial to learn Redux through simple examples](https://auth0.com/blog/redux-in-action).
 
 ## A Word About IDEs
 
