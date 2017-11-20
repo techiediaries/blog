@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Real-World React & Redux App"
+description: ""
+date: 2017-11-16 09:48
+category: Technical Guide, React
+author:
+  name: "Bruno Krebs"
+  url: "https://twitter.com/brunoskrebs"
+  mail: "bruno.krebs@auth0.com"
+  avatar: "https://www.gravatar.com/avatar/76ea40cbf67675babe924eecf167b9b8?s=60"
+design:
+  bg_color: "#1B1C20"
+  image: https://cdn.auth0.com/blog/spring5-embedded/logo-spring-tomcat-gradle.png
+tags:
+- react
+- redux
+- javascript
+- auth0
+- real-world
+related:
+- 2017-08-10-implementing-jwt-authentication-on-spring-boot
+---
