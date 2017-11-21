@@ -115,12 +115,22 @@ That's it. We don't need anything else if we are using Visual Studio Code or Web
 
 ### ESLint
 
-Explain ESLint and why use it.
+Another very important tool that we will add to our workflow is [ESLint](https://eslint.org/). Working as code quality tool, ESLint will analyze our code to check for common mistakes that can introduce bugs. For example, if we had a function that concatenates a person's name to an address and we mistyped a variable name, ESLint would generate a warning.
+
+![ESLint integrated into WebStorm in a React and Redux web application.](https://cdn.auth0.com/blog/react-redux-app/eslint-integration.png)
+
+We won't get into too much details about how it works or how we could customize ESLint. The idea is to be practical, but keep in mind that [this tool is highly customizable](https://eslint.org/docs/user-guide/getting-started).
+
+In our project, we will simply create a file called `.eslintrc` with a single configuration property. React already uses ESLint in its build process. However, to integrate the IDE with ESLint, we need to define this file. Having a terminal in our root directory, we can create and populate this file with the following commands:
 
 ```bash
-# tell reader to install an ESLint plugin
+# create the file
 touch .eslintrc
+
+# add configuration
 echo '{
   "extends": "react-app"
 }' > .eslintrc
 ```
+
+After that, we need to activate the ESLint integration in our IDE. Fortunately, this process is simple and both [WebStorm](https://www.jetbrains.com/help/webstorm/eslint.html) and [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) provide documentation on how to perform it. Let's use these references as they will be kept up to date.
