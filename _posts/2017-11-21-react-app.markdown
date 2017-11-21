@@ -52,15 +52,42 @@ As it's possible to see in the following screenshot, this feature works perfectl
 
 ## Creating the Project
 
-[Good resource about `create-react-app`](https://github.com/facebookincubator/create-react-app/tree/master/packages/react-scripts/template). [The `create-react-app` website](https://github.com/facebookincubator/create-react-app).
+The first step to create our project is to install the [`create-react-app` tool provided by Facebook](https://github.com/facebookincubator/create-react-app/). Installing it is simple. We just have to use NPM, as shown in the next code snippet. After that, by just issuing one more command, we can make `create-react-app` generate our app skeleton:
 
 ```bash
+# install create-react-app globally
 npm install -g create-react-app
 
+# use it to bootstrap a react project
 create-react-app personal-finance
 
+# move current directory into our new project
 cd personal-finance
 ```
+
+Inside this new directory, we will find the initial project structure and all the transitive dependencies installed:
+
+```bash
+personal-finance
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│   └── favicon.ico
+│   └── index.html
+│   └── manifest.json
+└── src
+    └── App.css
+    └── App.js
+    └── App.test.js
+    └── index.css
+    └── index.js
+    └── logo.svg
+    └── registerServiceWorker.js
+```
+
+Although the provided structure contains everything we need to start creating our app, we will first address some other important topics. We are going to take a brief look at tools that will help us keep our code consistent and free of errors.
 
 ### Keeping Code Style Consistent with EditorConfig
 
