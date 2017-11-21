@@ -50,7 +50,7 @@ As it's possible to see in the following screenshot, this feature works perfectl
 
 ![Debugging React and Redux applications on WebStorm](https://cdn.auth0.com/blog/react-redux-app/debugging-with-webstorm.png)
 
-## Creating the Project
+## Creating the Project Structure
 
 The first step to create our project is to install the [`create-react-app` tool provided by Facebook](https://github.com/facebookincubator/create-react-app/). Installing it is simple. We just have to use NPM, as shown in the next code snippet. After that, by just issuing one more command, we can make `create-react-app` generate our app skeleton:
 
@@ -87,7 +87,7 @@ personal-finance
     └── registerServiceWorker.js
 ```
 
-Although the provided structure contains everything we need to start creating our app, we will first address some other important topics. We are going to take a brief look at tools that will help us keep our code consistent and free of errors.
+Although the provided structure contains everything we need to start creating our app, we will first address two important topics. More specifically, we will address EditorConfig and ESLint to get an environment that help us keep our code consistent and free of errors.
 
 ### Keeping Code Style Consistent with EditorConfig
 
@@ -134,3 +134,36 @@ echo '{
 ```
 
 After that, we need to activate the ESLint integration in our IDE. Fortunately, this process is simple and both [WebStorm](https://www.jetbrains.com/help/webstorm/eslint.html) and [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) provide documentation on how to perform it. Let's use these references as they will be kept up to date.
+
+## Developing the React Application
+
+- [remove `logo.svg`, and clean up `App.js` (keep App.css)](https://github.com/auth0-blog/real-world-react-redux/pull/1/commits/40d64729f23c7e9bb4e8f64eb5e337bcfdb30378)
+- [replace App.css](https://github.com/auth0-blog/real-world-react-redux/pull/1/commits/7d9b0d3269039252fb0cd785770ea1327a3563be)
+- [add Roboto and Material icons by editing `index.html` and index.css](https://github.com/auth0-blog/real-world-react-redux/pull/1/commits/aeb37807d6ea9190a9765419034becd61362db8c)
+- [make body and #root 100% height](https://github.com/auth0-blog/real-world-react-redux/pull/1/commits/1270f785e71cd8bbf58b240a8e15069e31be5364)
+
+### Adding Identity Management with Auth0
+
+- Create new client: `{name: 'Dimerz Dev', type: 'SPA'}`
+- Configure callback: `http://localhost:3000/callback`
+- install `auth0-js`: `npm install --save auth0-js`
+- create an `Auth` service at `src/Auth/Auth.js` with:
+
+```javascript
+import auth0 from 'auth0-js';
+
+export default class Auth {
+  auth0 = new auth0.WebAuth({
+    domain: 'bkrebs.auth0.com',
+    clientID: '3qu4Cxt4h2x9Em7Cj0s7Zg5FxhQLjiiK',
+    redirectUri: 'http://localhost:3000/callback',
+    audience: 'https://bkrebs.auth0.com/userinfo',
+    responseType: 'token id_token',
+    scope: 'openid'
+  });
+
+  login() {
+    this.auth0.authorize();
+  }
+}
+```
