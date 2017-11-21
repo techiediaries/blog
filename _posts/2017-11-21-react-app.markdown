@@ -30,7 +30,7 @@ related:
 
 Before diving up into this article, it's important to note that there a few prerequisites. First and foremost, previous experience with JavaScript, HTML, and CSS is advisable. More than that, would be no harm at all (quite the opposite actually) to have at least some short experience with React. As the title states, we will also use Redux. However, [it is so simple to use this library](https://auth0.com/blog/redux-in-action) that no familiarity with it wouldn't be a problem.
 
-Besides this short technical background, we will also need two programs installed on our development computer: Node.js and NPM. Instead of installing these tools directly, a good idea is to [use NVM (Node Version Manager)](https://github.com/creationix/nvm#installation) on development environments. Sometimes, we need to quickly switch to other versions of Node.js without ado. NVM exists exactly for this reason.
+Besides this short technical background, we will also need two programs installed on our development computer: Node.js and NPM. Instead of installing these tools directly, a good idea is to [use NVM (Node Version Manager)](https://github.com/creationix/nvm#installation) on development environments. Sometimes, we need to quickly switch between different versions of Node.js. NVM exists exactly for this reason.
 
 ## Why React and Redux
 
