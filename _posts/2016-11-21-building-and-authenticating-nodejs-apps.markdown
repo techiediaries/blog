@@ -30,7 +30,7 @@ related:
 
 ---
 
-[Node.js](https://nodejs.org), or Node.js, NodeJS, or simply Node was first released in 2009 by Ryan Dahl and has become one of the most popular backend programming languages today. Node.js is for all intents and purposes JavaScript but instead of running in the users browser, Node.js code is executed on the backend. Developers familiar with JavaScript will be able to dive right in and write Node.js code.
+[Node.js](https://nodejs.org), NodeJS, or simply Node was first released in 2009 by Ryan Dahl and has become one of the most popular backend programming languages today. Node.js is for all intents and purposes JavaScript but instead of running in the users browser, Node.js code is executed on the backend. Developers familiar with JavaScript will be able to dive right in and write Node.js code.
 
 In our tutorial today, we will write a complete Node.js application using one of the most popular web frameworks for Node, [Express Js](http://expressjs.com). We'll cover everything from project setup to routing, calling external API's, and more. Before we dive into the code let's understand why Node.js is so popular and widely used to give you a deeper understand of why you may want to use Node.js for your applications.
 
