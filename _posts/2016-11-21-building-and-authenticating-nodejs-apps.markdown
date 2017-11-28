@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Build and Authenticate a Node Js App with JSON Web Tokens"
-description: "Node Js allows you to build backend applications with JavaScript. In this tutorial we'll take a look at how you can secure your Node Js applications with JSON Web Tokens (JWTs)."
+title: "Build and Authenticate a Node.js Apps"
+description: "Node.js allows you to build backend applications with JavaScript. In this tutorial we'll take a look at how you can create Node.js applications and how to secure them."
 date: 2016-11-21 08:30
 category: Technical Guide, Backend, NodeJS
 banner:
@@ -26,23 +26,23 @@ related:
 
 ---
 
-**TL;DR** Node Js brings the simplicity of JavaScript to the backend. Today, we will build an entire application with Node JS, starting with a blank canvas and finishing with a fully functional application with multiple routes, authentication, and even remote data access. Check out the completed code example from our [GitHub repo](https://github.com/auth0-blog/nodejs-awesome-polls).
+**TL;DR** Node.js brings the simplicity of JavaScript to the backend. Today, we will build an entire application with Node.js, starting with a blank canvas and finishing with a fully functional application with multiple routes, authentication, and even remote data access. Check out the completed code example from our [GitHub repo](https://github.com/auth0-blog/nodejs-awesome-polls).
 
 ---
 
-[Node Js](https://nodejs.org), or Node.js, NodeJS, or simply Node was first released in 2009 by Ryan Dahl and has become one of the most popular backend programming languages today. Node Js is for all intents and purposes JavaScript but instead of running in the users browser, Node Js code is executed on the backend. Developers familiar with JavaScript will be able to dive right in and write Node Js code.
+[Node.js](https://nodejs.org), or Node.js, NodeJS, or simply Node was first released in 2009 by Ryan Dahl and has become one of the most popular backend programming languages today. Node.js is for all intents and purposes JavaScript but instead of running in the users browser, Node.js code is executed on the backend. Developers familiar with JavaScript will be able to dive right in and write Node.js code.
 
-In our tutorial today, we will write a complete Node Js application using one of the most popular web frameworks for Node, [Express Js](http://expressjs.com). We'll cover everything from project setup to routing, calling external API's, and more. Before we dive into the code let's understand why Node Js is so popular and widely used to give you a deeper understand of why you may want to use Node Js for your applications.
+In our tutorial today, we will write a complete Node.js application using one of the most popular web frameworks for Node, [Express Js](http://expressjs.com). We'll cover everything from project setup to routing, calling external API's, and more. Before we dive into the code let's understand why Node.js is so popular and widely used to give you a deeper understand of why you may want to use Node.js for your applications.
 
-## The Rise of Node Js
+## The Rise of Node.js
 
-Node Js became an overnight sensation for multiple reasons. Performance played a huge factor. Node Js was built around an [event-based architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) and [asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O). This allowed Node Js applications to achieve superior I/O and load performance compared to other programming languages. Node Js code is compiled to machine code via Google's [V8 JavaScript Engine](https://developers.google.com/v8/). Let's take a look at a few other factors that led to the rise of Node Js:  
+Node.js became an overnight sensation for multiple reasons. Performance played a huge factor. Node.js was built around an [event-based architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) and [asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O). This allowed Node.js applications to achieve superior I/O and load performance compared to other programming languages. Node.js code is compiled to machine code via Google's [V8 JavaScript Engine](https://developers.google.com/v8/). Let's take a look at a few other factors that led to the rise of Node.js:  
 
 ### JavaScript on the Backend
 
 JavaScript as a programming language has many [flaws](https://whydoesitsuck.com/why-does-javascript-suck/). It is also the only language that runs in the web browser today. If you want your website or app to have any type of dynamic functionality, you'll have to implement it in JavaScript. This fact led many developers to learn JavaScript, and soon many open source libraries followed.
 
-Due to Node Js being JavaScript, many of these libraries, such as [lodash](https://lodash.com/), [Moment](http://momentjs.com/), and [request](https://github.com/request/request) could be used on the backend without any modification whatsoever. In many instances, developers were able to write their code once, and have it run on both the frontend and the backend allowing many to quickly become full-stack developers.
+Due to Node.js being JavaScript, many of these libraries, such as [lodash](https://lodash.com/), [Moment](http://momentjs.com/), and [request](https://github.com/request/request) could be used on the backend without any modification whatsoever. In many instances, developers were able to write their code once, and have it run on both the frontend and the backend allowing many to quickly become full-stack developers.
 
 ### Node Package Manager
 
@@ -52,39 +52,39 @@ NPM was revolutionary and to this day remains one of the best package managers a
 
 ### Ecosystem
 
-Node Js is not limited to building web applications. With [Electron](http://electron.atom.io/) for example, you can build native desktop applications with Node; we even have a tutorial on how to [here](https://auth0.com/blog/create-a-desktop-app-with-angular-2-and-electron/). Utilities and build systems are very popular candidates with Node Js, [Bower](https://bower.io/) is a popular front-end package manager built with Node, while [Gulp](http://gulpjs.com/), [Grunt](http://gruntjs.com/), and [WebPack](https://webpack.github.io/) are task runners and build systems built with Node that can improve workflows and increase developer efficiency.
+Node.js is not limited to building web applications. With [Electron](http://electron.atom.io/) for example, you can build native desktop applications with Node; we even have a tutorial on how to [here](https://auth0.com/blog/create-a-desktop-app-with-angular-2-and-electron/). Utilities and build systems are very popular candidates with Node.js, [Bower](https://bower.io/) is a popular front-end package manager built with Node, while [Gulp](http://gulpjs.com/), [Grunt](http://gruntjs.com/), and [WebPack](https://webpack.github.io/) are task runners and build systems built with Node that can improve workflows and increase developer efficiency.
 
-Due to the small footprint and low resource requirements for running Node Js applications, Node Js is leading the charge in serverless computing with platforms like [Webtask](https://webtask.io/), [AWS Lambda](https://aws.amazon.com/lambda/), and [Google Cloud Functions](https://cloud.google.com/functions/docs/) all supporting Node Js almost exclusively.
+Due to the small footprint and low resource requirements for running Node.js applications, Node.js is leading the charge in serverless computing with platforms like [Webtask](https://webtask.io/), [AWS Lambda](https://aws.amazon.com/lambda/), and [Google Cloud Functions](https://cloud.google.com/functions/docs/) all supporting Node.js almost exclusively.
 
-## Is Node Js For Me?
+## Is Node.js For Me?
 
-The age-old debate and probably most difficult question to answer. It depends. This may seem like a cop-out answer, but it really depends. Here at Auth0, we use Node Js extensively and it's proven its worth in helping us scale. Check out our [Stories from the Trenches](https://auth0.engineering/) blog for more in-depth coverage on how we make use of various technologies throughout our organization.
+The age-old debate and probably most difficult question to answer. It depends. This may seem like a cop-out answer, but it really depends. Here at Auth0, we use Node.js extensively and it's proven its worth in helping us scale. Check out our [Stories from the Trenches](https://auth0.engineering/) blog for more in-depth coverage on how we make use of various technologies throughout our organization.
 
-Node Js is great for many use cases, but not so good in others. If you need high I/O that doesn't require a lot of computation, such as serving assets or webpages, then Node will keep you satisfied. If you are doing complex operations, such as hashing passwords or running simulations, Node Js will likely underperform. Examine your use case carefully and use the right tool for the job.
+Node.js is great for many use cases, but not so good in others. If you need high I/O that doesn't require a lot of computation, such as serving assets or webpages, then Node will keep you satisfied. If you are doing complex operations, such as hashing passwords or running simulations, Node.js will likely underperform. Examine your use case carefully and use the right tool for the job.
 
-{% include tweet_quote.html quote_text="Node Js excels in many use cases, but is not a silver bullet for everything." %}
+{% include tweet_quote.html quote_text="Node.js excels in many use cases, but is not a silver bullet for everything." %}
 
-## Building an Application with Node Js
+## Building an Application with Node.js
 
-![Node Js App - Awesome Polls](https://cdn.auth0.com/blog/nodejs-awesome-polls/polls.png)
+![Node.js App - Awesome Polls](https://cdn.auth0.com/blog/nodejs-awesome-polls/polls.png)
 
-Now that we know more about Node Js, we are ready to get coding and building our application. The application we'll be building today is called Awesome Polls. The United States just had its presidential elections and we are going to build an app to help us analyse the results. Imagine you're building this app for a news organization that wishes to have the most up to date data so that it can provide accurate reports to it's viewers.
+Now that we know more about Node.js, we are ready to get coding and building our application. The application we'll be building today is called Awesome Polls. The United States just had its presidential elections and we are going to build an app to help us analyse the results. Imagine you're building this app for a news organization that wishes to have the most up to date data so that it can provide accurate reports to it's viewers.
 
-For this tutorial we will assume that you have at least some JavaScript and general programming knowledge, but no Node Js exposure, so we'll take it step by step. As always, you can check out the completed code from the [GitHub repo](https://github.com/auth0-blog/nodejs-awesome-polls) if you would like to just follow along.
+For this tutorial we will assume that you have at least some JavaScript and general programming knowledge, but no Node.js exposure, so we'll take it step by step. As always, you can check out the completed code from the [GitHub repo](https://github.com/auth0-blog/nodejs-awesome-polls) if you would like to just follow along.
 
-### Installing Node Js and NPM
+### Installing Node.js and NPM
 
-To install Node Js head over to the official website located at [https://nodejs.org](https://nodejs.org) and you'll see a giant green download button for your operating system. In our tutorial today, we'll be running the 6.x LTS version of Node. Simply download the executable, run it, and go through the steps to install Node Js on your system.
+To install Node.js head over to the official website located at [https://nodejs.org](https://nodejs.org) and you'll see a giant green download button for your operating system. In our tutorial today, we'll be running the 6.x LTS version of Node. Simply download the executable, run it, and go through the steps to install Node.js on your system.
 
-If you are on a Mac, you can also install Node Js and NPM via [Homebrew](http://brew.sh/). Simply run `homebrew install node` from your terminal and in seconds Node and NPM will be installed.
+If you are on a Mac, you can also install Node.js and NPM via [Homebrew](http://brew.sh/). Simply run `homebrew install node` from your terminal and in seconds Node and NPM will be installed.
 
 We will want to ensure that both NPM and Node are installed. Once you've gone through the installation steps, either manually or via homebrew, we'll confirm that the installation was successful. To do that, close and re-open your terminal window and run the command `node -v`. This command will let you know the current version of Node installed. Next, run `npm -v`, and likewise you should see the version of the Node Package Manager installed on your system.
 
-![Verify Node Js Installation](https://cdn.auth0.com/blog/nodejs-awesome-polls/test.png)
+![Verify Node.js Installation](https://cdn.auth0.com/blog/nodejs-awesome-polls/test.png)
 
 *Note: Node.js has two versions. A 6.x stable/long-term support version and 7.x which is the cutting edge version, that supports some of the latest ES6 features. Both versions are production-ready, and for this tutorial we'll be using the 6.x version of Node.*
 
-### Node Js Project Setup
+### Node.js Project Setup
 
 Now that we have Node and NPM installed, we are ready to continue. One of the best things about Node applications, for me personally, is the ability to have your application live anywhere in the file system. Each Node application is self-contained, so to setup our project, let's just create a directory on our desktop called `awesome-polls` and we'll place our entire application in this directory.
 
@@ -97,14 +97,14 @@ Let's see how this works. We will use the Express JavaScript web framework for b
 You can also install multiple dependencies at once. Let's install the rest of our dependencies. Write the following:
 
 ```sh
-npm install body-parser connect-ensure-login cookie-parser debug dotenv express-session jade morgan passport passport-auth0 --save
+npm install body-parser connect-ensure-login cookie-parser debug dotenv express-session jade morgan --save
 ```
 
 These are all of the 3rd party open source libraries we will rely on to write our application. It's ok if you don't understand what many of these mean or do just yet, we'll get there. To close out this section, take a look at your `package.json` file and you'll see that there is a new section now called `dependencies` with the libraries we've included.
 
-### Node Js Directory Structure
+### Node.js Directory Structure
 
-Node Js and Express Js are both pretty unopionionated when it comes to directory structure. You are free to define your own and won't be penalized for having too many or too few layers of abstraction. At the end of the day, the code is compiled and code structure flattened, so feel free to experiment with what works best for you. This will also depend a lot on the size and scope of your application. Our demo app is fairly small so our structure will look like:
+Node.js and Express Js are both pretty unopinionated when it comes to directory structure. You are free to define your own and won't be penalized for having too many or too few layers of abstraction. At the end of the day, the code is compiled and code structure flattened, so feel free to experiment with what works best for you. This will also depend a lot on the size and scope of your application. Our demo app is fairly small so our structure will look like:
 
 ```
 .env - // We will store our global environmental variables here
@@ -124,11 +124,11 @@ app.js - // This file will be our entry point into the application
 
 Our directory structure is fairly simple. We'll build our app in an MVC style fashion. Our `views` directory will hold all of our front-end views, while the `routes` directory will handle the traditional controller logic. We won't have any models for this simple application. Again, it's ok if some of these files don't make sense just yet. I'll explain them all in detail shortly.
 
-![Node Js Directory Structure](https://cdn.auth0.com/blog/nodejs-awesome-polls/setup.png)
+![Node.js Directory Structure](https://cdn.auth0.com/blog/nodejs-awesome-polls/setup.png)
 
 ### Building Awesome Polls
 
-Let's write some Node Js code. The first piece of functionality that we will implement is our main entry point into the application. Open up the `app.js` file, or create it if you haven't already. For now, let's add the following:
+Let's write some Node.js code. The first piece of functionality that we will implement is our main entry point into the application. Open up the `app.js` file, or create it if you haven't already. For now, let's add the following:
 
 ```js
 // We saw how we could download dependencies via npm. To use those dependencies in our code we require them. The syntax to require a library is the keyword require and a string for the name of the library. We assign this require function to a variable and can then access methods from the library through that variable. Here we are requiring all of our dependencies at the top of the page as is good practice.
@@ -153,7 +153,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// The .use method is similar to the .set method, where it allows us to set further configurations. The .use method also acts as a chain of events that will take place once a request hits our Node Js application. First we'll log the request data, parse any incoming data, and so on.
+// The .use method is similar to the .set method, where it allows us to set further configurations. The .use method also acts as a chain of events that will take place once a request hits our Node.js application. First we'll log the request data, parse any incoming data, and so on.
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -194,7 +194,7 @@ If you followed along with our directory structure, you'll have created an `inde
 var express = require('express');
 var router = express.Router();
 
-// On our router variable, we'll be able to include various methods. For our app we'll only make use of GET requests, so the method router.get will handle that interaction. This method takes a string as its first parameter and that is the url path, so for the first route we are just giving it '/', which means the default route. Next we are defining a Node Js callback function, that takes three parameters, a request (req), a response (res), and an optional next (next) parameter. Finally, in our callback function, we are just send the message "You are on the homepage".
+// On our router variable, we'll be able to include various methods. For our app we'll only make use of GET requests, so the method router.get will handle that interaction. This method takes a string as its first parameter and that is the url path, so for the first route we are just giving it '/', which means the default route. Next we are defining a Node.js callback function, that takes three parameters, a request (req), a response (res), and an optional next (next) parameter. Finally, in our callback function, we are just send the message "You are on the homepage".
 router.get('/', function(req, res, next) {
   res.send('You are on the homepage');
 });
@@ -288,7 +288,7 @@ With this change saved, restart your Node server and now navigate to `localhost:
 
 ### Building the UI
 
-Next, let's build our views. Node Js and Express are very extensible and we have a lot of choices and options when choosing a templating engine for our application. In this tutorial we will use [Jade](https://pugjs.org/api/getting-started.html) (recently renamed to Pug). Jade is perhaps one of the oldest view engines, but other options such as [EJS](http://www.embeddedjs.com/), [Mustache](https://mustache.github.io/), [Dust](http://www.dustjs.com/), and so on exist. In our `app.js` file, we already declared that our view engine is going to be Jade, and that our views will be stored in a directory titled views. In this tutorial, we won't go over the Jade/Pug syntax, so if you are unfamiliar, please check out the [official tutorial](https://pugjs.org/language/tags.html).
+Next, let's build our views. Node.js and Express are very extensible and we have a lot of choices and options when choosing a templating engine for our application. In this tutorial we will use [Jade](https://pugjs.org/api/getting-started.html) (recently renamed to Pug). Jade is perhaps one of the oldest view engines, but other options such as [EJS](http://www.embeddedjs.com/), [Mustache](https://mustache.github.io/), [Dust](http://www.dustjs.com/), and so on exist. In our `app.js` file, we already declared that our view engine is going to be Jade, and that our views will be stored in a directory titled views. In this tutorial, we won't go over the Jade/Pug syntax, so if you are unfamiliar, please check out the [official tutorial](https://pugjs.org/language/tags.html).
 
 We are going to build five unique views. Jade/Pug allows us to extend one layout and build on top of it, so we are going to do that in this simple application. Let's create a file named `layout.jade`. Our views will extend this layout and add on their unique properties. The contents of this file will be as follows:
 
@@ -405,7 +405,6 @@ Finally, we are ready to wire up our views and controllers with actual functiona
 
 ```js
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 var request = require('request');
@@ -452,7 +451,7 @@ router.get('/user', ensureLoggedIn, function(req, res, next) {
 module.exports = router;
 ```
 
-This completes our controller's implementation. We did a lot in this section. We saw how we could send data between our server and front end, how to use the excellent Node Js request library to make calls to an external API, and also how to secure our routes and prevent unauthorized access. We haven't built the user authentication system just yet, we'll do that next.
+This completes our controller's implementation. We did a lot in this section. We saw how we could send data between our server and front end, how to use the excellent Node.js request library to make calls to an external API, and also how to secure our routes and prevent unauthorized access. We haven't built the user authentication system just yet, we'll do that next.
 
 Before we close out this section, let's make one quick change to our `app.js` file. If you recall, in our `app.js` file we built our error handler. In the last section, we created a pretty view for our errors, so let's make sure we're using that view.
 
@@ -471,6 +470,6 @@ app.use(function(err, req, res, next) {
 
 ## Conclusion
 
-Node Js is a powerful language and framework for building modern applications. The community support through NPM is unrivaled and Auth0 can help secure your Node Js apps with not just state of the art authentication, but enhanced features like [multifactor auth](https://auth0.com/docs/multifactor-authentication), [anomaly detection](https://auth0.com/docs/anomaly-detection), [enterprise federation](https://auth0.com/docs/identityproviders), [single sign on (SSO)](https://auth0.com/docs/sso), and more. [Sign up](javascript:signup\(\)) today so you can focus on building features unique to your app.
+Node.js is a powerful language and framework for building modern applications. The community support through NPM is unrivaled and Auth0 can help secure your Node.js apps with not just state of the art authentication, but enhanced features like [multifactor auth](https://auth0.com/docs/multifactor-authentication), [anomaly detection](https://auth0.com/docs/anomaly-detection), [enterprise federation](https://auth0.com/docs/identityproviders), [single sign on (SSO)](https://auth0.com/docs/sso), and more. [Sign up](javascript:signup\(\)) today so you can focus on building features unique to your app.
 
-{% include tweet_quote.html quote_text="With Auth0, you can add authentication to your Node Js app in minutes." %}
+{% include tweet_quote.html quote_text="With Auth0, you can add authentication to your Node.js app in minutes." %}
