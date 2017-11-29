@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Building and Securing Koa and Angular 2 with JWT"
-description: "Single Page Applications (SPAs) can benefit greatly from JWT secured backends. Here we will see how to secure an Angular 2 app, backed by Koa, with JWTs."
-date: 2017-01-19 8:30
-category: Technical Guide, Angular, Angular2
+title: "Building and Securing Koa and Angular with JWTs"
+description: "Single Page Applications (SPAs) can benefit greatly from JWT secured backends. Here we will see how to secure an Angular app, backed by Koa, with JWTs."
+date: 2018-01-19 8:30
+category: Technical Guide, Angular
 author:
   name: "Bruno Krebs"
   url: "https://twitter.com/brunoskrebs"
@@ -13,7 +13,7 @@ design:
   image: https://cdn.auth0.com/blog/koa-angular2/logo.png
   bg_color: "#222228"
 tags:
-- angular2
+- angular
 - jwt
 - koa
 - node
@@ -26,40 +26,43 @@ related:
 
 ---
 
-**TL;DR**
-
-[Koa](http://koajs.com/) is a web framework for Node.JS that is based on [async functions, a new ES7 feature](https://jakearchibald.com/2014/es7-async-functions/), providing a simpler and more concise API. In this article, we will build a grocery list application, with an [Angular 2](https://angular.io/) front-end, that communicates with a Koa based backend. Our application will take advantage of [JWT tokens](https://jwt.io/) to secure these communications. The full implementation is [provided on this repo at GitHub](https://github.com/auth0-blog/grocery-list/tree/jwt).
+**TL;DR**: [Koa](http://koajs.com/) is a web framework for Node.JS that is based on [async functions, a new ES7 feature](https://jakearchibald.com/2014/es7-async-functions/), providing a simpler and more concise API. In this article, we will build a grocery list application, with an [Angular](https://angular.io/) front-end, that communicates with a Koa based backend. Our application will take advantage of [JWT tokens](https://jwt.io/) to secure these communications. The full implementation is [provided on this repo at GitHub](https://github.com/brunokrebs/koa-angular).
 
 ## Overview
 
-For our application, we will use [TypeScript](https://www.typescriptlang.org/), a programming language that extends JavaScript with type checking, for developing both our backend and frontend. Angular 2 already advises us to use TypeScript when writing applications with their framework. But, besides the advantage of using the same language on both ends, TypeScript enables developers to become more productive by using tools that help them to avoid mistakes, like passing the wrong type to a method, and also by making refactoring much easier.
+For our application, we will use [TypeScript](https://auth0.com/blog/typescript-practical-introduction/) for developing both our backend and front-end. TypeScript is already the default language on Angular, but we will also use it on the backend to be more productive. With TypeScript, we get access to tools that help us avoid mistakes, like passing the wrong type to a method, and also by making refactoring much easier.
 
-Since we want our application to secure ours users' data, we will use JWT tokens to authorize certain requests. A JWT—which stands for JSON Web Token and is pronounced as "jot"—is a token that provides credibility on an end to end communication. JWTs are getting widely adopted, and they take place as an alternative to the, rather old, cookie based approach. The biggest advantage of JWTs is that they can hold sensitive data, in a readable format, and be trustworthy while getting sent over the network.
+Since our application will handle sensitive user data, we will secure it with [Auth0](https://auth0.com/). Auth0 makes the process of authentication easy as it is pretty trivial to integrate it on a wide variety of platforms (including, of course, Angular and Koa).
 
-Koa is web framework, just like [Express](http://expressjs.com/), that is developed by many of the same people that built Express—by the way, here is a [nice tutorial on how to secure an Angular 2 app backed by Express](https://auth0.com/blog/angular-2-authentication/). Unofficially known as Express' successor, Koa uses `async` functions to improve readability and robustness of applications. Writing middlewares to handle users requests become very easy and clear with Koa's approach, as we will see on our own grocery list application.
+Koa is web framework, just like [Express](http://expressjs.com/), that is developed by many of the same people that built Express. Unofficially known as Express' successor, Koa uses `async` functions to improve readability and robustness of applications. Writing middleware to handle users requests become very easy and clear with Koa's approach, as we will see on our own grocery list application.
 
 {% include tweet_quote.html quote_text="Koa uses async functions to improve readability and robustness of apps." %}
 
+## Prerequisites
+
+Most notably, we need [Node.js](https://nodejs.org) and [NPM](https://www.npmjs.com/) installed in our development machine. These tools together will solve a lot of issues, like installing other dependencies, running our code, etc. To install them, we could simply go to [the Download page of Node.js](https://nodejs.org/en/download/), fetch the latest version, and install it on our machine. However, a better approach for developers is to use [NVM](https://github.com/creationix/nvm). This tool makes it easy to switch versions on a development machine. For example, to install the most recent Node.js version with NVM we can run the following command: `nvm install node`.
+
 ## Our Application - Grocery List
 
-The grocery list application will have a very simple and intuitive functionality. Visitors (unknown users) will be able to register themselves or, if they already have registered before, to sign in and manage their current list of items to buy at the grocery store. A user won't be able to have more than one list. The application will look like this:
+The grocery list application will have a very simple and intuitive functionality. Visitors (unknown users) will be able to authenticate themselves to manage list of items to buy at the grocery store. The application will look like this:
 
 ![Grocery List app built with Angular 2 and Koa](https://cdn.auth0.com/blog/koa-angular2/grocery-list-app.png)
 
-The most important files of our source code will be divided in three folders:
+Our source code will be structured into three folders:
 
-1. Client source folder—which will hold our Angular 2 source code.
-2. Common source folder—which will hold files that are used by both backend and front-end.
-3. Server source folder—which will contain all the code that is responsible for persisting users' data and authenticating them.
+1. `angular`—which will hold the source of our front-end app.
+2. `common`—which will hold files that are used on both the backend and the front-end.
+3. `server`—which will contain all the code that is responsible for persisting users' data and authenticating them.
 
-## Cloning the Repo
-
-To reach a minimum viable architecture, where we can start developing the real code for our grocery list, we'll need to do some configuration. Angular 2 alone is already considered cumbersome to configure. So, to avoid wasting valuable time, we will use a repo that provides a very good starting point, containing many of the dependencies installed and configured. Leaving us to deal with what matters: Koa's middlewares, Angular's components and JWT tokens' configuration.
-
-This repo was built specifically to be followed alongside with this post, and can be [found on GitHub](https://github.com/auth0-blog/grocery-list). So let's clone it:
+Let's create a new folder called `koa-angular` and add these three directories to it:
 
 ```bash
-git clone git@github.com:auth0-blog/grocery-list.git
+# create project root
+mkdir koa-angular
+# move cursor to it
+cd koa-angular
+# create the three main directories
+mkdir angular common server
 ```
 
 ### Node.js and NPM
