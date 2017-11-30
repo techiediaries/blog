@@ -15,9 +15,7 @@ We'll need an [Auth0](https://auth0.com) account to manage authentication. [To s
 
 ### Dependencies and Setup
 
-There are only two dependencies that we really need to install: [`auth0.js`](https://github.com/auth0/) and [`history`](https://github.com/ReactTraining/history). To do that, let's issue `npm install --save auth0-js history` in the project root.
-
-> Note that, as we want to get the best security available, we are going to rely on the [Centralized Login feature of Auth0](https://auth0.com/docs/hosted-pages/login). This method consists of redirecting users to a login page hosted by Auth0 that is easily customizable right from the [Dashboard](https://manage.auth0.com/).
+The only dependency that we need is the [`auth0.js` package: a client side JavaScript toolkit for Auth0 API](https://github.com/auth0/auth0.js). To install it, let's issue `npm install --save auth0-js` in the project root.
 
 After installing it, we can create an authentication service to interface with the `auth0.js` script. Let's call this service `Auth` and create it in the `src/Auth/` directory with the following code:
 
