@@ -49,9 +49,63 @@ Besides that, authenticated authors will be able to:
 
 ## Building the Blog Engine
 
+### Before Starting
+
+Make sure you have followed all instructions in the first part. However, if for some reason you lost the code created in the first part, or if you want to start here, [feel free to clone this GitHub repository](https://github.com/auth0-blog/symfony-blog-part-1). The following commands will set up the application for you:
+
+```bash
+git clone https://github.com/auth0-blog/symfony-blog-part-1
+cd symfony-blog-part-1
+```
+
+After that, you will have to create file called `.env` in the project root and paste the following into it:
+
+```yml
+DATABASE_HOST={DATABASE_HOST}
+DATABASE_PORT={DATABASE_PORT}
+DATABASE_NAME={DATABASE_NAME}
+DATABASE_USER={DATABASE_USER}
+DATABASE_PASSWORD={DATABASE_PASSWORD}
+AUTH0_CLIENT_ID={AUTH0_CLIENT_ID}
+AUTH0_CLIENT_SECRET={AUTH0_CLIENT_SECRET}
+AUTH0_DOMAIN={AUTH0_DOMAIN}
+```
+
+Note that you will have to replace the values above. Check the first part to understand how to replace them.
+
+__Pro Tip!__ If you do not have a MySQL database available, an easy way to bootstrap one is with Docker:
+
+```bash
+docker run --name symfony-blog-mysql \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=myextremellysecretpassword \
+    -e MYSQL_DATABASE=symfony-blog \
+    -e MYSQL_USER=symfony-blog-user \
+    -e MYSQL_PASSWORD=mysecretpassword \
+    -d mysql:5.7
+```
+
+The last thing you will need to do is to use composer to install the dependencies:
+
+```bash
+composer install
+```
+
+This will trigger a series of questions that you can answer as follows:
+
+```bash
+database_host (127.0.0.1): 127.0.0.1
+database_port (null): 3306
+database_name (symfony): symfony-blog
+database_user (root): symfony-blog-user
+database_password (null): mysecretpassword
+```
+
+For the questions related to `mailer_transport` and `secret`, you can simply press `Enter` to accept the default values.
+
 ### Installing Bootstrap
 
-In order to install [Bootstrap](https://getbootstrap.com/) we need [Symfony's Webpack Encore](https://github.com/symfony/webpack-encore), which is a simpler way to integrate [Webpack](https://webpack.js.org/) into your application. You can install this by running the following command:
+In order to install [Bootstrap](https://getbootstrap.com/), we need [Symfony's Webpack Encore](https://github.com/symfony/webpack-encore), which is a simpler way to integrate [Webpack](https://webpack.js.org/) into your application. You can install this by running the following command:
 
 ```bash
 yarn add @symfony/webpack-encore --dev
