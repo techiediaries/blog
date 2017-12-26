@@ -26,28 +26,29 @@ related:
 
 ---
 
-## About Part 1
+## Symfony Tutorial: About Part 1 and Part 2
 
 In the first article, we:
 
 * installed and configured a Symfony installation;
 * created two new database tables `author` and `blog_post`;
 * allowed users to authenticate with Auth0;
-* and ensured the authenticated user created an Author entry before using the system.
+* and ensured that the authenticated users have `Author` instances associated before using the system.
 
-In this part of the article we will be covering installing Bootstrap, a framework, to make the blog nicer visually. We will also enhance our blog engine to allow visitors to:
+In this part of the article, we will cover installing [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. We will also enhance our blog engine to allow visitors to:
 
 * see a list of blog posts;
 * read a specific blog post;
-* and find out more about the author.
+* and find out more about authors.
 
-Authenticated authors will be able to:
+Besides that, authenticated authors will be able to:
 
 * create a new blog post;
 * see all of their own blog posts;
-* delete their own blog posts from the system.
+* and delete their own blog posts from the system.
 
 ## Building the Blog Engine
+
 ### Installing Bootstrap
 
 In order to install [Bootstrap](https://getbootstrap.com/) we need [Symfony's Webpack Encore](https://github.com/symfony/webpack-encore), which is a simpler way to integrate [Webpack](https://webpack.js.org/) into your application. You can install this by running the following command:
