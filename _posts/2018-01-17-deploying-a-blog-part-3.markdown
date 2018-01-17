@@ -1,0 +1,148 @@
+---
+layout: post
+title: "Symfony Tutorial: Deploying a blog (Part 2)"
+description: "Let's create and deploy a secure blog engine with Symfony."
+longdescription: "Creating applications with Symfony is easy and can be scaled to be used in any requirement. The tools that it provides to create and maintain web applications is amazing and replaces repetitive tasks. Let's use Symfony to create a blog engine."
+date: 2018-01-17 11:00
+category: Technical Guide, PHP, Symfony
+author:
+  name: Greg Holmes
+  url: https://github.com/GregHolmes
+  mail: iam@gregholmes.co.uk
+  avatar: "https://avatars0.githubusercontent.com/u/2411269?s=460&v=4"
+design:
+  bg_color: "#000000"
+  image: https://cdn.auth0.com/blog/symfony-blog/logo.png
+tags:
+- symfony
+- php
+- auth0
+- bootstrap
+- authentication
+- heroku
+- travis-ci
+- web-app
+related:
+- 2017-12-28-symfony-tutorial-building-a-blog-part-1
+- 2018-01-04creating-symfony-blog-part-2
+- 2016-06-23-creating-your-first-laravel-app-and-adding-authentication
+---
+
+**TL;DR:** Symfony is a PHP framework as well as a set of reusable PHP components and libraries. It uses the Model-View-Controller design pattern and can be scaled to be used in any requirement. It aims to speed up the creation and maintenance of web applications, replacing repetitive code. In this part of the article, we will cover installing [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. The final code can be found at this [repository](https://github.com/auth0-blog/symfony-blog-part-2).
+
+---
+
+
+## Symfony Tutorial: About Part 1 and Part 2
+
+[In the first article](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/), we:
+
+* installed and configured a Symfony installation;
+* created two new database tables: `author` and `blog_post`;
+* allowed users to authenticate with [Auth0](https://auth0.com);
+* and ensured that the authenticated users have `Author` instances associated before using the system.
+
+[In the second article](https://auth0.com/blog/creating-symfony-blog-part-2/), we covered installing [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. We also enhanced our blog engine to allow visitors to:
+
+* see a list of blog posts;
+* read a specific blog post;
+* and find out more about authors.
+
+Besides that, authenticated authors were able to:
+
+* create a new blog post;
+* see all of their own blog posts;
+* and delete their own blog posts from the system.
+
+In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, (Heroku and Travis CI) allowing us to:
+
+* make code changes to the blog;
+* deploy these changes on committing them to github
+* almost instantly see their changes in production and/or staging
+
+## About Heroku
+
+## About Travis CI
+
+Travis CI is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub. 
+
+## Building the Blog Engine
+
+### Before Starting
+
+Make sure you have followed all instructions in the first part. However, if for some reason you lost the code created in the first part, or if you want to start here, [feel free to clone this GitHub repository](https://github.com/auth0-blog/symfony-blog-part-1). The following commands will set up the application for you:
+
+```bash
+git clone https://github.com/auth0-blog/symfony-blog-part-2
+cd symfony-blog-part-2
+```
+
+After that, you will have to create a file called `.env` in the project root and paste the following into it:
+
+```yml
+DATABASE_HOST={DATABASE_HOST}
+DATABASE_PORT={DATABASE_PORT}
+DATABASE_NAME={DATABASE_NAME}
+DATABASE_USER={DATABASE_USER}
+DATABASE_PASSWORD={DATABASE_PASSWORD}
+AUTH0_CLIENT_ID={AUTH0_CLIENT_ID}
+AUTH0_CLIENT_SECRET={AUTH0_CLIENT_SECRET}
+AUTH0_DOMAIN={AUTH0_DOMAIN}
+```
+
+Note that you will have to replace the values above. [Check the first part to understand how to replace them](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/).
+
+__Pro Tip!__ If you do not have a MySQL database available, an easy way to bootstrap one is with Docker:
+
+```bash
+docker run --name symfony-blog-mysql \
+    -p 3306:3306 \
+    -e MYSQL_ROOT_PASSWORD=myextremellysecretpassword \
+    -e MYSQL_DATABASE=symfony-blog \
+    -e MYSQL_USER=symfony-blog-user \
+    -e MYSQL_PASSWORD=mysecretpassword \
+    -d mysql:5.7
+```
+
+The last thing you will need to do is to use composer to install the dependencies:
+
+```bash
+composer install
+```
+
+This will trigger a series of questions that you can answer as follows:
+
+```bash
+database_host (127.0.0.1): 127.0.0.1
+database_port (null): 3306
+database_name (symfony): symfony-blog
+database_user (root): symfony-blog-user
+database_password (null): mysecretpassword
+```
+
+For the questions related to `mailer_transport` and `secret`, you can simply press `Enter` to accept the default values.
+
+If you haven't followed the first part of this series, you might need to issue the following commands to create the database tables and to populate them:
+
+```bash
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+```
+
+## Configuring Symfony for production
+    - Configure Composer requirement changes
+    - Move doctrine config to config_dev and config_prod
+    - Move logs config to config_dev and config_prod
+
+## Install dependencies
+    - Install Heroku CLI & configure
+        - Creating space
+        - Adding cleardb via heroku addons:add cleardb:ignite
+        - Add Symfony env variables (database, auth0 and SYMFONY_ENV=prod) to Heroku keys
+    - Travis-ci CLI & configure
+
+## Instructions for staging
+
+## Conclusion
+
+Congratulations, you have built yourself a functional blog engine from scratch with Symfony. This blog engine even enables visitors to sign up to become authors. This allows them to also contribute to your blog by posting articles of their own! Although this is just the basics of a blog, it is a strong stepping stone into making it as custom and feature filled as you wish.
