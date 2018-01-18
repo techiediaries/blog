@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Symfony Tutorial: Deploying a blog (Part 2)"
+title: "Symfony Tutorial: Deploying a blog (Part 3)"
 description: "Let's create and deploy a secure blog engine with Symfony."
 longdescription: "Creating applications with Symfony is easy and can be scaled to be used in any requirement. The tools that it provides to create and maintain web applications is amazing and replaces repetitive tasks. Let's use Symfony to create a blog engine."
 date: 2018-01-17 11:00
@@ -76,7 +76,17 @@ Although the source is technically free software and available piecemeal on GitH
 
 ### Before Starting
 
-Make sure you have followed all instructions in the first part. However, if for some reason you lost the code created in the first part, or if you want to start here, [feel free to clone this GitHub repository](https://github.com/auth0-blog/symfony-blog-part-1). The following commands will set up the application for you:
+For this tutorial, you will need a GitHub account. So head over to [sign up at GitHub](https://github.com/join?source=header-home).
+
+Once signed up, go to our example repository for the [Symfony blog part 2](https://github.com/auth0-blog/symfony-blog-part-2).
+Click the "Fork" button, found in the top right hand corner of the browser. As shown in the example below:
+
+todo: include fork-repository.png image
+
+Make sure you have followed all instructions in the first two parts. 
+
+You will find that you now have a repository of the same name, but under your account. Click the "Clone or download" button and copy the URL found in there.
+Next is to clone this repository for yourself, so run the following two commands. However replace the URL with your own one:
 
 ```bash
 git clone https://github.com/auth0-blog/symfony-blog-part-2
@@ -150,10 +160,23 @@ yarn run encore dev --watch
     - Move logs config to config_dev and config_prod
 
 ## Install dependencies
-    - Install Heroku CLI & configure
-        - Creating space
-        - Adding cleardb via heroku addons:add cleardb:ignite
-        - Add Symfony env variables (database, auth0 and SYMFONY_ENV=prod) to Heroku keys
+
+### Installing Heroku CLI
+
+Each operating system has a different method of installing Heroku CLI. So below is a list of the commands used to install this:
+
+* on MacOS: `brew install heroku/brew/heroku`
+* on Ubuntu Snap: `sudo snap install heroku --classic`
+* on Debian / Ubuntu: `wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh`
+* on Windows 64-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x64.exe)
+* on Windows 32-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x86.exe)
+
+- Log in
+- Create space
+- Add cleardb database (heroku addons:add cleardb:ignite)
+- Add symfony env variables to heroku keys
+
+
     - Travis-ci CLI & configure
 
 ## Instructions for staging
