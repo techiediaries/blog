@@ -54,17 +54,23 @@ Besides that, authenticated authors were able to:
 * see all of their own blog posts;
 * and delete their own blog posts from the system.
 
-In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, (Heroku and Travis CI) allowing us to:
+In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and Travis CI) allowing us to:
 
 * make code changes to the blog;
 * deploy these changes on committing them to github
 * almost instantly see their changes in production and/or staging
 
-## About Heroku
+## About [Heroku](https://www.heroku.com)
+
+[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manager and scale modern apps by developers. The service is a very flexible, simple to use and quick to start service allowing developers to focus more on the product than spending too much time in the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers, hardware of the infrastructure.
 
 ## About Travis CI
 
-Travis CI is a hosted, distributed continuous integration service used to build and test software projects hosted at GitHub. 
+Travis CI is a hosted, distributed, continuous integration service used to build and test software projects hosted at GitHub.
+ 
+Open source projects may be tested at no charge via travis-ci.org. Private projects may be tested at travis-ci.com on a fee basis. TravisPro provides custom deployments of a proprietary version on the customer's own hardware.
+ 
+Although the source is technically free software and available piecemeal on GitHub under permissive licenses, the company notes that it is unlikely that casual users could successfully integrate it on their own platforms.[4]
 
 ## Building the Blog Engine
 
@@ -122,11 +128,20 @@ database_password (null): mysecretpassword
 
 For the questions related to `mailer_transport` and `secret`, you can simply press `Enter` to accept the default values.
 
-If you haven't followed the first part of this series, you might need to issue the following commands to create the database tables and to populate them:
+If you haven't followed the first two parts of this series, you might need to issue the following commands to create and populate the database tables:
 
 ```bash
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
+```
+
+__NOTE__ If you do not have [Yarn](https://yarnpkg.com), a Javascript package manager, installed, you will need to install and configure this. So go to their [Installation](https://yarnpkg.com/lang/en/docs/install/) page and follow the instructions for installing and configuring Yarn first.
+
+You can then install the third party libraries used to make the blog look nicer visually with the following command:
+
+```bash
+yarn add @symfony/webpack-encore --dev
+yarn run encore dev --watch
 ```
 
 ## Configuring Symfony for production
