@@ -66,6 +66,8 @@ In this third article, we will be covering deployments to two different environm
 
 ## About Travis CI
 
+#todo: Replace the below:
+
 Travis CI is a hosted, distributed, continuous integration service used to build and test software projects hosted at GitHub.
  
 Open source projects may be tested at no charge via travis-ci.org. Private projects may be tested at travis-ci.com on a fee basis. TravisPro provides custom deployments of a proprietary version on the customer's own hardware.
@@ -180,7 +182,9 @@ heroku apps:create space-name-here
 
 #todo: include create-heroku-space.png image
 
-Great, you can now access your website. Head over to the url shown after you created your space, as shown in the example above. 
+Great, you can now access your website. If you take the URL that's given to you as a result of your command above, similar to the image above and put it into your browser, you should see the example page as shown in the image below:
+
+#todo: include heroku-space-browser.png image 
 
 Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to: [Heroku Verify](https://heroku.com/verify) to add your card details.
 
@@ -204,8 +208,97 @@ heroku config:set AUTH0_DOMAIN=(Your Auth0 Domain)
 heroku config:set DATABASE_NAME=(Your database name shown in the image above)
 ```
 
-### Installing Travis-ci CLI
+### Installing Travis-ci
 
+# todo: install travis cli.
+
+Travis-ci can be installed via Ruby. If you have Ruby installed, please make sure it is at least version 1.9.3 (2.0.0 recommended).
+You can check this by typing in a Terminal: 
+
+```bash
+ruby -v
+```
+
+If you don't have Ruby installed. You can install it in one of the following ways, depending on your operating system:
+
+```bash
+brew install ruby # Mac OS X
+sudo apt-get install ruby-full # Debian / Ubuntu
+pkg install ruby # Free bsd
+sudo yum install ruby # CentOS, Fedora, or RHEL
+```
+
+Now that Ruby is installed or at the minimum required version, let's install Travis-ci CLI with the following command:
+
+```bash
+gem install travis -v 1.8.8 --no-rdoc --no-ri
+```
+
+Once complete you can verify it is correctly installed by checking the version:
+
+```bash
+travis version
+```
+
+Making use of Travis-ci requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So head over to Travis-ci to [sign up](https://travis-ci.org/).
+
+Once the account is created at Travis-ci, we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
+
+In order to run through the travis-ci build, we need a `.env` file. So in the root of our project, let's create a `.env.travis.dist` file and paste the following in:
+
+```yml
+DATABASE_HOST=127.0.0.1
+DATABASE_PORT=3306
+DATABASE_NAME=travisbuild
+DATABASE_USER=travis
+DATABASE_PASSWORD=
+CLEARDB_DATABASE_URL=
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_DOMAIN=
+```
+
+We've enabled our github repository on Travis-CI, but we now need to create a `.travis.yml` file so that Travis-CI knows what to do with this. So create the file and put the following in:
+
+```yml
+language: php
+sudo: false
+services:
+- mysql
+cache:
+  directories:
+  - "$HOME/.composer/cache/files"
+matrix:
+  fast_finish: true
+  include:
+  - php: 7.1
+env:
+- SYMFONY_VERSION="3.3.*" DB=mysql
+before-install:
+- composer self-update
+install:
+- cp .env.travis.dist .env
+- composer install
+- php bin/console doctrine:database:create --env=test
+- php bin/console doctrine:schema:create --env=test
+- php bin/console doctrine:fixtures:load -n --env=test
+notifications:
+email: 
+deploy:
+  provider: heroku
+  api_key:
+    secure: 
+  app: 
+```
+
+There are 3 parts of this file where we need to input unique details here. First is our e-mail, please type in your e-mail next to the line: `email: `
+Second is your secure api_key for heroku. If you run the following command, it'll put the encrypted Heroku api key for you: 
+
+```bash
+travis encrypt $(heroku auth:token) --add deploy.api_key
+```
+
+And finally is the app our Heroku refers to, this is your heroku space id. So please type it in next to `app: ` which is at the bottom of the file.
 
 ## Configuring Symfony for production
     - Configure Composer requirement changes
