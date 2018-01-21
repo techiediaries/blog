@@ -66,13 +66,9 @@ In this third article, we will be covering deployments to two different environm
 
 ## About Travis CI
 
-#todo: Replace the below:
-
-Travis CI is a hosted, distributed, continuous integration service used to build and test software projects hosted at GitHub.
+[Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. [Travis CI](https://travis-ci.org/) allows you to build and test your software hosted on GitHub, allowing you to publicise projects comfortable in knowing that project is fully functional for others to use. 
  
-Open source projects may be tested at no charge via travis-ci.org. Private projects may be tested at travis-ci.com on a fee basis. TravisPro provides custom deployments of a proprietary version on the customer's own hardware.
- 
-Although the source is technically free software and available piecemeal on GitHub under permissive licenses, the company notes that it is unlikely that casual users could successfully integrate it on their own platforms.[4]
+With [Travis CI](https://travis-ci.org/), there are 2 different sites to use. [Travis-ci.org](https://travis-ci.org/) allows you test open source projects (public repositories). Where as [Travis-ci.com](https://travis-ci.com/) allows you to test private projects but requires a fee dependant on the size of your project.
 
 ## Building the Blog Engine
 
@@ -210,9 +206,7 @@ heroku config:set DATABASE_NAME=(Your database name shown in the image above)
 
 ### Installing Travis-ci
 
-# todo: install travis cli.
-
-Travis-ci can be installed via Ruby. If you have Ruby installed, please make sure it is at least version 1.9.3 (2.0.0 recommended).
+[Travis-ci](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please make sure it is at least version 1.9.3 (2.0.0 recommended).
 You can check this by typing in a Terminal: 
 
 ```bash
@@ -228,7 +222,7 @@ pkg install ruby # Free bsd
 sudo yum install ruby # CentOS, Fedora, or RHEL
 ```
 
-Now that Ruby is installed or at the minimum required version, let's install Travis-ci CLI with the following command:
+Now that Ruby is installed or at the minimum required version, let's install [Travis CI](https://travis-ci.org/) CLI with the following command:
 
 ```bash
 gem install travis -v 1.8.8 --no-rdoc --no-ri
@@ -240,11 +234,11 @@ Once complete you can verify it is correctly installed by checking the version:
 travis version
 ```
 
-Making use of Travis-ci requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So head over to Travis-ci to [sign up](https://travis-ci.org/).
+Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So head over to Travis-ci to [sign up](https://travis-ci.org/).
 
-Once the account is created at Travis-ci, we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
+Once the account is created at [Travis CI](https://travis-ci.org/), we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
 
-In order to run through the travis-ci build, we need a `.env` file. So in the root of our project, let's create a `.env.travis.dist` file and paste the following in:
+In order to run through the [Travis CI](https://travis-ci.org/) build, we need a `.env` file. So in the root of our project, let's create a `.env.travis.dist` file and paste the following in:
 
 ```yml
 DATABASE_HOST=127.0.0.1
@@ -258,7 +252,7 @@ AUTH0_CLIENT_SECRET=
 AUTH0_DOMAIN=
 ```
 
-We've enabled our github repository on Travis-CI, but we now need to create a `.travis.yml` file so that Travis-CI knows what to do with this. So create the file and put the following in:
+We've enabled our github repository on [Travis CI](https://travis-ci.org/), but we now need to create a `.travis.yml` file so that [Travis CI](https://travis-ci.org/) knows what to do with this. So create the file and put the following in:
 
 ```yml
 language: php
@@ -309,4 +303,4 @@ And finally is the app our Heroku refers to, this is your heroku space id. So pl
 
 ## Conclusion
 
-Congratulations, you have built yourself a functional blog engine from scratch with Symfony. This blog engine even enables visitors to sign up to become authors. This allows them to also contribute to your blog by posting articles of their own! Although this is just the basics of a blog, it is a strong stepping stone into making it as custom and feature filled as you wish.
+## TODO: add Conclusion
