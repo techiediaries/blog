@@ -79,7 +79,7 @@ For this tutorial, you will need a GitHub account. So head over to [sign up at G
 Once signed up, go to our example repository for the [Symfony blog part 2](https://github.com/auth0-blog/symfony-blog-part-2).
 Click the "Fork" button, found in the top right hand corner of the browser. As shown in the example below:
 
-#todo: include fork-repository.png image
+![Forking a repository on GitHub](https://cdn.auth0.com/blog/symfony-part-3/fork-repository.png)
 
 Make sure you have followed all instructions in the first two parts. 
 
@@ -176,11 +176,11 @@ __NOTE__ Please change the `space-name-here` to be the space name you wish. Othe
 heroku apps:create space-name-here
 ```
 
-#todo: include create-heroku-space.png image
+![Creating a Heroku space](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-space.png)
 
 Great, you can now access your website. If you take the URL that's given to you as a result of your command above, similar to the image above and put it into your browser, you should see the example page as shown in the image below:
 
-#todo: include heroku-space-browser.png image 
+![Heroku space created](https://cdn.auth0.com/blog/symfony-part-3/heroku-space-browser.png)
 
 Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to: [Heroku Verify](https://heroku.com/verify) to add your card details.
 
@@ -190,7 +190,9 @@ Once verified, we're going to add the ClearDb add-on to our space. So in your Te
 heroku addons:add cleardb:ignite
 ```
 
-#todo: include create-heroku-database.png image
+You once the command has been run, you will see something similar to the image below:
+
+![Creating a ClearDB database](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-database.png)
 
 Heroku stores the environment files themselves. So in order for our blog to use keys such as the database table name, user, password and so on. We need to store them as environment keys. Previously we placed this in a `.env` file.
 
@@ -295,9 +297,122 @@ travis encrypt $(heroku auth:token) --add deploy.api_key
 And finally is the app our Heroku refers to, this is your heroku space id. So please type it in next to `app: ` which is at the bottom of the file.
 
 ## Configuring Symfony for production
-    - Configure Composer requirement changes
-    - Move doctrine config to config_dev and config_prod
-    - Move logs config to config_dev and config_prod
+
+Now we have set up and configured Heroku and Travis-CI, we need to make some minor changes to our Symfony installation in order to be functional when hosted on Heroku.
+
+Let's make some changes to our `composer.json` file. Where it says:
+
+```json
+{
+//...
+  "minimum-stability": "dev",
+}
+```
+
+Change it to:
+
+```json
+{
+//...
+  "minimum-stability": "stable",
+}
+```
+
+Now let's update our composer lock file with the following command:
+
+```bash
+composer update
+```
+
+We now need to exclude our DataFixtures from the services autowiring. Open the file: `app/config/services.yml` and find:
+
+```yml
+AppBundle\:
+    resource: '../../src/AppBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+```
+
+In exclude, where it shows `{Entity,Repository,Tests}` add `DataFixtures`. This will look like:
+
+```yml
+AppBundle\:
+    resource: '../../src/AppBundle/*'
+    # you can exclude directories or files
+    # but if a service is unused, it's removed anyway
+    exclude: '../../src/AppBundle/{Entity,Repository,Tests,DataFixtures}'
+```
+
+Our doctrine configuration will be different in production than it is in development. So in `app/config/config.yml` you should find something similar to:
+
+```yml
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%env(DATABASE_HOST)%'
+        port: '%env(DATABASE_PORT)%'
+        dbname: '%env(DATABASE_NAME)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
+        charset: UTF8
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+```
+
+Move this to the dev config file: `app/config/config_dev.yml`.
+
+In `app/config/config_prod.yml` we need the configuration to be slightly different. Paste the following into the bottom of that file:
+
+```yml
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        dbname: '%env(DATABASE_NAME)%'
+        url: '%env(CLEARDB_DATABASE_URL)%'
+        charset: UTF8
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+```
+
+As you can see from the above, we are no longer using the database host, port, name, user and password. Instead we need only 2 variables, these are url, dbname.
+
+One final change is, we need to change a location of the log file found in `app/config/config_prod.yml`.
+In this file, there will be something similar to:
+
+```yml
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+        nested:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+```
+
+Replace the last line with:
+
+```yml
+path: 'php://stderr'
+```
+
+It's time to commit all of our changes to our forked repository. This can be done by the following commands:
+
+```bash
+git add .
+git commit -m "Added file changes to prepare for pushing to production"
+git push
+```
 
 ## Instructions for staging
 
