@@ -425,42 +425,19 @@ In this section, you will see how you can add Auth0 authentication to your front
 
 ### Creating an Auth0 Client
 
+To represent your Vue.js front-end application on Auth0, you will need to create an Auth0 client. To do that, go to your [Auth0 dashboard](https://manage.auth0.com/) and click on the *New Client* button.
 
-Go to your [Auth0 dashboard](https://manage.auth0.com/), then click on the *NEW CLIENT* button
+You will be presented with a page where you can enter the name of the client and the type of the client. You can fill the name of the application as *Django Vue.js App* and choose the *Single Page Web Applications* type.
 
+![Creating an Auth0 Client](https://cdn.auth0.com/blog/django-vuejs/auth0-client.png)
 
-![Create new client](https://screenshotscdn.firefoxusercontent.com/images/3f2d874d-5f2b-48ba-8769-8333b5171ce2.png)
-
-Or you can also navigate to the *Clients* section and then click on the *CREATE CLIENT* button
-
-
-![Create new client](https://screenshotscdn.firefoxusercontent.com/images/9c35fa7f-2c22-4f55-9562-bf5070f45ef2.png)
-
-
-You should be presented with a page where you can enter the name of the client and the type of the client
-
-![New client details](https://screenshotscdn.firefoxusercontent.com/images/bccd98ac-e69f-42f5-ac54-7cc07638722b.png)
-
-
-Enter a name for your client, select *Single Page Web Applications* type then click on *CREATE*
-
-
-You should be redirected to a page where you can find different tabs for quickstart information and settings etc.   
-
-
-![Client details](https://screenshotscdn.firefoxusercontent.com/images/4124eb81-689a-4e8c-b576-3ce99581118f.png)
-
+After filling this form, click on the *Create* button. This will redirect you to a page where you can find the *Settings* tab.
 
 ### Configuring the Callback URL
 
-
-You need to whitelist the callback URL for your app (`http://localhost:8080/`) in the *Allowed Callback URLs* field in your Client Settings.
-
-![Configuring the callback URL](https://screenshotscdn.firefoxusercontent.com/images/0953b85b-0728-44b7-bad7-51c0522d18fd.png)
-
+You will need to whitelist the callback URL for your app (`http://localhost:8080/`) in the *Allowed Callback URLs* field of your new Auth0 client. This can be done in the *Settings* tab. In this tab, find the field mentioned and add `http://localhost:8080/` to it. Then click on the *Save* button.
 
 ### Creating the Authentication Service
-
 
 Now let's install the `auth0.js` and EventEmitter libraries and create an authentication service which is going to encapsulate the code needed for interfacing with Auth0.
 
