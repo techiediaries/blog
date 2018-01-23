@@ -181,36 +181,53 @@ If you navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) in a web brows
 
 ## Bootstrapping the Front-end Project
 
-Vue.js has a [CLI utility](https://github.com/vuejs/vue-cli) that allows Vue developers to quickly generate single page applications. The CLI offers pre-configured build setups for a modern frontend workflow and takes only some minutes to scaffold a basic project boilerplate with features such as hot-reloading, lint-on-save, and production-ready builds.
+Vue.js has a [CLI utility](https://github.com/vuejs/vue-cli) that allows developers to quickly generate SPAs. The CLI offers pre-configured build setups for a modern frontend workflow and takes only a few minutes to scaffold a basic project boilerplate. This boilerplate is shipped with features such as hot-reloading, lint-on-save, and production-ready builds.
 
-Before you can install the Vue CLI you need to have a development environment with Node.js >=6.x, npm version 3+ (and optionally Git) installed. You can install both of them by heading to the [official Node.js website](https://nodejs.org/en/download/) and download the right installer for your operating system.
+Before you can install the Vue.js CLI, you need to have a development environment with Node.js 6.x or newer and NPM version 3 or newer. You can install both of them by heading to the [official Node.js website](https://nodejs.org/en/download/) and download the right installer for your operating system. For development machines, it's recommended to use [NVM](https://github.com/creationix/nvm).
 
-![Nodejs official page](https://screenshots.firefoxusercontent.com/images/531385b3-4ad5-4b68-8452-234fb7af3f7c.png)
-
-Next head over to your terminal or command prompt then run the following command:
+Next, head over to your terminal or command prompt and run the following command:
 
 ```bash
 npm install -g vue-cli
 ```
 
-You may need to add `sudo` to the npm command for installing commands globally, depending on your [npm configuration](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+> You may need to add `sudo` to the NPM command to install commands globally depending on your [NPM configuration](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-
-After installing the Vue CLI, let's use it to generate a new Vue application based on the [webpack template](https://github.com/vuejs-templates/webpack).
-
-Inside the django project's root folder run the following command:
+After installing the Vue.js CLI, you will use it to generate a new Vue.js application based on the [Webpack template](https://github.com/vuejs-templates/webpack). Inside the Django project's root, run the following command:
 
 ```bash
+# initialize Vue.js with the Webpack template
 vue init webpack frontend
+```
+
+Vue.js will ask a bunch of questions while creating your project. You can answer them as follows:
+
+* *Project name:* frontend
+* *Project description:* A Vue.js project
+* *Author:* Your Name <your.name@somewhere.com>
+* *Vue build:* Runtime + Compiler: recommended for most users
+* *Install vue-router?* Yes
+* *Use ESLint to lint your code?* Yes
+* *Pick an ESLint preset:* Standard
+* *Set up unit tests:* No
+* *Setup e2e tests with Nightwatch?* No
+* *Should we run `npm install` for you after the project has been created? (recommended)* Yes, I use NPM
+
+Then, to run the initial Vue.js project, you can run the following code:
+
+```bash
+# change working directory to the front-end
 cd frontend
-npm install
+
+# run the NPM dev script
 npm run dev
 ```
 
-You should be able to visit the Vue application with your browser by navigating to [http://127.0.0.1:4000](http://127.0.0.1:4000)
+After that, you should be able to visit the Vue.js application in your browser by navigating to [http://127.0.0.1:8080](http://127.0.0.1:8080).
+
+![Vue.js basic application](https://cdn.auth0.com/blog/django-vuejs/vuejs-basic-app.png)
 
 ## Introduction to JWT
-
 
 [JWT](https://jwt.io/) stands for JSON Web Token and it's simply a JSON (JavaScript Object Notation) object/payload that contains a claim.
 
