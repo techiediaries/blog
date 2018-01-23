@@ -732,6 +732,8 @@ Auth0 login page.
 
 After authenticating, you will be redirected to your Vue.js application, where the *Call Private* and the *Log Out* buttons will appear. Clicking on the *Call Private* button will issue a GET request to the Django framework, alongside with an access token, and will fetch the secured message.
 
+{% include tweet_quote.html quote_text="I just learned how easy it is to integrate Django and Vue.js" %}
+
 ## Conclusion and Next Steps
 
 In this article, you have bootstrapped both the Django back-end project and the Vue.js front-end application. You have also added JWT authentication to your back-end using Auth0. In the next part, you will see how to create the REST API using Django REST framework and then how to consume it from the Vue.js front-end using Axios. You will also see how to create our project front-end views.
