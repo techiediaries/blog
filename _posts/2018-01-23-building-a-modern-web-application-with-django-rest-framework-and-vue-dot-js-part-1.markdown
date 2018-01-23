@@ -51,21 +51,21 @@ This article is composed of the following sections:
 
 ## Introduction to Python and Django
 
-[Python](https://www.python.org/) is a general purpose programming language and it's among the most popular programming languages in the world. It's readable, efficient, and [easy to learn](http://lifehacker.com/five-best-programming-languages-for-first-time-learners-1494256243/1497409477). Python is also a portable language available for major operating systems such as Linux, Windows, and Mac.
+[Python](https://www.python.org/) is a general-purpose programming language and it's among the most popular programming languages in the world. It's readable, efficient, and [easy to learn](http://lifehacker.com/five-best-programming-languages-for-first-time-learners-1494256243/1497409477). Python is also a portable language available for major operating systems such as Linux, Windows, and Mac.
 
 For web developers, Python has many great tools and frameworks that make developers more productive and able to build prototypes in no time. The most popular framework for web development in the Python landscape is [Django](https://www.djangoproject.com/). Django is advertised as *the framework for perfectionists with tight deadlines* because of its ability to allow developers to quickly build prototypes.
 
-Django uses the power of Python to offer developers a great set of features such as class based views and a powerful ORM that you can use to model your database requirements without writing any single line of SQL. The Django ORM abstracts away all the complexities of working with databases and, most importantly, doesn't intimidate you when your client has not decided yet on the database system to use. You can start developing using a SQLite database (which doesn't need any special installation) then you can switch to the right database system later on when your client has settled on the right RDBMS (Relational Database Management System) to use.
+Django uses the power of Python to offer developers a great set of features such as class-based views and a powerful ORM that you can use to model your database requirements without writing any single line of SQL. The Django ORM abstracts away all the complexities of working with databases and, most importantly, doesn't intimidate you when your client has not decided yet on the database system to use. You can start developing using an SQLite database (which doesn't need any special installation) then you can switch to the right database system later on when your client has settled on the right RDBMS (Relational Database Management System) to use.
 
 Django also comes with a powerful migration system that allows you to migrate your database safely and without losing your data when you make changes to the database structure later on.
 
 Another advantage of using Django is that it has a big and an evolving community. This community has created open source packages for common web development problems, so you don't need to reinvent the wheel when building your project.
 
-Django has an excellent and complete documentation for all the features of the framework supplemented by a set of tutorials created by the community.
+Django has an excellent and complete documentation of all the features of the framework supplemented by a set of tutorials created by the community.
 
-Django is also suitable for beginners and you don't have to be an expert with every feature of the framework to start building your web application.
+Django is also suitable for beginners and you don't have to be an expert in every feature of the framework to start building your web application.
 
-{% include tweet_quote.html quote_text="Django is also suitable for beginners and you don't have to be an expert with every feature of the framework to start building your web application." %}
+{% include tweet_quote.html quote_text="Django is also suitable for beginners and you don't have to be an expert in every feature of the framework to start building your web application." %}
 
 ## Introduction to Vue.js and Vue.js Features
 
@@ -82,13 +82,13 @@ Vue.js has many features, such as:
 
 ## Bootstrapping the Back-End Project
 
-Before you can create the back-end project, you need to install some requirements in your development machine. For Django, you need to have [Python 3](https://www.python.org/download/releases/3.0/), [PIP](https://pypi.python.org/pypi/pip), and [`venv`](https://docs.python.org/3/library/venv.html) installed.
+Before you can create the back-end project, you need to install some requirements on your development machine. For Django, you need to have [Python 3](https://www.python.org/download/releases/3.0/), [PIP](https://pypi.python.org/pypi/pip), and [`venv`](https://docs.python.org/3/library/venv.html) installed.
 
-Please note that you don't need to install a full fledged database management system to develop with Django. You can use a SQLite database which allows you to have a file-based database that doesn't require any special installation.
+Please note that you don't need to install a full-fledged database management system to develop with Django. You can use an SQLite database which allows you to have a file-based database that doesn't require any special installation.
 
 ### Installing the Requirements
 
-Let's start with Python 3. Chances are that you already have Python 3 installed on your machine. If not, then the process is simple. You just need to head over to the [official  downloads page](https://www.python.org/downloads/) and pick the installer for your operating system.
+Let's start with Python 3. Chances are that you already have Python 3 installed on your machine. If not, then the process is simple. You just need to head over to the [official downloads page](https://www.python.org/downloads/) and pick the installer for your operating system.
 
 You can check if you have Python 3 installed by running the following command from your terminal or command prompt:
 
@@ -96,15 +96,15 @@ You can check if you have Python 3 installed by running the following command fr
 python3 --version
 ```
 
-The `venv` module (part of the Python 3 standard library) allows you to create lightweight virtual environments for your projects. This allows you to have an isolated environments for each Python project (i.e. dependencies are isolated for each project and from the system wide packages).
+The `venv` module (part of the Python 3 standard library) allows you to create lightweight virtual environments for your projects. This allows you to have an isolated environments for each Python project (i.e. dependencies are isolated for each project and from the system-wide packages).
 
-Setting up an isolated environment provides you with more control over the installed Python packages. You can have different versions for the same package without having to worry about any conflicts, which allows you to work with different Python projects with different package versions. Also, since each environment can have its own Python binary, this allows you to create various environments with different Python versions.
+Setting up an isolated environment provides you with more control over the installed Python packages. You can have different versions of the same package without having to worry about any conflicts, which allows you to work with different Python projects with different package versions. Also, since each environment can have its own Python binary, this allows you to create various environments with different Python versions.
 
 Once you create a virtual environment, `venv` will take care of installing the latest Python binary.
 
 Next, you need to install [`pip`](https://packaging.python.org/key_projects/#pip), a package manager for Python that, by default, installs packages from the Python Package Index ([PyPI](https://pypi.python.org/pypi)).
 
-You can verify if `pip` is installed in your development machine by running the following command:
+You can verify if `pip` is installed on your development machine by running the following command:
 
 ```bash
 # pip or pip3, depending on the environment
@@ -128,7 +128,7 @@ cd djangovuejsproject
 python3 -m venv ./
 ```
 
-Next you need to activate the virtual environment using `source`:
+Next, you need to activate the virtual environment using `source`:
 
 ```bash
 source ./bin/activate
@@ -154,7 +154,7 @@ Now, execute the following command to organize your Django project with [`catalo
 python manage.py startapp catalog
 ```
 
-You also need to add this app to the list of installed apps. Open your project `settings.py` file then add the app:
+You also need to add this app to the list of installed apps. Open your `settings.py` file and add the app:
 
 ```python
 INSTALLED_APPS = [
@@ -233,7 +233,7 @@ After that, you should be able to visit the Vue.js application in your browser b
 
 >JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties.  The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted.
 
-JWTs are composed of three parts: a header, a payload, and a signature. The header contains informations such as the algorithm used while signing the payload and the header (e.g `RS256`) and the payload holds the claims. To learn more about JWTs, [take a look into this reference](https://auth0.com/docs/jwt).
+JWTs are composed of three parts: a header, a payload, and a signature. The header contains information such as the algorithm used while signing the payload and the header (e.g `RS256`) and the payload holds the claims. To learn more about JWTs, [take a look at this reference](https://auth0.com/docs/jwt).
 
 ## Creating an Auth0 Resource/API
 
@@ -257,9 +257,9 @@ That's it! You are now ready to integrate your Django application with Auth0
 
 In this section, you will see how to secure the Django REST API with Auth0.
 
-In the next part, you will build the API, but before that you will add JWT authentication to your back-end using Auth0.
+In the next part, you will build the API, but before that, you will add JWT authentication to your back-end using Auth0.
 
-For this reason, you will need to install the [Django REST framework](http://www.django-rest-framework.org/). You will also need to install the `djangorestframework-jwt` package for handling JWT authentication. You will setup `djangorestframework-jwt` to use Auth0 for signing the JWT tokens.
+For this reason, you will need to install the [Django REST framework](http://www.django-rest-framework.org/). You will also need to install the `djangorestframework-jwt` package for handling JWT authentication. You will set up `djangorestframework-jwt` to use Auth0 for signing the JWT tokens.
 
 To do that, head back to your terminal, make sure the virtual environment we previously created is activated, and then run the following commands to install both packages using `pip`:
 
@@ -304,7 +304,7 @@ from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
 ```
 
-Then, add the following code in the end of this file:
+Then, add the following code at the end of this file:
 
 ```python
 AUTH0_DOMAIN = '<YOUR_AUTH0_DOMAIN>'
@@ -674,7 +674,7 @@ export default {
 }
 ```
 
-In this code, you are listening for the `authChange` event emitted by `AuthService` when the authentication state changes. You are then assign the result to the `authenticated` variable. You also set the `message` variable to be empty. This variable will hold the response from your protected endpoint.
+In this code, you are listening for the `authChange` event emitted by `AuthService` when the authentication state changes. You then assign the result to the `authenticated` variable. You also set the `message` variable to be empty. This variable will hold the response from your protected endpoint.
 
 The last thing you need to do is to define the `methods` property of the `app` component:
 
