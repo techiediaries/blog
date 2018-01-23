@@ -422,6 +422,44 @@ urlpatterns = [
 
 If you rerun your Django project now (`python manage.py runserver`), you will have access only to the [http://127.0.0.1:8000/api/public/](http://127.0.0.1:8000/api/public/) URL. The other one, the `/api/private/`, will need a JWT to be accessed.
 
+### Enabling CORS on Django
+
+As you are going to create a Vue.js application to consume the Django endpoints, you will need to enable CORS on your Django project. To do that, you can [install the `django-cors-headers` utility](https://github.com/ottoyiu/django-cors-headers) as follows:
+
+```bash
+pip install django-cors-headers
+```
+
+After that, you have to add this utility to your installed apps in the `settings.py` file:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    'corsheaders',
+]
+```
+
+Then, you have to add the `CorsMiddleware` in this same file:
+
+```python
+MIDDLEWARE = [  # Or MIDDLEWARE_CLASSES on Django < 1.10
+    # ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    # ...
+]
+```
+
+The last thing you will need to do is to configure what origins will be accepted in your Django application:
+
+```python
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+)
+```
+
+You can add this configuration as the last item in the `settings.py` file.
+
 ## Integrating Auth0 with The Vue.js Front-end
 
 In this section, you will see how you can add Auth0 authentication to your front-end Vue.js application. You will also add a button to use the access token, retrieved from Auth0, to allow users to fetch the message from the `/api/private/` endpoint.
