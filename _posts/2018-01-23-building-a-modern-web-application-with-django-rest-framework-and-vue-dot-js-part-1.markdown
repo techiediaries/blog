@@ -421,9 +421,7 @@ If you rerun your Django project now (`python manage.py runserver`), you will ha
 
 ## Integrating Auth0 with The Vue.js Front-end
 
-
-In this section we'll see how we can add Auth0 authentication to our front-end Vue application and add some a button to communicate with our protected endpoint
-
+In this section, you will see how you can add Auth0 authentication to your front-end Vue.js application. You will also add a button to use the access token, retrieved from Auth0, to allow users to fetch the message from the `/api/private/` endpoint.
 
 ### Creating an Auth0 Client
 
