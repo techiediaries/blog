@@ -599,7 +599,8 @@ You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLB
 
 Now, you are going to refactor your Vue.js homepage to allow users to authenticate via Auth0 and to fetch public and private messages. To do that, open `./frontend/src/App.vue` and replace the `<template>` code with this:
 
-```html
+{% highlight html %}
+{% raw %}
 <template>
   <div>
     <button
@@ -626,20 +627,23 @@ Now, you are going to refactor your Vue.js homepage to allow users to authentica
     <br>
   </div>
 </template>
-```
+{% endraw %}
+{% endhighlight %}
 
 ### Creating the Methods
 
 Still in your `./frontend/src/App.vue`, replace the `<script>` tag with this:
 
-```html
+{% highlight html %}
+{% raw %}
 <script>
 import AuthService from './auth/AuthService'
 import axios from 'axios'
 
 const API_URL = 'http://localhost:8000'
 </script>
-```
+{% endraw %}
+{% endhighlight %}
 
 This imports the `AuthService` from `./auth/AuthService` and the `axios` library. After that, it declares the *API_URL* constant which holds the URL of the back-end server.
 
