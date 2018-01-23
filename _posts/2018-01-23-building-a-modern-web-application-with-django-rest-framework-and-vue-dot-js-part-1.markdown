@@ -69,18 +69,16 @@ Django is also suitable for beginners and you don't have to be an expert with ev
 
 ## Introduction to Vue.js and Vue.js Features
 
-Vue.js is a progressive framework for building user interfaces with JavaScript. You can use Vue.js in the view layer of your application or it can also be used to build Single Page Applications by combining it with other front-end [tools](https://vuejs.org/v2/guide/single-file-components.html).
+[Vue.js is a progressive framework for building user interfaces with JavaScript](https://vuejs.org/). You can use Vue.js in the view layer of your application or you can use it to build Single Page Applications (SPAs) by combining it with some other front-end [tools](https://vuejs.org/v2/guide/single-file-components.html).
 
-Vue.js took the best of both Angular.js and React into one library. For example just like React, Vue uses the virtual DOM and a component-based approach. It also uses similar syntax to the Angular.js templates (for example `v-if` and `v-for` etc.)
-Vue.js has many features such as:
+Vue.js took the best of both Angular.js and React into one library. For example, just like React, Vue.js uses [a virtual DOM](https://vuejsdevelopers.com/2017/02/21/vue-js-virtual-dom/) and a component-based approach. It also uses similar syntax to the Angular.js directives (e.g. `v-if` and `v-for`)
 
-* virtual DOM
+Vue.js has many features, such as:
 
-* reactive and composable view components
-
-* performance
-
-* native rendering on iOS and Android thanks to [Weex](https://weex.incubator.apache.org/) and [NativeScript](https://github.com/rigor789/nativescript-vue)
+* virtual DOM;
+* reactive and composable view components;
+* great performance;
+* and native rendering on iOS and Android thanks to [Weex](https://weex.incubator.apache.org/) and [NativeScript](https://github.com/rigor789/nativescript-vue);
 
 ## Bootstrapping the Back-end Project
 
