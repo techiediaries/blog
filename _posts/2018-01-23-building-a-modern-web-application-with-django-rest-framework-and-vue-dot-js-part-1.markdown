@@ -255,13 +255,13 @@ That's it! You are now ready to integrate your Django application with Auth0
 
 ## Integrating Django with Auth0
 
+In this section, you will see how to secure the Django REST API with Auth0.
 
-In this section we'll see how to secure the Django REST API with Auth0.
+In the next part, you will build the API, but before that you will add JWT authentication to your back-end using Auth0.
 
-In the next part we'll build the API but before that let's add JWT authentication to our back-end using Auth0.
-For this reason, we'll need to first install Django REST framework and the `djangorestframework-jwt` package for handling JWT authentication in DRF then we'll setup `djangorestframework-jwt` to use Auth0 for signing the JWT tokens.
+For this reason, you will need to install the [Django REST framework](http://www.django-rest-framework.org/). You will also need to install the `djangorestframework-jwt` package for handling JWT authentication. You will setup `djangorestframework-jwt` to use Auth0 for signing the JWT tokens.
 
-So head back to your terminal, make sure the virtual environment we previously created is activated then run the following command to install both packages using `pip`
+To do that, head back to your terminal, make sure the virtual environment we previously created is activated, and then run the following commands to install both packages using `pip`:
 
 ```bash
 pip install djangorestframework
@@ -270,9 +270,9 @@ pip install cryptography
 pip install python-jose
 ```
 
-Make sure to install dev files for Python 3 `python3-dev` if you get problems when installing the cryptography package.
+> You may need to install `python3-dev` if you get problems while installing the cryptography package.
 
-Next you'll need to add these packages to the list of installed apps in `settings.py`
+Next, you'll need to add these packages to the list of installed apps in `settings.py`
 
 ```python
 INSTALLED_APPS = [
@@ -282,7 +282,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Add `JSONWebTokenAuthentication` to `DEFAULT_AUTHENTICATION_CLASSES`:
+You will also need to the `REST_FRAMEWORK` application definition to `settings.py`:
 
 ```python
 REST_FRAMEWORK = {
@@ -295,7 +295,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-Next make sure to import the following dependencies in your `settings.py` file
+Next, make sure to import the following dependencies in your `settings.py` file:
 
 ```python
 import json
@@ -304,7 +304,7 @@ from cryptography.x509 import load_pem_x509_certificate
 from cryptography.hazmat.backends import default_backend
 ```
 
-Then add the following code
+Then, add the following code in the end of this file:
 
 ```python
 AUTH0_DOMAIN = '<YOUR_AUTH0_DOMAIN>'
@@ -330,53 +330,49 @@ JWT_AUTH = {
 }
 ```
 
-Make sure to replace `AUTH0_DOMAIN` with your own Auth0 domain and `API_IDENTIFIER` with your own API identifier.
+Make sure to replace `<YOUR_AUTH0_DOMAIN>` with your own Auth0 domain and `<YOUR_API_IDENTIFIER>` with the identifier used while creating the Auth0 API.
 
-The public key is retrieved from  `https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json` using the `request.urlopen()` method then assigned to `PUBLIC_KEY` in `JWT_AUTH` (the settings object for `djangorestframework-jwt`).
+The public key is retrieved from `https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json` using the `request.urlopen()` method. This key is then assigned to `PUBLIC_KEY` in `JWT_AUTH` (the settings object for `djangorestframework-jwt`).
 
 `JWT_ISSUER` is your Auth0 domain name prefixed by https.
 
-`JWT_ALGORITHM` needs to be set to **RS256** so you need to make sure your Auth0 API is using **RS256**.
+`JWT_ALGORITHM` needs to be set to **RS256**. That means that you also need to make sure your Auth0 API is using **RS256**.
 
-The `JWT_AUTH_HEADER_PREFIX` is set to **Bearer** the default prefix used by Auth0 (`djangorestframework-jwt` uses a **JWT** prefix by default).
+The `JWT_AUTH_HEADER_PREFIX` is set to **Bearer**. This is the default prefix used by most frameworks (`djangorestframework-jwt` uses a **JWT** prefix by default).
 
-We have also set `JWT_PAYLOAD_GET_USERNAME_HANDLER` to a custom method. This tells `djangorestframework-jwt` to use our custom method in order to map the username from the **access_token** payload to the Django user.
+You also have set `JWT_PAYLOAD_GET_USERNAME_HANDLER` to a custom method. This tells `djangorestframework-jwt` to use your custom method in order to map the username from the **access_token** payload to the Django user.
 
-For most cases, you don't need to store users in your database since Auth0 handles all of that for you including advanced features such as profiles. So we can use a custom function that checks if a general (can be fake) user that we create exists and map it to all Auth0 users.  
+For most cases, you don't need to store users in your database since Auth0 handles all of that for you including advanced features such as profiles. You can use a custom function that checks if a general (can be fake) user that you create exists and map it to all Auth0 users.
 
-So head over to your application and create a user with any valid username such as *auth0user*, you can do that through Django admin interface or in a migration by adding the following code.
-
-First create an empty data migration:
-
+To do that, head over to your application and create a user with any valid username such as *auth0user*. You can do that through Django admin interface or in a migration by adding the following code:
 
 ```bash
+# create an empty data migration
 python manage.py makemigrations --empty catalog
 ```
 
-Then use the `RunPython()` method to execute a function that creates the user
-
+This will generate the `catalog/migrations/0001_initial.py` file. In this file, you can add the following code:
 
 ```python
-
 from django.db import migrations
 from django.conf import settings
+
 def create_data(apps, schema_editor):
     User = apps.get_model(settings.AUTH_USER_MODEL)
     user = User(pk=1, username="auth0user", is_active=True , email="admin@techiediaries.com")
     user.save()
+
 class Migration(migrations.Migration):
     dependencies = [
-        ('catalog', '0001_initial'),
     ]
     operations = [
         migrations.RunPython(create_data),
     ]
-
 ```
 
-For more information see [the docs about data migrations in Django](https://docs.djangoproject.com/en/2.0/topics/migrations/#data-migrations)
+> For more information about migrations, see [the official docs](https://docs.djangoproject.com/en/2.0/topics/migrations/#data-migrations).
 
-Next just run migrate to create your initial data:
+Next, just run migrate to create your initial data:
 
 ```bash
 python manage.py migrate
@@ -389,8 +385,7 @@ def jwt_get_username_from_payload_handler(payload):
     return 'auth0user'
 ```
 
-Please note that you can return the username of any existing user in the database because we are not going to use this for anything besides the sole purpose of letting `djangorestframework-jwt` successfully authenticate the user once the JWT token is found valid.
-
+Please, note that you can return the username of any existing user in the database because you are not going to use this for anything besides the sole purpose of letting `djangorestframework-jwt` successfully authenticate the user.
 
 ### Adding Django Views
 
