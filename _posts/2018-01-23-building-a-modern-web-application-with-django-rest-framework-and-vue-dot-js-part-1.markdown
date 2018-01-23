@@ -51,21 +51,21 @@ This article is composed of the following sections:
 
 ## Introduction to Python and Django
 
-Python is a general purpose programming language. It's among the most popular programming languages in the world. It's readable, efficient and [easy to learn](http://lifehacker.com/five-best-programming-languages-for-first-time-learners-1494256243/1497409477). Python is a portable language available for major operating systems such as Linux, Windows and MAC.
+[Python](https://www.python.org/) is a general purpose programming language and it's among the most popular programming languages in the world. It's readable, efficient, and [easy to learn](http://lifehacker.com/five-best-programming-languages-for-first-time-learners-1494256243/1497409477). Python is also a portable language available for major operating systems such as Linux, Windows, and Mac.
 
-![](https://i.kinja-img.com/gawker-media/image/upload/19bwpujkmuzhwjpg.jpg)
-[Source](https://lifehacker.com/five-best-programming-languages-for-first-time-learners-1494256243/1497409477)
+For web developers, Python has many great tools and frameworks that make developers more productive and able to build prototypes in no time. The most popular framework for web development in the Python landscape is [Django](https://www.djangoproject.com/). Django is advertised as *the framework for perfectionists with tight deadlines* because of its ability to allow developers to quickly build prototypes.
 
-For web developers, Python has many great tools and frameworks that make developers more productive and able to build prototypes in time. Among the most popular web frameworks across the Python community is Django. It's being advertised as the framework for perfectionists with deadlines because of its ability to allow developers to quickly build prototypes and then offer the required tools to build the complete application in a time record.
-
-Django uses the power of Python to offer developers a great set of features such as class based views and a powerful ORM that you can use to model your database requirements without writing any single line of SQL. The Django ORM abstracts away all the complexities of working with databases and most importantly doesn't intimidate you when your client has not decided yet on the database system to use, you can start development using a SQLite database which doesn't need any special installation then switch to the right database system later on when you have settled on the right RDBMS (Relational Database Management System) to use for your project data storage and retrieval.
+Django uses the power of Python to offer developers a great set of features such as class based views and a powerful ORM that you can use to model your database requirements without writing any single line of SQL. The Django ORM abstracts away all the complexities of working with databases and, most importantly, doesn't intimidate you when your client has not decided yet on the database system to use. You can start developing using a SQLite database (which doesn't need any special installation) then you can switch to the right database system later on when your client has settled on the right RDBMS (Relational Database Management System) to use.
 
 Django also comes with a powerful migration system that allows you to migrate your database safely and without losing your data when you make changes to the database structure later on.
 
-Django has a big and an evolving community which has created open source packages for common web development problems so you don't need to reinvent the wheel when building your project.
+Another advantage of using Django is that it has a big and an evolving community. This community has created open source packages for common web development problems, so you don't need to reinvent the wheel when building your project.
 
-Django has an excellent and complete documentation for all the features of the framework supplemented by a set of tutorials created by the community which in many situations can be simpler to understand than the official documentation.
-Django is suitable for beginners and you don't have to be an expert with every feature of the framework to start building your web application.   
+Django has an excellent and complete documentation for all the features of the framework supplemented by a set of tutorials created by the community.
+
+Django is also suitable for beginners and you don't have to be an expert with every feature of the framework to start building your web application.
+
+{% include tweet_quote.html quote_text="Django is also suitable for beginners and you don't have to be an expert with every feature of the framework to start building your web application." %}
 
 ## Introduction to Vue.js and Vue.js Features
 
