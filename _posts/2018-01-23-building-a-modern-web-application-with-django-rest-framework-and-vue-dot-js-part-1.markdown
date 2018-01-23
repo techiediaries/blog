@@ -389,34 +389,35 @@ Please, note that you can return the username of any existing user in the databa
 
 ### Adding Django Views
 
-
-To make sure the JWT authentication via Auth0 is working. You can add these two view functions in `catalog/views.py`:  
+To make sure the JWT authentication via Auth0 is working, you can add these two view functions in `catalog/views.py`:  
 
 ```python
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
+
 def public(request):
     return HttpResponse("You don't need to be authenticated to see this")
+
+
 @api_view(['GET'])
 def private(request):
     return HttpResponse("You should not see this message if not authenticated!");
 ```
 
-Make sure also to create the corresponding URLs in `urls.py`:
-
+Also, make sure to create the corresponding URLs in `urls.py`. You can replace the whole contents of this file with this:
 
 ```python
 from django.conf.urls import url
-from . import views
+from catalog import views
+
+
 urlpatterns = [
     url(r'^api/public/', views.public),
     url(r'^api/private/', views.private)
 ]
 ```
 
-In the next part we will create the actual API endpoints.
-
-
+If you rerun your Django project now (`python manage.py runserver`), you will have access only to the [http://127.0.0.1:8000/api/public/](http://127.0.0.1:8000/api/public/) URL. The other one, the `/api/private/`, will need a JWT to be accessed.
 
 ## Integrating Auth0 with The Vue.js Front-end
 
