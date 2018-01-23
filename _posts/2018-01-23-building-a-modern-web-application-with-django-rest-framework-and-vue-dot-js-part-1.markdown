@@ -435,24 +435,28 @@ After filling this form, click on the *Create* button. This will redirect you to
 
 ### Configuring the Callback URL
 
-You will need to whitelist the callback URL for your app (`http://localhost:8080/`) in the *Allowed Callback URLs* field of your new Auth0 client. This can be done in the *Settings* tab. In this tab, find the field mentioned and add `http://localhost:8080/` to it. Then click on the *Save* button.
+You will need to whitelist the callback URL for your app (`http://localhost:8000/`) in the *Allowed Callback URLs* field of your new Auth0 client. This can be done in the *Settings* tab. In this tab, find the field mentioned and add `http://localhost:8000/` to it. Then click on the *Save* button.
 
 ### Creating the Authentication Service
 
-Now let's install the `auth0.js` and EventEmitter libraries and create an authentication service which is going to encapsulate the code needed for interfacing with Auth0.
+Now. you will focus on integrating Auth0 in your Vue.js application. To do that, you will have to install the [`auth0.js`](https://github.com/auth0/auth0.js) and the `eventemitter3` libraries:
 
 ```bash
+# change directory to frontend
+cd frontend
+
+# install dependencies
 npm install --save auth0-js
-npm install --save EventEmitter
+npm install --save eventemitter3
 ```
 
-You also need to install Axios for sending API requests to the Django back-end
+You also need to install Axios to send AJAX requests to the Django back-end:
 
 ```bash
 npm install --save axios
 ```
 
-Create a `src/auth/AuthService.js` file then add the following code
+After installing these three dependencies, create a new file under `./frontend/src/auth/`. You will call this file as `AuthService.js` and add the following code:
 
 ```js
 import auth0 from 'auth0-js'
@@ -460,89 +464,95 @@ import EventEmitter from 'eventemitter3'
 import router from './../router'
 
 export default class AuthService {
-  authenticated = this.isAuthenticated()
-  authNotifier = new EventEmitter()
+  authenticated = this.isAuthenticated();
+  authNotifier = new EventEmitter();
 
-  constructor () {
-    this.login = this.login.bind(this)
-    this.setSession = this.setSession.bind(this)
-    this.logout = this.logout.bind(this)
-    this.isAuthenticated = this.isAuthenticated.bind(this)
-    this.handleAuthentication = this.handleAuthentication.bind(this)
+  constructor() {
+    this.login = this.login.bind(this);
+    this.setSession = this.setSession.bind(this);
+    this.logout = this.logout.bind(this);
+    this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.handleAuthentication = this.handleAuthentication.bind(this);
   }
-  // create an instance of auth0.WebAuth with your API and Client credentials
+
+  // create an instance of auth0.WebAuth with your
+  // API and Client credentials
   auth0 = new auth0.WebAuth({
-    domain: <YOUR_AUTH0_DOMAIN>,
-    clientID: <YOUR_CLIENT_ID>,
-    redirectUri: <YOUR_CALLBACK_URL>,
-    audience: <YOUR_AUDIENCE>,
+    domain: '<YOUR_AUTH0_DOMAIN>',
+    clientID: '<YOUR_CLIENT_ID>',
+    redirectUri: '<YOUR_CALLBACK_URL>',
+    audience: '<YOUR_AUDIENCE>',
     responseType: 'token id_token',
     scope: 'openid profile'
-  })
-  // this method calls the authorize() method which triggers the Auth0 login page
-  login () {
-    this.auth0.authorize()
+  });
+
+  // this method calls the authorize() method
+  // which triggers the Auth0 login page
+  login() {
+    this.auth0.authorize();
   }
-  // this method calls the parseHash() method of auth0 to get authentication information from the callback URL
-  handleAuthentication () {
-    console.log("handling auth");
+
+  // this method calls the parseHash() method of Auth0
+  // to get authentication information from the callback URL
+  handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult)
-        router.replace('/')
+        this.setSession(authResult);
       } else if (err) {
-        router.replace('/')
-        console.log(err)
-        alert(`Error: ${err.error}. Check the console for further details.`)
+        console.log(err);
+        alert(`Error: ${err.error}. Check the console for further details.`);
       }
+      router.replace('/');
     })
   }
-  //stores the user's access_token, id_token, and a time at which the access_token will expire in the local storage
-  setSession (authResult) {
+
+  // stores the user's access_token, id_token, and a time at
+  // which the access_token will expire in the local storage
+  setSession(authResult) {
     // Set the time that the access token will expire at
     let expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
-    )
-    localStorage.setItem('access_token', authResult.accessToken)
-    localStorage.setItem('id_token', authResult.idToken)
-    localStorage.setItem('expires_at', expiresAt)
-    this.authNotifier.emit('authChange', { authenticated: true })
+    );
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_at', expiresAt);
+    this.authNotifier.emit('authChange', {authenticated: true})
   }
-  // remove the access and ID tokens from the local storage and emits the authChange event
 
-  logout () {
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('id_token')
-    localStorage.removeItem('expires_at')
-    this.authNotifier.emit('authChange', false)
+  // remove the access and ID tokens from the
+  // local storage and emits the authChange event
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
+    this.authNotifier.emit('authChange', false);
     // navigate to the home route
     router.replace('/')
   }
 
   // checks if the user is authenticated
-  isAuthenticated () {
+  isAuthenticated() {
     // Check whether the current time is past the
     // access token's expiry time
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
-    return new Date().getTime() < expiresAt
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
   }
 
   // a static method to get the access token
-  static getAuthToken(){
+  static getAuthToken() {
     return localStorage.getItem('access_token');
   }
 
   //a method to get the User profile
-  getUserProfile(cb){
-    var accessToken =  localStorage.getItem('access_token')
-    if(accessToken) return this.auth0.client.userInfo(accessToken, cb);
+  getUserProfile(cb) {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) return this.auth0.client.userInfo(accessToken, cb);
     else return null;
   }
 }
 ```
 
-You need to replace <YOUR_AUTH0_DOMAIN>, <YOUR_CLIENT_ID>, <YOUR_CALLBACK_URL> and <YOUR_AUDIENCE> with the values from your client and API settings.
-
+You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>`, and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejsapi.digituz.com.br`).
 
 ### Creating the Template
 
