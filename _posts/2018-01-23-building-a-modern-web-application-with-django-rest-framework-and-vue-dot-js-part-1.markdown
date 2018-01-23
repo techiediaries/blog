@@ -229,23 +229,13 @@ After that, you should be able to visit the Vue.js application in your browser b
 
 ## Introduction to JWT
 
-[JWT](https://jwt.io/) stands for JSON Web Token and it's simply a JSON (JavaScript Object Notation) object/payload that contains a claim.
+[JWT](https://jwt.io/) stands for JSON Web Token and it's simply a JSON (JavaScript Object Notation) object that contains claims. Here it is the official definition in the [RFC 7519](https://tools.ietf.org/html/rfc7519):
 
-Here is how it's defined in [RFC 7519](https://tools.ietf.org/html/rfc7519)
+>JSON Web Token (JWT) is a compact, URL-safe means of representing claims to be transferred between two parties.  The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted.
 
->JSON Web Token (JWT) is a compact, URL-safe means of representing
-claims to be transferred between two parties.  The claims in a JWT
-are encoded as a JSON object that is used as the payload of a JSON
-Web Signature (JWS) structure or as the plaintext of a JSON Web
-Encryption (JWE) structure, enabling the claims to be digitally
-signed or integrity protected with a Message Authentication Code
-(MAC) and/or encrypted.
-
-A JWT has three parts:  a header, a payload, and a signature. The header contains informations such as the algorithm to be used for signing the payload and the header (e.g HS256) and the payload holds the claims to make.
-
+JWTs are composed of three parts: a header, a payload, and a signature. The header contains informations such as the algorithm used while signing the payload and the header (e.g `RS256`) and the payload holds the claims. To learn more about JWTs, [take a look into this reference](https://auth0.com/docs/jwt).
 
 ## Creating an Auth0 Resource/API
-
 
 Before you can use Auth0 authentication with your application you first need to create an Auth0 account then head over to the [dashboard](https://manage.auth0.com/)
 
