@@ -554,116 +554,116 @@ export default class AuthService {
 
 You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>`, and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejsapi.digituz.com.br`).
 
-### Creating the Template
+### Creating the Homepage
 
-
-Open `src/App.vue` then add the following template to create three buttons for login, logout and for sending a request to a private endpoint
+Now, you are going to refactor your Vue.js homepage to allow users to authenticate via Auth0 and to fetch public and private messages. To do that, open `./frontend/src/App.vue` and replace the `<template>` code with this:
 
 ```html
 <template>
-<div>
-          <button
-            class="btn btn-primary btn-margin"
-            v-if="!authenticated"
-            @click="login()">
-              Log In
-          </button>
+  <div>
+    <button
+      class="btn btn-primary btn-margin"
+      v-if="!authenticated"
+      @click="login()">
+      Log In
+    </button>
 
-          <button
-            class="btn btn-primary btn-margin"
-            v-if="authenticated"
-            @click="private()">
-              Call Private
-          </button>
+    <button
+      class="btn btn-primary btn-margin"
+      v-if="authenticated"
+      @click="private()">
+      Call Private
+    </button>
 
-          <button
-            class="btn btn-primary btn-margin"
-            v-if="authenticated"
-            @click="logout()">
-              Log Out
-          </button>
-          {{message}}
-          <br>
-
-
-</div>  
+    <button
+      class="btn btn-primary btn-margin"
+      v-if="authenticated"
+      @click="logout()">
+      Log Out
+    </button>
+    {{message}}
+    <br>
+  </div>
 </template>
 ```
 
 ### Creating the Methods
 
+Still in your `./frontend/src/App.vue`, replace the `<script>` tag with this:
 
-In `src/App.vue` add this code in the `<script>` tag
+```html
+<script>
+  import AuthService from './auth/AuthService';
+  import axios from 'axios';
 
-```js
-import AuthService from './auth/AuthService'
-import axios from 'axios'
-const API_URL = 'http://localhost:8000'
+  const API_URL = 'http://localhost:8000';
+</script>
 ```
 
-This imports the AuthService, we previously created, from `./auth/AuthService` and the axios client then declares the *API_URL* constant which holdes the URL of the back-end server.
+This imports the `AuthService` from `./auth/AuthService` and the `axios` library. After that, it declares the *API_URL* constant which holds the URL of the back-end server.
 
-Next create an instance of the AuthService
+After the `API_URL` constant, create an instance of `AuthService`:
 
 ```js
-const auth = new AuthService()
+const auth = new AuthService();
 ```
 
-Next in your `data()` method add the following code:
+Then, below the `auth` definition, start defining the app component:
 
 ```js
-  data () {
+export default {
+  name: 'app',
+  data() {
     this.handleAuthentication();
     this.authenticated = false;
 
     auth.authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
-    })
+    });
 
     return {
       authenticated: false,
-      message:''
+      message: ''
     }
-  }
+  },
+}
 ```
 
-We listen for the authChange event emited by AuthService when the authentication state changes and then assign the result to `authenticated` variable. We also set the `message` variable to the empty string. `message` will hold the responce from our protected endpoint.
+In this code, you are listening for the `authChange` event emitted by `AuthService` when the authentication state changes. You are then assign the result to the `authenticated` variable. You also set the `message` variable to be empty. This variable will hold the response from your protected endpoint.
 
-
-Then add these methods:
-
+The last thing you need to do is to define the `methods` property of the `app` component:
 
 ```js
-  methods: {
-    // this method calls the AuthService login() method
-    login(){
-      auth.login();
-    },
-    handleAuthentication(){
-      auth.handleAuthentication();
-    },
-    logout(){
-      auth.logout();
-    },
-    private(){
-      const url = `${API_URL}/api/private/`;
-      return axios.get(url, { headers: { Authorization: `Bearer ${AuthService.getAuthToken()}` }}).then( (response) => { console.log(response.data); this.message = response.data || '';});
+export default {
+    // name: 'app',
+    // data() { ... },
+    methods: {
+      // this method calls the AuthService login() method
+      login() {
+        auth.login();
+      },
+      handleAuthentication() {
+        auth.handleAuthentication();
+      },
+      logout() {
+        auth.logout();
+      },
+      private() {
+        const url = `${API_URL}/api/private/`;
+        return axios.get(url, {headers: {Authorization: `Bearer ${AuthService.getAuthToken()}`}}).then((response) => {
+          console.log(response.data);
+          this.message = response.data || '';
+        });
+      }
     }
   }
 ```
 
-`login()`, `handleAuthentication()` and `logout()` methods are simply wrappers for the corresponding methods in AuthService.
+The `login()`, `handleAuthentication()`, and `logout()` methods are simply wrappers for the corresponding methods in AuthService.
 
+In the `private()` method, you are now using the `axios.get()` method to send a GET request to `http://localhost:8000/api/private/`. Since this endpoint is protected by Auth0, you also added an `Authorization` header. The access token is retrieved from the local storage using `AuthService.getAuthToken()` method.  
 
-In the `private()` method we use `axios.get()` method to send a GET request to  `http://localhost:8000/api/private/`. Since this endpoint is protected by Auth0 we also added an Authorization header. The access token is retrieved from the local host using `AuthService.getAuthToken()` method.  
-
-
-You can get the code for this part from this [Github repository](https://github.com/techiediaries/django-auth0-vue-part1)
-
-You can login from this page
-
-![Login page](https://screenshotscdn.firefoxusercontent.com/images/f5daba7f-a948-47ac-bf1a-7e4ccf641643.png)
-
+## Testing the Django, Vue.js, and Auth0 Integration
 
 You'll be redirected to Auth0 central login page
 
