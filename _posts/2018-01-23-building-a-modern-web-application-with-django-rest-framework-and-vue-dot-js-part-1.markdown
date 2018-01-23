@@ -80,9 +80,9 @@ Vue.js has many features, such as:
 * great performance;
 * and native rendering on iOS and Android thanks to [Weex](https://weex.incubator.apache.org/) and [NativeScript](https://github.com/rigor789/nativescript-vue);
 
-## Bootstrapping the Back-end Project
+## Bootstrapping the Back-End Project
 
-Before you can create the back-end project you need to install some requirements in your development machine. For Django you need to have Python 3 (the latest version of Django requires Python 3), PIP and `venv` installed.
+Before you can create the back-end project, you need to install some requirements in your development machine. For Django, you need to have [Python 3](https://www.python.org/download/releases/3.0/), [PIP](https://pypi.python.org/pypi/pip), and [`venv`](https://docs.python.org/3/library/venv.html) installed.
 
 Please note that you don't need to install a full fledged database management system to develop with Django. You can use a SQLite database which allows you to have a file-based database that doesn't require any special installation.
 
