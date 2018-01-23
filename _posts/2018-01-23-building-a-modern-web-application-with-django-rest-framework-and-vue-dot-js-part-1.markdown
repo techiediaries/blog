@@ -32,7 +32,7 @@ related:
 
 You are going to start by installing all the project's requirements, then you will bootstrap the Django and the Vue.js sub-projects.
 
-You can find the final source code of the demo project that you will create in this [GitHub repository](https://github.com/techiediaries/django-auth0-vue).
+You can find the final source code of the demo project that you will create in this [GitHub repository](https://github.com/auth0-blog/django-vue.js).
 
 ---
 
