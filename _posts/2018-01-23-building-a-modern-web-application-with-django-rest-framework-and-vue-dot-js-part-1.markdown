@@ -1,24 +1,31 @@
 ---
 layout: post
-title: Building a Modern Web Application with Django REST Framework and Vue.js: Part 1
-description: <A SHORT DESCRIPTION OF THE POST <= 200 CHARACTERS >
-longdescription: <A LONG DESCRIPTION OF THE POST BETWEEN 230 AND 320 CHARACTERS>
+title: "Building Modern Applications with Django and Vue.js: Part 1"
+description: "In this series, we will create, step by step, a full-stack application with Django and Vue.js."
+longdescription: "Throughout this series, we'll be using Django, Django REST framework, and Vue.js to develop an application with a REST API back-end and a Vue.js front-end. The API will be consumed by the Vue.js front-end with the help of the Axios client library and JWT authentication will be handled by Auth0."
 date: 2018-01-23 17:28
-category: <FROM HERE: https://docs.google.com/spreadsheets/d/1e_RKzi8kVwzqPG8si8kyDOWPiBk9tI-XNGh0KgRIF7Q>
-press_release: <true|false (FOR FALSE YOU COULD ALSO REMOVE THIS LINE)>
-is_non-tech: <true|false (FOR FALSE YOU COULD ALSO REMOVE THIS LINE)>
+category: Technical Guide, Python, Django
 author:
-  name: <YOUR NAME>
-  url: <YOUR URL>
-  mail: <YOUR MAIL>
-  avatar: <LINK TO PROFILE PIC>
+  name: "Ahmed Bouchefra"
+  url: "https://www.techiediaries.com"
+  mail: "techiediaries9@gmail.com"
+  avatar: "https://twitter.com/ahmedbouchefra/profile_image?size=original"
 design:
-  bg_color: <A HEX BACKGROUND COLOR>
-  image: <A PATH TO A 200x200 IMAGE>
+  bg_color: "#4A4A4A"
+  image: https://cdn.auth0.com/blog/python-restful/logo.png
 tags:
-- foo
+- django
+- vue.js
+- python
+- javascript
+- rest
+- restful
+- api
+- auth0
+- identity
 related:
-- <ADD SOME RELATED POSTS FROM AUTH0'S BLOG>
+- 2017-11-09-sqlalchemy-orm-tutorial-for-python-developers
+- 2017-09-28-developing-restful-apis-with-python-and-flask
 ---
 
 **TL;DR:** Throughout this  tutorial we'll be using Django, Django REST framework and Vue.js to develop a CRUD (Create, Read, Update and Delete) application with a REST API back-end and a Vue.js front-end. The API will be consumed using the Axios client and JWT authentication will be handled by Auth0.
