@@ -246,7 +246,7 @@ You'll be presented with a form to fill in your API details: the name, the ident
 You can use the following properties while filling this form:
 
 * *Name:* Django Vue.js API
-* *Identifier:* http://djangovuejsapi.digituz.com.br
+* *Identifier:* http://djangovuejs.digituz.com.br
 * *Signing Algorithm:* RS256
 
 After that, click on the *Create* button. You'll be taken to a page where you can further customize your API settings.
@@ -435,7 +435,7 @@ After filling this form, click on the *Create* button. This will redirect you to
 
 ### Configuring the Callback URL
 
-You will need to whitelist the callback URL for your app (`http://localhost:8000/`) in the *Allowed Callback URLs* field of your new Auth0 client. This can be done in the *Settings* tab. In this tab, find the field mentioned and add `http://localhost:8000/` to it. Then click on the *Save* button.
+You will need to whitelist the callback URL for your app (`http://localhost:8080/`) in the *Allowed Callback URLs* field of your new Auth0 client. This can be done in the *Settings* tab. In this tab, find the field mentioned and add `http://localhost:8080/` to it. Then click on the *Save* button.
 
 ### Creating the Authentication Service
 
@@ -467,12 +467,12 @@ export default class AuthService {
   authenticated = this.isAuthenticated();
   authNotifier = new EventEmitter();
 
-  constructor() {
-    this.login = this.login.bind(this);
-    this.setSession = this.setSession.bind(this);
-    this.logout = this.logout.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
+  constructor () {
+    this.login = this.login.bind(this)
+    this.setSession = this.setSession.bind(this)
+    this.logout = this.logout.bind(this)
+    this.isAuthenticated = this.isAuthenticated.bind(this)
+    this.handleAuthentication = this.handleAuthentication.bind(this)
   }
 
   // create an instance of auth0.WebAuth with your
@@ -488,71 +488,71 @@ export default class AuthService {
 
   // this method calls the authorize() method
   // which triggers the Auth0 login page
-  login() {
-    this.auth0.authorize();
+  login () {
+    this.auth0.authorize()
   }
 
   // this method calls the parseHash() method of Auth0
   // to get authentication information from the callback URL
-  handleAuthentication() {
+  handleAuthentication () {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
+        this.setSession(authResult)
       } else if (err) {
-        console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
+        console.log(err)
+        alert(`Error: ${err.error}. Check the console for further details.`)
       }
-      router.replace('/');
+      router.replace('/')
     })
   }
 
   // stores the user's access_token, id_token, and a time at
   // which the access_token will expire in the local storage
-  setSession(authResult) {
+  setSession (authResult) {
     // Set the time that the access token will expire at
     let expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
-    );
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
+    )
+    localStorage.setItem('access_token', authResult.accessToken)
+    localStorage.setItem('id_token', authResult.idToken)
+    localStorage.setItem('expires_at', expiresAt)
     this.authNotifier.emit('authChange', {authenticated: true})
   }
 
   // remove the access and ID tokens from the
   // local storage and emits the authChange event
-  logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    this.authNotifier.emit('authChange', false);
+  logout () {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('expires_at')
+    this.authNotifier.emit('authChange', false)
     // navigate to the home route
     router.replace('/')
   }
 
   // checks if the user is authenticated
-  isAuthenticated() {
+  isAuthenticated () {
     // Check whether the current time is past the
     // access token's expiry time
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+    return new Date().getTime() < expiresAt
   }
 
   // a static method to get the access token
-  static getAuthToken() {
-    return localStorage.getItem('access_token');
+  static getAuthToken () {
+    return localStorage.getItem('access_token')
   }
 
-  //a method to get the User profile
-  getUserProfile(cb) {
-    const accessToken = localStorage.getItem('access_token');
-    if (accessToken) return this.auth0.client.userInfo(accessToken, cb);
-    else return null;
+  // a method to get the User profile
+  getUserProfile (cb) {
+    const accessToken = localStorage.getItem('access_token')
+    if (accessToken) return this.auth0.client.userInfo(accessToken, cb)
+    else return null
   }
 }
 ```
 
-You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>`, and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejsapi.digituz.com.br`).
+You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>`, and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejs.digituz.com.br`).
 
 ### Creating the Homepage
 
@@ -571,7 +571,7 @@ Now, you are going to refactor your Vue.js homepage to allow users to authentica
     <button
       class="btn btn-primary btn-margin"
       v-if="authenticated"
-      @click="private()">
+      @click="privateMessage()">
       Call Private
     </button>
 
@@ -593,10 +593,10 @@ Still in your `./frontend/src/App.vue`, replace the `<script>` tag with this:
 
 ```html
 <script>
-  import AuthService from './auth/AuthService';
-  import axios from 'axios';
+import AuthService from './auth/AuthService'
+import axios from 'axios'
 
-  const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:8000'
 </script>
 ```
 
@@ -605,7 +605,7 @@ This imports the `AuthService` from `./auth/AuthService` and the `axios` library
 After the `API_URL` constant, create an instance of `AuthService`:
 
 ```js
-const auth = new AuthService();
+const auth = new AuthService()
 ```
 
 Then, below the `auth` definition, start defining the app component:
@@ -613,13 +613,13 @@ Then, below the `auth` definition, start defining the app component:
 ```js
 export default {
   name: 'app',
-  data() {
-    this.handleAuthentication();
-    this.authenticated = false;
+  data () {
+    this.handleAuthentication()
+    this.authenticated = false
 
     auth.authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
-    });
+    })
 
     return {
       authenticated: false,
@@ -635,28 +635,28 @@ The last thing you need to do is to define the `methods` property of the `app` c
 
 ```js
 export default {
-    // name: 'app',
-    // data() { ... },
-    methods: {
-      // this method calls the AuthService login() method
-      login() {
-        auth.login();
-      },
-      handleAuthentication() {
-        auth.handleAuthentication();
-      },
-      logout() {
-        auth.logout();
-      },
-      private() {
-        const url = `${API_URL}/api/private/`;
-        return axios.get(url, {headers: {Authorization: `Bearer ${AuthService.getAuthToken()}`}}).then((response) => {
-          console.log(response.data);
-          this.message = response.data || '';
-        });
-      }
+  // name: 'app',
+  // data () { ... },
+  methods: {
+    // this method calls the AuthService login() method
+    login () {
+      auth.login()
+    },
+    handleAuthentication () {
+      auth.handleAuthentication()
+    },
+    logout () {
+      auth.logout()
+    },
+    privateMessage () {
+      const url = `${API_URL}/api/private/`
+      return axios.get(url, {headers: {Authorization: `Bearer ${AuthService.getAuthToken()}`}}).then((response) => {
+        console.log(response.data)
+        this.message = response.data || ''
+      })
     }
   }
+}
 ```
 
 The `login()`, `handleAuthentication()`, and `logout()` methods are simply wrappers for the corresponding methods in AuthService.
@@ -665,28 +665,34 @@ In the `private()` method, you are now using the `axios.get()` method to send a 
 
 ## Testing the Django, Vue.js, and Auth0 Integration
 
-You'll be redirected to Auth0 central login page
+Now that everything is correctly configured, you can test the integration among Django, Vue.js, and Auth0. To do that, go back to the root directory of your project and run the following commands:
 
-![Auth0 auth page](https://screenshotscdn.firefoxusercontent.com/images/b59a1a2e-70a6-460a-8626-e628ed0fd02b.png)
+```bash
+# run Django in the background
+python manage.py runserver &
 
+# move to the frontend directory
+cd frontend
 
-After authentication you'll be able to send a request to the protected endpoint
+# run Vue.js in the background &
+npm run dev &
+```
 
-![page after authentication](https://screenshotscdn.firefoxusercontent.com/images/61fa4449-c16a-4c2c-9a8e-7fc40f135251.png)
+After running both the back-end and the front-end projects, you can head to the Vue.js homepage ([http://localhost:8080/](http://localhost:8080/)) to test it.
 
+In the homepage, you will see the *Log In* button. Clicking on it will redirect you to the
+Auth0 login page.
 
-If the request is successfully sent you should get this massage `You should not see this message if not authenticated!`
+![Auth0 login page](https://cdn.auth0.com/blog/django-vuejs/auth0-authentication.png)
 
-![private message](https://screenshotscdn.firefoxusercontent.com/images/1a9c8aef-ce66-46c8-85cd-26042f47244f.png)
-
+After authenticating, you will be redirected to your Vue.js application, where the *Call Private* and the *Log Out* buttons will appear. Clicking on the *Call Private* button will issue a GET request to the Django framework, alongside with an access token, and will fetch the secured message.
 
 ## Conclusion and Next Steps
 
-
-In this article we have bootstrapped both the back-end project with Django and the front-end application using the Vue CLI. We have also added JWT authentication to our back-end using Auth0. In the next part we will see how to create the REST API using Django REST framework and then how to consume it from the Vue.js front-end using Axios. We'll also see how to create our project front-end views so stay tuned!
+In this article, you have bootstrapped both the Django back-end project and the Vue.js front-end application. You have also added JWT authentication to your back-end using Auth0. In the next part, you will see how to create the REST API using Django REST framework and then how to consume it from the Vue.js front-end using Axios. You will also see how to create our project front-end views.
 
 These are some screenshots from the demo project we are going to continue building in the next parts:
 
-![demo app](https://camo.githubusercontent.com/108cac1baf92e9ea68ec1326fd2cb2292266a718/68747470733a2f2f73637265656e73686f74732e66697265666f7875736572636f6e74656e742e636f6d2f696d616765732f36323663303262302d616363622d343561362d623430622d6565633465613331333337342e706e67)
+![The final Django + Vue.js application](https://cdn.auth0.com/blog/django-vuejs/complete-app.png)
 
-![demo app](https://camo.githubusercontent.com/7085b3824c7ab564a09e761f0e5cf58f05123f25/68747470733a2f2f73637265656e73686f74732e66697265666f7875736572636f6e74656e742e636f6d2f696d616765732f37386131393135322d306565302d346462632d383636622d3930393864346533626534342e706e67)
+Stay tuned!
