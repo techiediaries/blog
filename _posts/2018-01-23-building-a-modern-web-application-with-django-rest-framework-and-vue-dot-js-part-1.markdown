@@ -237,24 +237,21 @@ JWTs are composed of three parts: a header, a payload, and a signature. The head
 
 ## Creating an Auth0 Resource/API
 
-Before you can use Auth0 authentication with your application you first need to create an Auth0 account then head over to the [dashboard](https://manage.auth0.com/)
+Before you can use Auth0 authentication with your application, you first need to create an Auth0 account. If you haven't so yet, <a href="https://auth0.com/signup" data-amp-replace="CLIENT_ID" data-amp-addparams="anonId=CLIENT_ID(cid-scope-cookie-fallback-name)">sign up for a free account now</a>. After that, head over to the [API section](https://manage.auth0.com/#/apis) of the Auth0 dashboard and click on the *CREATE API* button.
 
-![Auth0 Dashboard](https://screenshotscdn.firefoxusercontent.com/images/fce95f70-646d-4994-8428-9f719982cb32.png)
+You'll be presented with a form to fill in your API details: the name, the identifier, and the signing algorithm.
 
-Next head to the [API section](https://manage.auth0.com/#/apis) and click on the *CREATE API* button.
+![Auth0 Create API Form](https://cdn.auth0.com/blog/django-vuejs/auth0-api-form.png)
 
-![Auth0 API Section](https://screenshotscdn.firefoxusercontent.com/images/61224ef4-dab5-47bb-b0fd-bc18c3c65590.png)
+You can use the following properties while filling this form:
 
-You'll be presented with a form to fill in your API details: the name, the identifier and the signing algorithm   
+* *Name:* Django Vue.js API
+* *Identifier:* http://djangovuejsapi.digituz.com.br
+* *Signing Algorithm:* RS256
 
-![Auth0 CREATE API Form](https://screenshotscdn.firefoxusercontent.com/images/4f6d02f4-ba10-4657-b5c1-39d7bf0ad170.png)
-
-Enter the details and click on the *CREATE* button. You'll be taken to a page where you can further customize your API settings and create test clients etc.
-
-![Auth0 API Settings](https://screenshotscdn.firefoxusercontent.com/images/4f5f0184-5df3-472a-a0b5-a52d5172fac1.png)
+After that, click on the *Create* button. You'll be taken to a page where you can further customize your API settings.
 
 That's it! You are now ready to integrate your Django application with Auth0
-
 
 ## Integrating Django with Auth0
 
