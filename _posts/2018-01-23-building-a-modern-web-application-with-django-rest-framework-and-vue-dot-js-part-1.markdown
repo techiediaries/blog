@@ -88,9 +88,7 @@ Please note that you don't need to install a full fledged database management sy
 
 ### Installing the Requirements
 
-Let's start with Python 3. Chances are that you already have Python 3 installed on your machine if not, then the process is simple you just need to head over to their [official website then navigate to the downloads page](https://www.python.org/downloads/) and pick the installer for your operating system.
-
-![](https://screenshotscdn.firefoxusercontent.com/images/6b9c7fa1-5b30-4a33-81e7-0c98ca3124f9.png)
+Let's start with Python 3. Chances are that you already have Python 3 installed on your machine. If not, then the process is simple. You just need to head over to the [official  downloads page](https://www.python.org/downloads/) and pick the installer for your operating system.
 
 You can check if you have Python 3 installed by running the following command from your terminal or command prompt:
 
@@ -98,21 +96,22 @@ You can check if you have Python 3 installed by running the following command fr
 python3 --version
 ```
 
-For `venv` it's installed by default with Python 3. The `venv` module (part of the Python 3 standard library) allows you to create lightweight virtual environments for your projects so you can have an isolated environment for each Python project (isolated from each project and from the system wide packages), that means each project may have its own dependencies.
+The `venv` module (part of the Python 3 standard library) allows you to create lightweight virtual environments for your projects. This allows you to have an isolated environments for each Python project (i.e. dependencies are isolated for each project and from the system wide packages).
 
-Setting up an isolated environment provides you with more control over the installed Python packages, you can have different versions for the same package without having to worry about any conflicts which allows you to work with different Python projects with different packages or same packages with different versions. Also, since each environment can have its own Python binary this allows you to create various environments with different Python versions.
+Setting up an isolated environment provides you with more control over the installed Python packages. You can have different versions for the same package without having to worry about any conflicts, which allows you to work with different Python projects with different package versions. Also, since each environment can have its own Python binary, this allows you to create various environments with different Python versions.
 
-Once you create a virtual environment, `venv` will take care of installing the latest Python binary
-Next you need to install [pip](https://packaging.python.org/key_projects/#pip), a package manager for Python that, by default, installs packages from the Python Package Index ([PyPI](https://pypi.python.org/pypi)).
+Once you create a virtual environment, `venv` will take care of installing the latest Python binary.
 
-You can verify if pip is installed on your development machine by running the following command:
+Next, you need to install [`pip`](https://packaging.python.org/key_projects/#pip), a package manager for Python that, by default, installs packages from the Python Package Index ([PyPI](https://pypi.python.org/pypi)).
+
+You can verify if `pip` is installed in your development machine by running the following command:
 
 ```bash
+# pip or pip3, depending on the environment
 pip --version
 ```
 
-You should have pip installed if you have installed Python using the official [python.org](https://www.python.org/downloads) installer or via Homebrew in MAC (Also if you are inside a `venv` environment, pip is already installed). For Linux, you may need to install it separately. See this [guide](https://packaging.python.org/guides/installing-using-linux-tools/) and [this](https://pip.pypa.io/en/stable/installing/).
-
+You should have `pip` installed if you have installed Python using the official [python.org](https://www.python.org/downloads) installer (or via Homebrew in MAC). Also, if you are inside a `venv` environment, pip is already installed. For Linux, you may need to install it separately. If that's your environment, take a look at this [guide](https://packaging.python.org/guides/installing-using-linux-tools/) and [this page](https://pip.pypa.io/en/stable/installing/).
 
 ### Creating a Virtual Environment
 
