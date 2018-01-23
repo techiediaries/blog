@@ -41,14 +41,13 @@ You can find the final source code of the demo project that you will create in t
 This article is composed of the following sections:
 
 * Introduction to Python and Django
-* Introduction to Vue.js and Vue.js features
-* Bootstrapping the back-end project
-* Bootstrapping the front-end project
+* Introduction to Vue.js and Vue.js Features
+* Bootstrapping the Back-End Project
+* Bootstrapping the Front-End Project
 * Introduction to JSON Web Tokens
 * Integrating Django with Auth0
-* Integrating Auth0 with The Vue.js Front-end
-* Conclusion and next steps
-
+* Integrating Auth0 with Vue.js
+* Conclusion and Next Steps
 
 ## Introduction to Python and Django
 
