@@ -115,17 +115,26 @@ You should have `pip` installed if you have installed Python using the official 
 
 ### Creating a Virtual Environment
 
-Once you have all the back-end requirements installed, let's create a virtual environment for installing our project dependencies so head back to your terminal and run the following command:
+Once you have all the back-end requirements installed, you will have to create a virtual environment for installing your project's dependencies. Head back to your terminal and run the following commands:
 
 ```bash
-python3 -m venv ./nenv
+# create a directory to your project
+mkdir djangovuejsproject
+
+# move the cursor to it
+cd djangovuejsproject
+
+# initialize a virtual env on it
+python3 -m venv ./
 ```
 
-Next you need to activate the environment using `source`:
+Next you need to activate the virtual environment using `source`:
 
 ```bash
-source nenv/bin/activate
+source ./bin/activate
 ```
+
+### Bootstrapping Django
 
 You can now install Django using `pip`:
 
@@ -133,20 +142,19 @@ You can now install Django using `pip`:
 pip install django
 ```
 
-The next step is to create the django project using:
+The next step is to create the Django project using this command:
 
 ```bash
-django-admin startproject djangovuejsproject
+django-admin startproject djangovuejsproject .
 ```
 
-Navigate inside your project's root folder then create a Django application
+Now, execute the following command to organize your Django project with [`catalog`](https://github.com/redsolution/django-catalog):
 
 ```bash
-cd djangovuejsproject
 python manage.py startapp catalog
 ```
 
-Now you need to add this app to the list of installed apps. Open your project `settings.py` file then add the app:
+You also need to add this app to the list of installed apps. Open your project `settings.py` file then add the app:
 
 ```python
 INSTALLED_APPS = [
@@ -160,22 +168,18 @@ INSTALLED_APPS = [
 ]
 ```
 
-You can then migrate your database then start the development server
+You can then migrate your database and start the development server:
 
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
-Next, navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) with your web browser.
+If you navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) in a web browser, you will see the following homepage:
 
-You should see the following home page
-
-![django start page](https://screenshotscdn.firefoxusercontent.com/images/622ea6ae-dee4-47ef-895a-e2b9307e7c68.png)
-
+![Django starter page](https://cdn.auth0.com/blog/django-vuejs/django-basic-app.png)
 
 ## Bootstrapping the Front-end Project
-
 
 Vue.js has a [CLI utility](https://github.com/vuejs/vue-cli) that allows Vue developers to quickly generate single page applications. The CLI offers pre-configured build setups for a modern frontend workflow and takes only some minutes to scaffold a basic project boilerplate with features such as hot-reloading, lint-on-save, and production-ready builds.
 
