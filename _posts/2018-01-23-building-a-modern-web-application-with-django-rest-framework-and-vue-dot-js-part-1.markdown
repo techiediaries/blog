@@ -11,8 +11,8 @@ author:
   mail: "techiediaries9@gmail.com"
   avatar: "https://twitter.com/ahmedbouchefra/profile_image?size=original"
 design:
-  bg_color: "#4A4A4A"
-  image: https://cdn.auth0.com/blog/python-restful/logo.png
+  bg_color: "#164E36"
+  image: https://cdn.auth0.com/blog/django-vuejs/logo.png
 tags:
 - django
 - vue.js
