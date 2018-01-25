@@ -460,6 +460,58 @@ git push
 
 ## Instructions for staging
 
+If we wish to make use of a staging environment for testing on, we're going to need to repeat some of our steps above. A staging environment allows you to make use of a direct replica of the production server. Providing an environment for those with access to test new features before they're ready to be published for public.
+
+First, let's create our staging space on Heroku with the following command:
+
+```bash
+heroku apps:create space-name-here-staging
+```
+
+If previously you called your space "space-name-here" lets just append "-staging" on the end, so we know it's for staging, as shown in the example above.
+
+Next, we're going to need to create a new database entry for this space. Lets do this by running the following command:
+
+```bash
+heroku addons:add cleardb:ignite
+```
+
+We now need to change the `travis.yml` file. Where we previously had:
+
+```yml
+  app: space-name-here
+```
+
+We want to replace this with branch specific configurations:
+
+```yml
+  app:
+      master: space-name-here
+      staging: space-name-here-staging
+```
+
+Next, we're going to need to create a staging area on Auth0, [log into your account here](https://manage.auth0.com/#/clients).
+Click the button "Create Client", you can call it whatever you want. I would suggest call it the same as your current client, but append "-staging" to the end of it.
+
+Once created, we need to make use of the Auth0 client Id, secret and domain. We also need to make use of the database name returned to us when we ran the cleardb:ignite command. Replace the contents of the brackets in the examples below with these details. And then run each of these commands:
+
+```bash
+heroku config:set SYMFONY_ENV=prod
+heroku config:set AUTH0_CLIENT_ID=(Your Auth0 Client ID)
+heroku config:set AUTH0_CLIENT_SECRET=(Your Auth0 client secret)
+heroku config:set AUTH0_DOMAIN=(Your Auth0 Domain)
+heroku config:set DATABASE_NAME=(Your database name shown in the image above)
+```
+
+Now that we have our environment set up, we need to run the following git commands to create and deploy the staging branch:
+
+```bash
+git checkout -b staging
+git push --set-upstream origin staging
+```
+
+If we head over to our Heroku dashboard, we should see the build in progress or complete. If we now head to the URL for our staging environment we'll see an exact duplicate of the production environment. 
+
 ## Conclusion
 
 ## TODO: add Conclusion
