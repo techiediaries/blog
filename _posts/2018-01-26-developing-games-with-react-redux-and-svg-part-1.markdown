@@ -76,6 +76,8 @@ Right now, what you will want to do is to remove some stuff that you won't need.
 - `App.test.js`: tests might be addressed in another article, but you won't use it for now;
 - `logo.svg`: you won't use React's logo in this game;
 
+Now is a good time to commit your files to Git or some other version control system (you do use a  version control system, right?).
+
 ## Installing Redux and PropTypes
 
 ## Creating the Basic SVG Elements
