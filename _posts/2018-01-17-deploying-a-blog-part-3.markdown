@@ -62,7 +62,7 @@ In this third article, we will be covering deployments to two different environm
 
 ## About [Heroku](https://www.heroku.com)
 
-[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manager and scale modern apps by developers. The service is a very flexible, simple to use and quick to start service allowing developers to focus more on the product than spending too much time in the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers, hardware of the infrastructure.
+[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manage and scale modern apps by developers. The service is very flexible, simple to use and quick to start allowing developers to focus more on the product rather than spending too much time in the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers, hardware of the infrastructure.
 
 ## About Travis CI
 
@@ -149,7 +149,7 @@ You can then install the third party libraries used to make the blog look nicer 
 
 ```bash
 yarn add @symfony/webpack-encore --dev
-yarn run encore dev --watch
+yarn run encore dev
 ```
 
 ## Install dependencies
@@ -165,8 +165,6 @@ Once you have created an account, we're going to need to install the command lin
 * on Debian / Ubuntu: `wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh`
 * on Windows 64-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x64.exe)
 * on Windows 32-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x86.exe)
-
-- Create space
 
 Now we have an account and have the CLI installed on our system, we're going to need to create a space on Heroku. Running the following command will do this:
 
@@ -184,13 +182,13 @@ Great, you can now access your website. If you take the URL that's given to you 
 
 Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to: [Heroku Verify](https://heroku.com/verify) to add your card details.
 
-Once verified, we're going to add the ClearDb add-on to our space. So in your Terminal you can run the following command to add a database for your blog to access:
+Once verified, we're going to add the ClearDb add-on to our space. So in the Terminal let's run the following command to add a database for our blog to access:
 
 ```bash
 heroku addons:add cleardb:ignite
 ```
 
-You once the command has been run, you will see something similar to the image below:
+When the command has finished running, we should see something similar to the image below:
 
 ![Creating a ClearDB database](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-database.png)
 
@@ -236,7 +234,7 @@ Once complete you can verify it is correctly installed by checking the version:
 travis version
 ```
 
-Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So head over to Travis-ci to [sign up](https://travis-ci.org/).
+Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
 
 Once the account is created at [Travis CI](https://travis-ci.org/), we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
 
@@ -287,18 +285,20 @@ deploy:
   app: 
 ```
 
-There are 3 parts of this file where we need to input unique details here. First is our e-mail, please type in your e-mail next to the line: `email: `
-Second is your secure api_key for heroku. If you run the following command, it'll put the encrypted Heroku api key for you: 
+There are 3 parts of this file where we need to input unique details here:
+
+* First is our e-mail, please type in your e-mail next to the line: `email: `
+* Second is your secure api_key for heroku. If you run the following command, it'll put the encrypted Heroku api key for you: 
 
 ```bash
 travis encrypt $(heroku auth:token) --add deploy.api_key
 ```
 
-And finally is the app our Heroku refers to, this is your heroku space id. So please type it in next to `app: ` which is at the bottom of the file.
+* And finally is the app our Heroku refers to, this is your heroku space id. So please type it in next to `app: ` which is at the bottom of the file.
 
 ## Configuring Symfony for production
 
-Now we have set up and configured Heroku and Travis-CI, we need to make some minor changes to our Symfony installation in order to be functional when hosted on Heroku.
+Now we have set up and configured Heroku and [Travis CI](https://travis-ci.org/), we need to make some minor changes to our Symfony installation in order to be functional when hosted on Heroku.
 
 Let's make some changes to our `composer.json` file. Where it says:
 
@@ -316,6 +316,47 @@ Change it to:
 //...
   "minimum-stability": "stable",
 }
+```
+
+Lets add a compile command, that Heroku will understand when being deployed to, to update the schema of the database. So find the following:
+
+```json
+"symfony-scripts": [
+    "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+],
+"post-install-cmd": [
+    "@symfony-scripts"
+],
+"post-update-cmd": [
+    "@symfony-scripts"
+]
+```
+
+Add the compile entry at the bottom as shown below:
+
+```json
+"symfony-scripts": [
+    "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+],
+"post-install-cmd": [
+    "@symfony-scripts"
+],
+"post-update-cmd": [
+    "@symfony-scripts"
+],
+"compile": [
+    "php bin/console doctrine:schema:update --force"
+]
 ```
 
 Now let's update our composer lock file with the following command:
@@ -385,7 +426,7 @@ doctrine:
 
 As you can see from the above, we are no longer using the database host, port, name, user and password. Instead we need only 2 variables, these are url, dbname.
 
-One final change is, we need to change a location of the log file found in `app/config/config_prod.yml`.
+Let's change the location of the log file found in `app/config/config_prod.yml`.
 In this file, there will be something similar to:
 
 ```yml
@@ -405,6 +446,9 @@ Replace the last line with:
 ```yml
 path: 'php://stderr'
 ```
+
+One final change is to remove the current PHPUnit test, we previously removed the DefaultController, there is still a test for this which will attempt to run (and fail) when building in Travis-CI.
+So remove the following directory `tests/AppBundle/Controller`.
 
 It's time to commit all of our changes to our forked repository. This can be done by the following commands:
 
