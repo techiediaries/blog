@@ -76,6 +76,29 @@ Right now, what you will want to do is to remove some stuff that you won't need.
 - `App.test.js`: tests might be addressed in another article, but you won't use it for now;
 - `logo.svg`: you won't use React's logo in this game;
 
+Removing these files will probably generate an error if you try to execute you project. This is easily solved by removing two import statements from the `./src/App.js` file:
+
+```js
+// remove both lines from ./src/App.js
+import logo from './logo.svg';
+import './App.css';
+```
+
+And by refactoring the `render()` method to:
+
+```js
+// ... import statement and class definition
+render() {
+  return (
+    <div className="App">
+      <h1>We will create an awesome game with React, Redux, and SVG!</h1>
+    </div>
+  );
+}
+
+// ... closing bracket and export statement
+```
+
 Now is a good time to commit your files to Git or some other version control system (you do use a  version control system, right?).
 
 ## Installing Redux and PropTypes
