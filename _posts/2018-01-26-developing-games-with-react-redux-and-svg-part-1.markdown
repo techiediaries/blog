@@ -228,7 +228,50 @@ Second, the SVG coordinate system is similar to the Cartesian plane, but upside-
 
 The third and last characteristic that you need to know is that SVG introduces a lot of new elements (e.g. `circle`, `rect`, and `path`). To use these elements, you cannot simply define them inside an HTML element. First, you must define an `svg` element (your canvas) where you will plot all your SVG components.
 
-### SVG and Bezier Curves
+### SVG, Path Elements, and Cubic Bezier Curves
+
+Drawing elements with SVG can be accomplished in three ways. First, you can use basic elements like `rect`, `circle`, and `line`. These elements are not very flexible, though. As their names state, they simply allow you to draw some simple shapes.
+
+The second way is to combine these basic elements to form more complex shapes. For example, you could use a `rect` with equals sides (this would be a square) and two lines to form the shape of a  house. However, this approach is still limited.
+
+The third and more flexible way is to use [`path` elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths). This kind of element allows developers to create fairly complex shapes. It does that by accepting a set of commands that instructs the browser how to draw a shape. For example, to draw an "L", you could create a `path` element that contains three commands:
+
+1. `M 20 20`: this command instructs the browser to move its "pen" to the X and Y coordinates defined after `M` (i.e. `20, 20`);
+2. `V 80`: this command instructs the browser to draw a line from the previous point to the position `80` in the Y axis;
+3. `H 50`: this command instructs the browser to draw a line from the previous point to the position `50` in the X axis;
+
+{% highlight html %}
+{% raw %}
+<svg>
+  <path d="M 20 20 V 80 H 50" stroke="black" stroke-width="2" fill="transparent" />
+</svg>
+{% endraw %}
+{% endhighlight %}
+
+The `path` element accepts many other commands. Among of them, one of the most important is [the Cubic Bezier Curves command](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Bezier_Curves). This command allows you to add some smooth curves in your path by taking two reference points and two control points.
+
+From the Mozilla tutorial, this is how Cubic Bezier Curves work on SVG:
+
+> _"Cubic Bezier curves take in two control points for each point. Therefore, to create a cubic Bezier curve, you need to specify three sets of coordinates. The last set of coordinates are where you want the line to end. The other two are control points. [...]. The control points essentially describe the slope of your line starting at each point. The Bezier function then creates a smooth curve that transfers you from the slope you established at the beginning of your line, to the slope at the other end."_ —[Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Bezier_Curves)
+
+For example, to draw an "U", you can proceed as follows:
+
+{% highlight html %}
+{% raw %}
+<svg>
+  <path d="M 20 20 C 20 110, 110 110, 110 20" stroke="black" fill="transparent"/>
+</svg>
+{% endraw %}
+{% endhighlight %}
+
+In this case, the commands passed to the `path` element tell the browser:
+
+1. to start drawing on the point `20, 20`;
+2. that the first control point lies on the point `20, 110`;
+2. that the second control point lies on the point `110, 110`;
+4. to finish the curve on the point `110 20`;
+
+If you still don't understand exactly how Cubic Bezier curves work, don't worry. You will have the opportunity to practice during this series. Besides that, you can find a lot of tutorial around the web about this feature and you can always practice in tools like [JSFiddle](https://jsfiddle.net/) and [Codepen](https://codepen.io/).
 
 ### Creating the Canvas React Component
 
