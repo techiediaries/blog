@@ -18,17 +18,27 @@ design:
   bg_color: "#222228"
 tags:
 - gdpr
-- data-protection
+- regulation
+- security
+- identity
 - compliance
-- regulations
+- data-protection
 - identity
 - iam
 related:
 - 2018-01-15-mission-possible-reality-for-7-gdpr-misconceptions
 - 2017-08-07-gdpr-fight-against-fake-news
+- 2017-05-03-get-ready-for-gdpr
+---
+
+<div class="alert alert-info alert-icon">
+  <i class="icon-budicon-500"></i>
+  <strong>GDPR is around the corner. Are you Ready? Take our GDPR Readiness Assessment to find out. <a href="https://auth0.com/gdpr-assessment/tool-1">Start the survey</a>.</strong>
+</div>
+
 ---
  
-Like the business trip that hits at an inopportune moment, GDPR compliance can feel like a large inconvenience, even though it is business-critical. We believe that every security or compliance requirement has a silver lining. With GDPR, you have an opportunity to improve how you do Identity—whether it's in the context of improving customer experience, time to market, or increasing revenue.
+Like the business trip that hits at an inopportune moment, [GDPR](https://auth0.com/gdpr) compliance can feel like a large inconvenience, even though it is business-critical. We believe that every security or compliance requirement has a silver lining. With GDPR, you have an opportunity to improve how you do Identity—whether it's in the context of improving customer experience, time to market, or increasing revenue.
 
 {% include tweet_quote.html quote_text="We believe that every security or compliance requirement has a silver lining." %}
 
@@ -40,7 +50,7 @@ Many of our customers make the most of their investment in compliance by using A
  
 Your largest customer is often both the most demanding and rewarding. If you can redirect them to a customized page after logging into your application, you will be able to treat this customer differently from the rest—as you should. 
 
-Thank them. Make it easy for them to add to their subscription. Engage them with questions. Auth0 makes it easy to use taken an innovative approach to this page to increase customer conversions.
+Thank them. Make it easy for them to add to their subscription. Engage them with questions. Auth0 makes it easy to take an innovative approach to this page to increase customer conversions.
 
 An unfriendly implementation of GDPR compliance could tarnish that interaction. Instead, demonstrate your respect for their time by automatically recording the date when explicit consent or agreement to new privacy terms was granted without any disruption to service. Using Auth0 to automatically record the data without adding anything to the login form means your biggest fan won't notice the difference.
 
