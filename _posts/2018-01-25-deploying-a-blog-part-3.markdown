@@ -41,7 +41,7 @@ related:
 * installed and configured a Symfony installation;
 * created two new database tables: `author` and `blog_post`;
 * allowed users to authenticate with [Auth0](https://auth0.com);
-* and ensured that the authenticated users have `Author` instances associated before using the system.
+* and ensured that the authenticated users have `Author` instances associated with them before using the system.
 
 [In the second article](https://auth0.com/blog/creating-symfony-blog-part-2/), we covered installing [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. We also enhanced our blog engine to allow visitors to:
 
@@ -55,10 +55,10 @@ Besides that, authenticated authors were able to:
 * see all of their own blog posts;
 * and delete their own blog posts from the system.
 
-In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and Travis CI) allowing us to:
+In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and [Travis-CI](https://travis-ci.com/)) allowing us to:
 
 * make code changes to the blog;
-* deploy these changes on committing them to github
+* deploy these changes on committing them to GitHub
 * almost instantly see their changes in production and/or staging
 
 ## About [Heroku](https://www.heroku.com)
@@ -146,7 +146,7 @@ php bin/console doctrine:fixtures:load
 
 __NOTE__ If you do not have [Yarn](https://yarnpkg.com), a Javascript package manager, installed, you will need to install and configure this. So go to their [Installation](https://yarnpkg.com/lang/en/docs/install/) page and follow the instructions for installing and configuring Yarn first.
 
-You can then install the third party libraries used to make the blog look nicer visually with the following command:
+Let's install the third party libraries used to make the blog look nicer visually with the following command:
 
 ```bash
 yarn add @symfony/webpack-encore --dev
@@ -157,9 +157,9 @@ yarn run encore dev
 
 ### Installing Heroku CLI
 
-In order to use Heroku, you need to have an account. So [sign up here](https://signup.heroku.com/) and follow all instructions provided on the website.
+In order to use Heroku, we need to have an account. So [sign up here](https://signup.heroku.com/) and follow all instructions provided on the website.
 
-Once you have created an account, we're going to need to install the command line interface (CLI). Each operating system has a different method of installing Heroku CLI. So below is a list of the commands used to install this:
+Once an account has been created, we're going to need to install the command line interface (CLI). Each operating system has a different method of installing Heroku CLI. So below is a list of the commands used to install this:
 
 * on MacOS: `brew install heroku/brew/heroku`
 * on Ubuntu Snap: `sudo snap install heroku --classic`
@@ -177,7 +177,7 @@ heroku apps:create space-name-here
 
 ![Creating a Heroku space](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-space.png)
 
-Great, you can now access your website. If you take the URL that's given to you as a result of your command above, similar to the image above and put it into your browser, you should see the example page as shown in the image below:
+Great, we can now access our website. If you take the URL that's given to you as a result of your command above, similar to the image above and put it into your browser, you should see the example page as shown in the image below:
 
 ![Heroku space created](https://cdn.auth0.com/blog/symfony-part-3/heroku-space-browser.png)
 
@@ -214,7 +214,7 @@ You can check this by typing in a Terminal:
 ruby -v
 ```
 
-If you don't have Ruby installed. You can install it in one of the following ways, depending on your operating system:
+If Ruby isn't installed, it can be installed by one of the following methods, depending on your operating system:
 
 ```bash
 brew install ruby # Mac OS X
@@ -229,13 +229,13 @@ Now that Ruby is installed or at the minimum required version, let's install [Tr
 gem install travis -v 1.8.8 --no-rdoc --no-ri
 ```
 
-Once complete you can verify it is correctly installed by checking the version:
+Once complete the installation can be verified by checking the version with the following command:
 
 ```bash
 travis version
 ```
 
-Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you previously created one to fork the symfony-blog tutorial, you don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
+Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As an account was previously created one to fork the symfony-blog tutorial, we don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
 
 Once the account is created at [Travis CI](https://travis-ci.org/), we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
 
@@ -319,7 +319,7 @@ Change it to:
 }
 ```
 
-Lets add a compile command, that Heroku will understand when being deployed to, to update the schema of the database. So find the following:
+Let's add a compile command, that Heroku will understand when being deployed to, to update the schema of the database. So find the following:
 
 ```json
 "symfony-scripts": [
@@ -469,9 +469,9 @@ First, let's create our staging space on Heroku with the following command:
 heroku apps:create space-name-here-staging
 ```
 
-If previously you called your space "space-name-here" lets just append "-staging" on the end, so we know it's for staging, as shown in the example above.
+If previously you called your space "space-name-here" let's just append "-staging" on the end, so we know it's for staging, as shown in the example above.
 
-Next, we're going to need to create a new database entry for this space. Lets do this by running the following command:
+Next, we're going to need to create a new database entry for this space. Let's do this by running the following command:
 
 ```bash
 heroku addons:add cleardb:ignite
