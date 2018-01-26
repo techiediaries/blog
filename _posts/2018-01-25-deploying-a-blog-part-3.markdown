@@ -464,7 +464,7 @@ git push
 
 If we wish to make use of a staging environment for testing on, we're going to need to repeat some of our steps above. A staging environment allows you to make use of a direct replica of the production server. Providing an environment for those with access to test new features before they're ready to be published for public.
 
-First, let's create our staging space on Heroku with the following command:
+First, let's create our staging space on [Heroku](https://www.heroku.com) with the following command:
 
 ```bash
 heroku apps:create space-name-here-staging
@@ -518,6 +518,6 @@ If we head over to our Heroku dashboard, we should see the build in progress or 
 
 The deployment process is a very broad subject. It can also be very daunting for someone who hasn't had any exposure to this part of development. 
 
-Hopefully this article will have given you a footstep into the world of deploying PHP applications.
+Hopefully, this article will have given you a footstep into the world of deploying PHP applications.
 
-With this article, you should be have the foundation to creating, designing and deploying the blog you always wanted!
+With this article, you should have the foundation to creating, designing and deploying the blog you always wanted!
