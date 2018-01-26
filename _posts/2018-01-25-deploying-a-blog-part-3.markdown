@@ -236,7 +236,7 @@ Once complete the installation can be verified by checking the version with the 
 travis version
 ```
 
-Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As an account was previously created one to fork the symfony-blog tutorial, we don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
+Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As an account was previously created one to fork the Symfony-blog tutorial, we don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
 
 Once the account is created at [Travis CI](https://travis-ci.org/), we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
 
@@ -254,7 +254,7 @@ AUTH0_CLIENT_SECRET=
 AUTH0_DOMAIN=
 ```
 
-We've enabled our github repository on [Travis CI](https://travis-ci.org/), but we now need to create a `.travis.yml` file so that [Travis CI](https://travis-ci.org/) knows what to do with this. So create the file and put the following in:
+We've enabled our GitHub repository on [Travis CI](https://travis-ci.org/), but we now need to create a `.travis.yml` file so that [Travis CI](https://travis-ci.org/) knows what to do with this. So create the file and put the following in:
 
 ```yml
 language: php
@@ -290,17 +290,17 @@ deploy:
 There are 3 parts of this file where we need to input unique details here:
 
 * First is our e-mail, please type in your e-mail next to the line: `email: `
-* Second is your secure api_key for heroku. If you run the following command, it'll put the encrypted Heroku api key for you: 
+* Second is your secure api_key for [Heroku](https://www.heroku.com). If you run the following command, it'll put the encrypted [Heroku](https://www.heroku.com) API key for you: 
 
 ```bash
 travis encrypt $(heroku auth:token) --add deploy.api_key
 ```
 
-* And finally is the app our Heroku refers to, this is your heroku space id. So please type it in next to `app: ` which is at the bottom of the file.
+* And finally is the app our [Heroku](https://www.heroku.com) refers to, this is your [Heroku](https://www.heroku.com) space id. So please type it in next to `app: ` which is at the bottom of the file.
 
 ## Configuring Symfony for production
 
-Now we have set up and configured Heroku and [Travis CI](https://travis-ci.org/), we need to make some minor changes to our Symfony installation in order to be functional when hosted on Heroku.
+Now we have set up and configured Heroku and [Travis CI](https://travis-ci.org/), we need to make some minor changes to our Symfony installation in order to be functional when hosted on [Heroku](https://www.heroku.com).
 
 Let's make some changes to our `composer.json` file. Where it says:
 
