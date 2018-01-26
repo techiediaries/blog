@@ -69,7 +69,7 @@ In this third article, we will be covering deployments to two different environm
 
 [Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. [Travis CI](https://travis-ci.org/) allows you to build and test your software hosted on GitHub, allowing you to publicise projects comfortable in knowing that project is fully functional for others to use. 
  
-With [Travis CI](https://travis-ci.org/), there are 2 different sites to use. [Travis-ci.org](https://travis-ci.org/) allows you test open source projects (public repositories). Where as [Travis-ci.com](https://travis-ci.com/) allows you to test private projects but requires a fee dependant on the size of your project.
+With [Travis CI](https://travis-ci.org/), there are 2 different sites to use. [Travis-ci.org](https://travis-ci.org/) allows you test open source projects (public repositories). Whereas [Travis-ci.com](https://travis-ci.com/) allows you to test private projects but requires a fee dependant on the size of your project.
 
 ## Building the Blog Engine
 
