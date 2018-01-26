@@ -78,14 +78,15 @@ With [Travis CI](https://travis-ci.org/), there are 2 different sites to use. [T
 For this tutorial, you will need a GitHub account. So head over to [sign up at GitHub](https://github.com/join?source=header-home).
 
 Once signed up, go to our example repository for the [Symfony blog part 2](https://github.com/auth0-blog/symfony-blog-part-2).
-Click the "Fork" button, found in the top right hand corner of the browser. As shown in the example below:
+
+Click the "Fork" button, found in the top right-hand corner of the browser. As shown in the example below:
 
 ![Forking a repository on GitHub](https://cdn.auth0.com/blog/symfony-part-3/fork-repository.png)
 
 Make sure you have followed all instructions in the first two parts. 
 
-You will find that you now have a repository of the same name, but under your account. Click the "Clone or download" button and copy the URL found in there.
-Next is to clone this repository for yourself, so run the following two commands. However replace the URL with your own one:
+You will find that you now have a repository of the same name but under your account. Click the "Clone or download" button and copy the URL found in there.
+Next is to clone this repository for yourself, so run the following two commands. However, replace the URL with your own one:
 
 ```bash
 git clone https://github.com/auth0-blog/symfony-blog-part-2
@@ -169,7 +170,7 @@ Once an account has been created, we're going to need to install the command lin
 
 Now we have an account and have the CLI installed on our system, we're going to need to create a space on Heroku. Running the following command will do this:
 
-__NOTE__ Please change the `space-name-here` to be the space name you wish. Otherwise you will find that the space `space-name-here` is already in use by someone else.
+__NOTE__ Please change the `space-name-here` to be the space name you wish. Otherwise, you will find that the space name `space-name-here` is already in use by someone else.
 
 ```bash
 heroku apps:create space-name-here
@@ -181,9 +182,9 @@ Great, we can now access our website. If you take the URL that's given to you as
 
 ![Heroku space created](https://cdn.auth0.com/blog/symfony-part-3/heroku-space-browser.png)
 
-Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to: [Heroku Verify](https://heroku.com/verify) to add your card details.
+Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to [Heroku Verify](https://heroku.com/verify) to add your card details.
 
-Once verified, we're going to add the ClearDb add-on to our space. So in the Terminal let's run the following command to add a database for our blog to access:
+Once verified, we're going to add the ClearDb add-on to our space. So in the Terminal let's run the following command to add a database to our blog to access:
 
 ```bash
 heroku addons:add cleardb:ignite
