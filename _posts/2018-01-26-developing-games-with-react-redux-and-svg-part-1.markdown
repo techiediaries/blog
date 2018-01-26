@@ -208,9 +208,25 @@ You are done! To see everything working, you can head to the project root and ru
 
 {% include tweet_quote.html quote_text="It's easy to integrate React and Redux." %}
 
-## Creating the Basic SVG Elements
+## Creating SVG Components with React
+
+As you will see in this series, creating SVG components with React is quite easy. In reality, there is almost no difference between creating a React component with HTML and with SVG. Basically, the only differences are that SVG introduces new elements and that these elements are plotted in an SVG canvas.
+
+Nevertheless, before creating your components with SVG and React, a quick review on SVG may be useful.
 
 ### Quick Review on SVG
+
+SVG is one of the most cool and flexible web standards. SVG, which stands for Scalable Vector Graphics, is a markup language that allows developers to describe two dimensional based vector graphics. SVG is pretty similar to HTML. Both technologies are XML-based markup languages and work well with other web standards like CSS and the DOM. This means that you can apply CSS rules to SVG elements just like you would do with HTML elements, including animations.
+
+Throughout this series, you will create more than a dozen SVG components with React. You will even compose (group) SVG elements to form your game elements (like the cannon that shoots cannon balls).
+
+A thorough explanation about SVG is out of scope and would make this series too lengthy. So, if you are looking forward to learn the details of the SVG markup language, you can take a look at [the *SVG Tutorial* provided by Mozilla](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial) and at [this article about the SVG coordinate system](https://www.sarasoueidan.com/blog/svg-coordinate-systems/).
+
+However, prior to start creating your components, there a few SVG characteristics that are important to understand. First, SVG and DOM enable developers to accomplish great things when combined. This makes using SVG with React very easy.
+
+Second, the SVG coordinate system is similar to the Cartesian plane, but upside-down. This means that negative vertical values are, by default, shown above the X axis. The horizontal values, on the other hand, are just like the Cartesian plane (i.e. negative values are shown to the left of the Y axis). This behavior could be easily changed by [applying a transformation to the SVG canvas](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform). However, in order not to confuse any other developer, it's better to stick with the default. You will get used soon.
+
+The third and last characteristic that you need to know is that SVG introduces a lot of new elements (e.g. `circle`, `rect`, and `path`). To use these elements, you cannot simply define them inside an HTML element. First, you must define an `svg` element (your canvas) where you will plot all your SVG components.
 
 ### SVG and Bezier Curves
 
