@@ -103,6 +103,111 @@ Now is a good time to commit your files to Git or some other version control sys
 
 ## Installing Redux and PropTypes
 
+After bootstrapping the React project and removing the useless files from it, you will want to install and configure [Redux](https://redux.js.org/) to be [the single source of truth on your application](https://redux.js.org/docs/introduction/ThreePrinciples.html#single-source-of-truth). You will also want to install [PropTypes](https://github.com/facebook/prop-types) as [this tool helps avoiding common mistakes](https://reactjs.org/docs/typechecking-with-proptypes.html). Both tools can be installed in a single command:
+
+```bash
+npm i redux react-redux proptypes
+```
+
+As you can see, the command above includes a third NPM package: `react-redux`. Although you could use Redux directly with React, this is not recommended. [The `react-redux` package does some performance optimizations](https://redux.js.org/docs/basics/UsageWithReact.html) that would be cumbersome to handle manually.
+
+### Configuring Redux and Using PropTypes
+
+With these packages in place, you can configure your app to use Redux. The process is simple, you will need to create a *container* component, a *presentational* component, and a *reducer*. The difference between container components and presentational components is that the first simply `connects` presentational components to Redux. The third element that you will create, a reducer, is the core component in a Redux store. This kind of component is responsible for getting *actions* triggered by events that occur in your application and applying functions to change state based on these actions.
+
+> If you are not familiar with these concepts, you can read [this article to get a better explanation about presentational and container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) and you can go through [this practical Redux tutorial to learn about *actions*, *reducers*, and the *store*](https://auth0.com/blog/redux-practical-tutorial/). Although learning about these concepts is highly recommended, you can still follow this series without reading about them.
+
+You will be better off starting by creating the reducer, as this element does not depend on the others (actually, it's the other way around). To keep things organized, you can create a new directory called `reducers`, inside the `src` directory, and add to it a file called `index.js`. This file can contain the following source code:
+
+```js
+const initialState = {
+  message: `It's easy to integrate React and Redux, isn't it?`,
+};
+
+function reducer(state = initialState) {
+  return state;
+}
+
+export default reducer;
+```
+
+For now, your reducer will simply initialize the app's state with a `message` saying that it's easy to integrate React and Redux. Soon, you will start defining actions and handling them in this file.
+
+Next, you can refactor the `App` component to show this message to users. As you installed `prop-types`, it's a good time to start using it as well. To achieve this, open the `./src/App.js` file and replace its contents with the following:
+
+```js
+import React, {Component} from 'react';
+import PropTypes from 'proptypes';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <h1>{this.props.message}</h1>
+      </div>
+    );
+  }
+}
+
+App.propTypes = {
+  message: PropTypes.string.isRequired,
+};
+
+export default App;
+```
+
+As you can see, defining what types your component is expecting is very easy with `prop-types`. You just have to define the `propTypes` property of the `App` component with the `props` that it needs. There are a few cheat sheets around the web (like [this one](https://lzone.de/cheat-sheet/React%20PropTypes), [this one](https://reactcheatsheet.com/), and [this one](https://devhints.io/react)) that summarize how to create basic and advanced `prop-types` definitions. If needed, refer to them.
+
+Even though you have defined what the `App` component needs to render and what is the initial state of your Redux store, you still need a way to tie these elements together. That's exactly what *container* components do. To define a container in an organized fashion, you will want to create a directory called `containers` inside the `src` directory. Then, you can create a container called `Game` inside a file called `Game.js` in this new directory. This container will use the `connect` utility from `react-redux` to pass the `state.message` to the `message` props of the `App` component:
+
+```js
+import {connect} from 'react-redux';
+
+import App from '../App';
+
+const mapStateToProps = state => ({
+  message: state.message,
+});
+
+const Game = connect(
+  mapStateToProps,
+)(App);
+
+export default Game;
+```
+
+You are almost done now. The last step to integrate everything together is to refactor the `./src/index.js` file to initialize the Redux store and to pass it to the `Game` container (which will then fetch the `message` and pass to `App`). The following code shows how your `./src/index.js` file will look like after the refactoring:
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import './index.css';
+import Game from './containers/Game';
+import reducer from './reducers';
+import registerServiceWorker from './registerServiceWorker';
+
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+    reducer, /* preloadedState, */
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
+/* eslint-enable */
+
+ReactDOM.render(
+    <Provider store={store}>
+        <Game />
+    </Provider>,
+    document.getElementById('root'),
+);
+registerServiceWorker();
+```
+
+You are done! To see everything working, you can head to the project root and run `npm start`. This will run your app in development mode and open it in your default browser.
+
+{% include tweet_quote.html quote_text="It's easy to integrate React and Redux." %}
+
 ## Creating the Basic SVG Elements
 
 ### Quick Review on SVG
