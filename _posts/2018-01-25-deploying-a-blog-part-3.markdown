@@ -63,7 +63,7 @@ In this third article, we will be covering deployments to two different environm
 
 ## About [Heroku](https://www.heroku.com)
 
-[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manage and scale modern apps by developers. The service is very flexible, simple to use and quick to start allowing developers to focus more on the product rather than spending too much time in the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers, hardware of the infrastructure.
+[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manage and scale modern apps by developers. The service is very flexible, simple to use and quick to start allowing developers to focus more on the product rather than spending too much time on the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers and the hardware of the infrastructure.
 
 ## About Travis CI
 
