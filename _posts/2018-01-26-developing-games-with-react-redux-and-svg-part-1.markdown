@@ -367,6 +367,62 @@ If you check your app now, you will see your circle horizontally centered in the
 
 ### Creating the Sky React Component
 
+After making your canvas fit the entire screen and repositioning the origin axis to the center of it, it's time to start creating real game elements. You can start by defining the element that will act as the background of your game, the sky. For that, create a new file called `Sky.jsx` in the `./src/components/` directory with the following code:
+
+```js
+import React from 'react';
+
+const Sky = () => {
+  const skyStyle = {
+    fill: '#30abef',
+  };
+  const skyWidth = 5000;
+  const gameHeight = 1200;
+  return (
+    <rect
+      style={skyStyle}
+      x={skyWidth / -2}
+      y={100 - gameHeight}
+      width={skyWidth}
+      height={gameHeight}
+    />
+  );
+};
+
+export default Sky;
+```
+
+You might be wondering why you are setting your game with such a huge area (width of `5000` and height of `1200`). Actually, the width is not important in this game. You just have to set it to a number that is high enough to cover any screen size.
+
+Now, the height is important. Soon, you will force your canvas to show this `1200` points, no matter what is the resolution and orientation of your users. This will give your game consistency and you will know that all users will see the same area in your game. As such, you will be able to define where the flying discs will appear and how long they will take to go through these points.
+
+To make the canvas element show your new sky, open the `Canvas.jsx` file in your editor and refactor it like that:
+
+```js
+import React from 'react';
+import Sky from './Sky';
+
+const Canvas = () => {
+  const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
+  return (
+    <svg
+      id="aliens-go-home-canvas"
+      preserveAspectRatio="xMaxYMax none"
+      viewBox={viewBox}
+    >
+      <Sky />
+      <circle cx={0} cy={0} r={50} />
+    </svg>
+  );
+};
+
+export default Canvas;
+```
+
+If you check your app now (`npm start`), you will see that your circle is still centered and near the bottom and that now you have a blue (`fill: '#30abef'`) background color.
+
+> **Note:** If you add the `Sky` element after the `circle` element, you won't be able to see the latter anymore. This happens because SVG **does not** support `z-index`. SVG relies on the order that the elements are listed to decide which one is above the other. That is, you have to define the `circle` element after the `Sky` so web browsers know that they must show it above the blue background.
+
 ### Creating the Ground React Component
 
 ### Creating the Cannon React Component
