@@ -481,6 +481,186 @@ To wrap this section, don't forget to add the `Ground` element to your canvas (k
 
 ### Creating the Cannon React Component
 
+You already have the sky and the ground elements defined in your game. Next, you will want to add something more interesting. Perhaps, you can add the elements that will represent your cannon. These elements will be a little bit more complex than the other two elements defined before. They will have many more lines of source code, but this is due to the fact that you will need Cubic Bezier curves to draw them.
+
+As you might remember, defining a Cubic Bezier curve on SVG depends on four points: the starting point, the ending point, and two control points. These points, which are defined in the `d` property of a `path` element, look like this: `M 20 20 C 20 110, 110 110, 110 20`.
+
+To avoid repeating similar [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) in your code to create these curves, you can create a new file called `formulas.js` in the `./src/utils/` directory and add a function that returns this string based on some parameters:
+
+```js
+export const pathFromBezierCurve = (cubicBezierCurve) => {
+  const {
+    initialAxis, initialControlPoint, endingControlPoint, endingAxis,
+  } = cubicBezierCurve;
+  return `
+    M${initialAxis.x} ${initialAxis.y}
+    c ${initialControlPoint.x} ${initialControlPoint.y}
+    ${endingControlPoint.x} ${endingControlPoint.y}
+    ${endingAxis.x} ${endingAxis.y}
+  `;
+};
+```
+
+This code is quite simple, it just extracts four attributes (`initialAxis`, `initialControlPoint`, `endingControlPoint`, `endingAxis`) from a parameter called `cubicBezierCurve` and pass them to a template literal that builds the Cubic Bezier curve representation.
+
+With this file in place, you can start creating your cannon. To keep things more organized, you can divide your cannon into two parts: the `CannonBase` and the `CannonPipe`.
+
+To define the `CannonBase`, create a new file called `CannonBase.jsx` inside `./src/components` and add the following code to it:
+
+```js
+import React from 'react';
+import { pathFromBezierCurve } from '../utils/formulas';
+
+const CannonBase = (props) => {
+  const cannonBaseStyle = {
+    fill: '#a16012',
+    stroke: '#75450e',
+    strokeWidth: '2px',
+  };
+
+  const baseWith = 80;
+  const halfBase = 40;
+  const height = 60;
+  const negativeHeight = height * -1;
+
+  const cubicBezierCurve = {
+    initialAxis: {
+      x: -halfBase,
+      y: height,
+    },
+    initialControlPoint: {
+      x: 20,
+      y: negativeHeight,
+    },
+    endingControlPoint: {
+      x: 60,
+      y: negativeHeight,
+    },
+    endingAxis: {
+      x: baseWith,
+      y: 0,
+    },
+  };
+
+  return (
+    <g>
+      <path
+        style={cannonBaseStyle}
+        d={pathFromBezierCurve(cubicBezierCurve)}
+      />
+      <line
+        x1={-halfBase}
+        y1={height}
+        x2={halfBase}
+        y2={height}
+        style={cannonBaseStyle}
+      />
+    </g>
+  );
+};
+
+export default CannonBase;
+```
+
+Besides the Cubic Bezier curve, there is nothing new about this element. In the end, the browser will render this element as a curve with a dark brown (`#75450e`) stroke and will add a light brown (`#a16012`) color to its background.
+
+The code to create the `CannonPipe` will be similar to the `CannonBase` code. The differences are that it will use other colors and it will pass other points to the `pathFromBezierCurve` formula to draw the pipe. Besides that, this element will make use of the [transform](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform) attribute to simulate the cannon rotation.
+
+To create this element, add the following code to a new file called `CannonPipe.jsx` inside the `./src/components/` directory:
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import { pathFromBezierCurve } from '../utils/formulas';
+
+const CannonPipe = (props) => {
+  const cannonPipeStyle = {
+    fill: '#999',
+    stroke: '#666',
+    strokeWidth: '2px',
+  };
+  const transform = `rotate(${props.rotation}, 0, 0)`;
+
+  const muzzleWidth = 40;
+  const halfMuzzle = 20;
+  const height = 100;
+  const yBasis = 70;
+
+  const cubicBezierCurve = {
+    initialAxis: {
+      x: -halfMuzzle,
+      y: -yBasis,
+    },
+    initialControlPoint: {
+      x: -40,
+      y: height * 1.7,
+    },
+    endingControlPoint: {
+      x: 80,
+      y: height * 1.7,
+    },
+    endingAxis: {
+      x: muzzleWidth,
+      y: 0,
+    },
+  };
+
+  return (
+    <g transform={transform}>
+      <path
+        style={cannonPipeStyle}
+        d={pathFromBezierCurve(cubicBezierCurve)}
+      />
+      <line
+        x1={-halfMuzzle}
+        y1={-yBasis}
+        x2={halfMuzzle}
+        y2={-yBasis}
+        style={cannonPipeStyle}
+      />
+    </g>
+  );
+};
+
+CannonPipe.propTypes = {
+  rotation: PropTypes.number.isRequired,
+};
+
+export default CannonPipe;
+```
+
+After that, remove the `circle` element from your canvas and add both the `CannonBase` and the `CannonPipe` to it. The following code is what you will have after refactoring your canvas:
+
+```js
+import React from 'react';
+import Sky from './Sky';
+import Ground from './Ground';
+import CannonBase from './CannonBase';
+import CannonPipe from './CannonPipe';
+
+const Canvas = () => {
+  const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
+  return (
+    <svg
+      id="aliens-go-home-canvas"
+      preserveAspectRatio="xMaxYMax none"
+      viewBox={viewBox}
+    >
+      <Sky />
+      <Ground />
+      <CannonPipe rotation={45} />
+      <CannonBase />
+    </svg>
+  );
+};
+
+export default Canvas;
+```
+
+Running and checking your application now will bring an app that shows the following vector graphics:
+
+![Drawing SVG elements with React and Redux ](https://cdn.auth0.com/blog/aliens-go-home/cannon-react-component.png)
+
 ### Making the Cannon Aim
 
 ## Next Steps
