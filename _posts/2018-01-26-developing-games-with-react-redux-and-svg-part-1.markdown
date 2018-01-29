@@ -25,13 +25,21 @@ related:
 - 2018-01-10-implementing-single-sign-on-in-b2c-applications
 ---
 
-**TL;DR:** A brief synopsis that includes link to a [github repo](http://www.github.com/).
+**TL;DR:** In this series, you will learn how to make React and Redux control a bunch of SVG elements to create a game. The knowledge acquired throughout this series will also allow you to create other types of animations that are orchestrated by React and Redux, not only games. You can find the final code developed in this article in the following GitHub repository: [Aliens Go Home - Part 1](https://github.com/auth0-blog/aliens-go-home-part-1)
 
 ---
 
 ## The React Game: Aliens, Go Home!
 
+The game that you will develop in this series is called *Aliens, Go Home!* The idea of this game is simple, you will have a cannon and will have to kill flying discs that are trying to invade the earth. To kill these flying discs you will have to point and click on an SVG canvas to make your cannon shoot.
+
+If you are curious, you can find [the final game up and running here](http://bang-bang.digituz.com.br/). But don't play too much, you have work to do!
+
 ## Prerequisites
+
+As the prerequisites to follow this series, you will need some knowledge on web development (JavaScript mainly) and a development machine with [Node.js and NPM installed](https://nodejs.org/en/download/). You don't have to have deep knowledge about the JavaScript programming language or how React, Redux, and SVG work to follow this series. However, if you do so, you will have an easier time to grasp the different topics and how they fit together.
+
+Nevertheless, this series includes links to relevant articles, posts, and documents that provide better explanations of topics that deserve more attention.
 
 ## Bootstrapping a React Project with Create-React-App
 
@@ -661,6 +669,8 @@ Running and checking your application now will bring an app that shows the follo
 
 ![Drawing SVG elements with React and Redux ](https://cdn.auth0.com/blog/aliens-go-home/cannon-react-component.png)
 
-### Making the Cannon Aim
+## Conclusion and Next Steps
 
-## Next Steps
+In the first part of this series, you have learned about some important topics that will enable you to create the complete game. You have also used `create-react-app` to bootstrap your project and you have created some game elements like the cannon, the sky, and the ground. With these elements in place, you are ready to start adding some animation to your game.
+
+In the next part, you will start by adding the aiming feature to your cannon and then you will define more game elements. For instance, you will create the flying objects, the cannon ball, and you will make them animated. Stay tuned!
