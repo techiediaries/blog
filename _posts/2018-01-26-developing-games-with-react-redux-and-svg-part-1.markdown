@@ -425,6 +425,60 @@ If you check your app now (`npm start`), you will see that your circle is still 
 
 ### Creating the Ground React Component
 
+After creating the `Sky` element, the next one that you can create is the `Ground` element. To do that, create a new file called `Ground.jsx` in the `./src/components/` directory and add the following code:
+
+```js
+import React from 'react';
+
+const Ground = () => {
+  const groundStyle = {
+    fill: '#59a941',
+  };
+  const division = {
+    stroke: '#458232',
+    strokeWidth: '3px',
+  };
+
+  const groundWidth = 5000;
+
+  return (
+    <g id="ground">
+      <rect
+        id="ground-2"
+        data-name="ground"
+        style={groundStyle}
+        x={groundWidth / -2}
+        y={0}
+        width={groundWidth}
+        height={100}
+      />
+      <line
+        x1={groundWidth / -2}
+        y1={0}
+        x2={groundWidth / 2}
+        y2={0}
+        style={division}
+      />
+    </g>
+  );
+};
+
+export default Ground;
+```
+
+There is nothing fancy about this element. It's just a composition of a `rect` element and a `line`. However, as you may have noted, this element also uses a constant with the value of `5000` to define its width. Therefore, it might be a good idea to create a file to keep some global constants like this one.
+
+As such, create a new directory called `utils` inside the `./src/` directory and, inside this new directory, create a file called `constants.js`. For now, you can add a single constant to it:
+
+```js
+// very wide to provide as full screen feeling
+export const skyAndGroundWidth = 5000;
+```
+
+After that, you can refactor both the `Sky` element and the `Ground` element to use this new constant.
+
+To wrap this section, don't forget to add the `Ground` element to your canvas (keep in mind that you need to add it between the `Sky` and the `circle` elements). [If you have any doubt about how to do these last steps, please take a look into this commit](https://github.com/auth0-blog/aliens-go-home-part-1/commit/f453eb5147821f0289ecd81b8ae8deb0b7941f0e).
+
 ### Creating the Cannon React Component
 
 ### Making the Cannon Aim
