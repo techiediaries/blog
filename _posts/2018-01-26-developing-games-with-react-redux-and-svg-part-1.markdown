@@ -106,7 +106,7 @@ Now is a good time to commit your files to Git or some other version control sys
 After bootstrapping the React project and removing the useless files from it, you will want to install and configure [Redux](https://redux.js.org/) to be [the single source of truth on your application](https://redux.js.org/docs/introduction/ThreePrinciples.html#single-source-of-truth). You will also want to install [PropTypes](https://github.com/facebook/prop-types) as [this tool helps avoiding common mistakes](https://reactjs.org/docs/typechecking-with-proptypes.html). Both tools can be installed in a single command:
 
 ```bash
-npm i redux react-redux proptypes
+npm i redux react-redux prop-types
 ```
 
 As you can see, the command above includes a third NPM package: `react-redux`. Although you could use Redux directly with React, this is not recommended. [The `react-redux` package does some performance optimizations](https://redux.js.org/docs/basics/UsageWithReact.html) that would be cumbersome to handle manually.
@@ -137,7 +137,7 @@ Next, you can refactor the `App` component to show this message to users. As you
 
 ```js
 import React, {Component} from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 
 class App extends Component {
   render() {
@@ -210,7 +210,7 @@ You are done! To see everything working, you can head to the project root and ru
 
 ## Creating SVG Components with React
 
-As you will see in this series, creating SVG components with React is quite easy. In reality, there is almost no difference between creating a React component with HTML and with SVG. Basically, the only differences are that SVG introduces new elements and that these elements are plotted in an SVG canvas.
+As you will see in this series, creating SVG components with React is quite easy. In reality, there is almost no difference between creating a React component with HTML and with SVG. Basically, the only differences are that SVG introduces new elements and that these elements are drawn in an SVG canvas.
 
 Nevertheless, before creating your components with SVG and React, a quick review on SVG may be useful.
 
@@ -226,7 +226,7 @@ However, prior to start creating your components, there a few SVG characteristic
 
 Second, the SVG coordinate system is similar to the Cartesian plane, but upside-down. This means that negative vertical values are, by default, shown above the X axis. The horizontal values, on the other hand, are just like the Cartesian plane (i.e. negative values are shown to the left of the Y axis). This behavior could be easily changed by [applying a transformation to the SVG canvas](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform). However, in order not to confuse any other developer, it's better to stick with the default. You will get used soon.
 
-The third and last characteristic that you need to know is that SVG introduces a lot of new elements (e.g. `circle`, `rect`, and `path`). To use these elements, you cannot simply define them inside an HTML element. First, you must define an `svg` element (your canvas) where you will plot all your SVG components.
+The third and last characteristic that you need to know is that SVG introduces a lot of new elements (e.g. `circle`, `rect`, and `path`). To use these elements, you cannot simply define them inside an HTML element. First, you must define an `svg` element (your canvas) where you will draw all your SVG components.
 
 ### SVG, Path Elements, and Cubic Bezier Curves
 
@@ -274,6 +274,96 @@ In this case, the commands passed to the `path` element tell the browser:
 If you still don't understand exactly how Cubic Bezier curves work, don't worry. You will have the opportunity to practice during this series. Besides that, you can find a lot of tutorial around the web about this feature and you can always practice in tools like [JSFiddle](https://jsfiddle.net/) and [Codepen](https://codepen.io/).
 
 ### Creating the Canvas React Component
+
+Now that you have your project structured and that you know the basic stuff about SVG, it's time to start creating your game. The first element that you will need to create is the SVG canvas that you will use to draw the elements of the game.
+
+This component will behave as a presentational component. As such, you can create a directory called `components`, inside the `./src` directory, to hold this new component and its siblings. Since this will be your canvas, nothing more natural than calling it `Canvas`. Therefore, create a new file called `Canvas.jsx` inside the `./src/components/` directory and add the following code:
+
+```js
+import React from 'react';
+
+const Canvas = () => {
+  const style = {
+    border: '1px solid black',
+  };
+  return (
+    <svg
+      id="aliens-go-home-canvas"
+      preserveAspectRatio="xMaxYMax none"
+      style={style}
+    >
+      <circle cx={0} cy={0} r={50} />
+    </svg>
+  );
+};
+
+export default Canvas;
+```
+
+With this file in place, you will want to refactor the `App` component to use your `Canvas`:
+
+```js
+import React, {Component} from 'react';
+import Canvas from './components/Canvas';
+
+class App extends Component {
+  render() {
+    return (
+      <Canvas />
+    );
+  }
+}
+
+export default App;
+```
+
+If your run (`npm start`) and check your application, you will see that the browser draws just a quarter of this circle. This happens because, by default, the origin axis is rendered in the top left corner of the window. Besides that, you will also see that the `svg` element does not fit the entire screen.
+
+To make things more interesting and easier to manage, you can make your canvas fit the entire screen. You will also want to reposition its origin to be on the center the X axis and to be near the bottom (you will add your cannon to the origin in a little while). To do both, you will need to change two files: `./src/components/Canvas.jsx` and `./src/index.css`.
+
+You can start by replacing the contents of the `Canvas` component with the following code:
+
+```js
+import React from 'react';
+
+const Canvas = () => {
+  const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
+  return (
+    <svg
+      id="aliens-go-home-canvas"
+      preserveAspectRatio="xMaxYMax none"
+      viewBox={viewBox}
+    >
+      <circle cx={0} cy={0} r={50} />
+    </svg>
+  );
+};
+
+export default Canvas;
+```
+
+In this new version, you have defined [the `viewBox` attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/viewBox) of the `svg` element. What this attribute does is to define that your canvas and its contents must fit a particular container (in this case the inner area of the window/browser). As you can see, `viewBox` attributes are made of four numbers:
+
+- `min-x`: This value defines what is the leftmost point that your users will see. So, to make the origin axis (and the circle) appear in the center of the screen, you divided your screen width by negative two (`window.innerWidth / -2`) to the get this attribute (`min-x`). Note that you need to use `-2` to make your canvas show the same amount of points to the left (negative) and to the right (positive) of the origin.
+- `min-y`: This value defines what will be the uppermost point of your canvas. Here, you have subtracted the `window.innerHeight` from `100` to give some area (`100` points) after the Y origin.
+- `width` and `height`: These are the values that define how many X and Y points your users will see in their screen.
+
+Besides defining the `viewBox` attribute, you have also defined an attribute called [`preserveAspectRatio`](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio) in this new version. You have used `xMaxYMax none` on it to force uniform scaling of your canvas and its elements.
+
+After refactoring your canvas, you will need to add the following rule to the `./src/index.css` file:
+
+```css
+/* ... body definition ... */
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+```
+
+This will make both the `html` and `body` elements hide (and disable) scrolling. It will also make these elements fit the entire screen.
+
+If you check your app now, you will see your circle horizontally centered in the screen and near the bottom.
 
 ### Creating the Sky React Component
 
