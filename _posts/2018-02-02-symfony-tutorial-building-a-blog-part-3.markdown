@@ -84,7 +84,7 @@ Click the "Fork" button that appears in the top right-hand corner of the browser
 
 Make sure you have followed all instructions in the first two parts.
 
-You will find that you now have a repository of the same name, but under your account. Click the "Clone or download" button and copy the URL found in there.
+You will find that you now have a repository of the same name but under your account. Click the "Clone or download" button and copy the URL found in there.
 
 Next, you will need to clone this repository for yourself, so run the following two commands. However, replace the URL with your own one:
 
@@ -149,7 +149,7 @@ php bin/console doctrine:fixtures:load
 
 > __NOTE:__ If you do not have [Yarn](https://yarnpkg.com) installed (a JavaScript package manager), you will need to install and configure this. So, go to their [installation](https://yarnpkg.com/lang/en/docs/install/) page and follow the instructions for installing and configuring Yarn first.
 
-Lastly, you will need to install third party libraries (used to make the blog look nicer visually) with the following command:
+Lastly, you will need to install third-party libraries (used to make the blog look nicer visually) with the following command:
 
 ```bash
 yarn add @symfony/webpack-encore --dev
@@ -196,7 +196,7 @@ When the command has finished running, you should see something similar to the i
 
 ![Creating a ClearDB database](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-database.png)
 
-Heroku stores the environment files themselves. So, in order for your blog to use sensitive keys (such as the database table name, user, and password), you need to store them as environment keys. Previousl, you placed this in a `.env` file.
+Heroku stores the environment files themselves. So, in order for your blog to use sensitive keys (such as the database table name, user, and password), you need to store them as environment keys. Previously, you placed this in a `.env` file.
 
 The following is the structure of keys you are going to need:
 
@@ -238,7 +238,7 @@ travis version
 
 Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you already created your account previously, you don't need to create another. So, head over to [Travis CI to sign up](https://travis-ci.org/).
 
-Once your account is created, you should see [your profile page](https://travis-ci.org/profile/). This page contains the list of your GitHub repositories (you might need to click on the *Sync account* button). All you need to do is to toggle your specific repository to on.
+Once your account is created, you should see [your profile page](https://travis-ci.org/profile/). This page contains the list of your GitHub repositories (you might need to click on the *Sync account* button). All you need to do is to turn on your specific repository.
 
 ![Turning Travis CI integration with GitHub on](https://cdn.auth0.com/blog/symfony-blog-engine-part-3/travis-ci-integration.png)
 
@@ -425,7 +425,7 @@ doctrine:
         auto_mapping: true
 ```
 
-As you can see from the above, you are no longer using the database host, port, name, user and password. Instead, you need only 2 variables, these are url, dbname.
+As you can see from the above, you are no longer using the database `host`, `port`, `name`, `user`, and `password`. Instead, you need only 2 variables, these are `url`, `dbname`.
 
 Now, change the location of the log file found in `app/config/config_prod.yml`. In this file, there will be something similar to:
 
@@ -459,7 +459,7 @@ git push
 
 ## Instructions for Setting Up the Staging Environment
 
-If you wish to make use of a staging environment for testing on, you are going to need to repeat some of the steps above. A staging environment allows you to make use of a direct replica of the production server, providing an environment for those with access to test new features before they're ready to be published for public.
+If you wish to make use of a staging environment for testing on, you are going to need to repeat some of the steps above. A staging environment allows you to make use of a direct replica of the production server, providing an environment for those with access to test new features before they're ready to be published for the public.
 
 First, create your staging space on [Heroku](https://www.heroku.com) with the following command:
 
@@ -489,7 +489,7 @@ You will need to replace this with branch specific configurations:
       staging: space-name-here-staging
 ```
 
-After that, you are going to need to create a staging area on Auth0, [log into your account here](https://manage.auth0.com/#/clients), then click the "Create Client" button. You can call it whatever you want. I would suggest call it the same as your current client, but append "-staging" to the end of it.
+After that, you are going to need to create a staging area on Auth0, [log into your account here](https://manage.auth0.com/#/clients), then click the "Create Client" button. You can call it whatever you want. I would suggest calling it the same as your current client but append "-staging" to the end of it.
 
 Once created, you need to make use of the Auth0 client Id, secret, and domain. You also need to make use of the database name returned to you when you ran the `cleardb:ignite` command. Replace the contents of the brackets in the examples below with these details. Then, run each of these commands:
 
