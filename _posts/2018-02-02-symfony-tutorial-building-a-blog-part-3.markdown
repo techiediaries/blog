@@ -210,8 +210,7 @@ heroku config:set DATABASE_NAME=(Your database name, as shown by the heroku addo
 
 ### Installing Travis-ci
 
-[Travis-ci](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please make sure it is at least version 1.9.3 (2.0.0 recommended).
-You can check this by typing in a Terminal:
+[Travis-ci](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please, make sure it is at least version 1.9.3 (2.0.0 recommended). You can check this by typing the following command in a terminal:
 
 ```bash
 ruby -v
@@ -219,30 +218,31 @@ ruby -v
 
 If Ruby isn't installed, it can be installed by one of the following methods, depending on your operating system:
 
-```bash
-brew install ruby # Mac OS X
-sudo apt-get install ruby-full # Debian / Ubuntu
-pkg install ruby # Free bsd
-sudo yum install ruby # CentOS, Fedora, or RHEL
-```
 
-Now that Ruby is installed or at the minimum required version, let's install [Travis CI](https://travis-ci.org/) CLI with the following command:
+* Mac OS X: `brew install ruby`
+* Debian / Ubuntu: `sudo apt-get install ruby-full`
+* Free bsd: `pkg install ruby`
+* CentOS, Fedora, or RHEL: `sudo yum install ruby`
+
+Now that you have Ruby, you will be able to install [Travis CI](https://travis-ci.org/) CLI with the following command:
 
 ```bash
 gem install travis -v 1.8.8 --no-rdoc --no-ri
 ```
 
-Once complete the installation can be verified by checking the version with the following command:
+Once complete, the installation can be verified by checking the version with the following command:
 
 ```bash
 travis version
 ```
 
-Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As an account was previously created one to fork the Symfony-blog tutorial, we don't need to create another. So let's head over to Travis-ci to [sign up](https://travis-ci.org/).
+Making use of [Travis CI](https://travis-ci.org/) requires a GitHub account. As you already created your account previously, you don't need to create another. So, head over to [Travis CI to sign up](https://travis-ci.org/).
 
-Once the account is created at [Travis CI](https://travis-ci.org/), we should see a profile page, that contains the list of our Github repositories. All we need to do is toggle our specific repository to on.
+Once your account is created, you should see [your profile page](https://travis-ci.org/profile/). This page contains the list of your GitHub repositories (you might need to click on the *Sync account* button). All you need to do is to toggle your specific repository to on.
 
-In order to run through the [Travis CI](https://travis-ci.org/) build, we need a `.env` file. So in the root of our project, let's create a `.env.travis.dist` file and paste the following in:
+![Turning Travis CI integration with GitHub on](https://cdn.auth0.com/blog/symfony-blog-engine-part-3/travis-ci-integration.png)
+
+In order to run through the [Travis CI](https://travis-ci.org/) build, you need a `.env` file specifically tailored to this service. So, in the root of your project, create a `.env.travis.dist` file and paste the following in:
 
 ```yml
 DATABASE_HOST=127.0.0.1
@@ -256,7 +256,7 @@ AUTH0_CLIENT_SECRET=
 AUTH0_DOMAIN=
 ```
 
-We've enabled our GitHub repository on [Travis CI](https://travis-ci.org/), but we now need to create a `.travis.yml` file so that [Travis CI](https://travis-ci.org/) knows what to do with this. So create the file and put the following in:
+You have enabled your GitHub repository on [Travis CI](https://travis-ci.org/), but you still need to create a `.travis.yml` file so that [Travis CI](https://travis-ci.org/) knows what to do with your repository. So, create the file and put the following in:
 
 ```yml
 language: php
@@ -289,16 +289,16 @@ deploy:
   app:
 ```
 
-There are 3 parts of this file where we need to input unique details here:
+There are 3 parts of this file where you need to input unique details:
 
-* First is our e-mail, please type in your e-mail next to the line: `email: `
-* Second is your secure api_key for [Heroku](https://www.heroku.com). If you run the following command, it'll put the encrypted [Heroku](https://www.heroku.com) API key for you:
+* First, your e-mail address. Please, type in your own e-mail next to the line that starts with `email: `.
+* Second, your secure `api_key` for [Heroku](https://www.heroku.com). If you run the following command, it'll put the encrypted [Heroku](https://www.heroku.com) API key for you:
 
-```bash
-travis encrypt $(heroku auth:token) --add deploy.api_key
-```
+  ```bash
+  travis encrypt $(heroku auth:token) --add deploy.api_key
+  ```
 
-* And finally is the app our [Heroku](https://www.heroku.com) refers to, this is your [Heroku](https://www.heroku.com) space id. So please type it in next to `app: ` which is at the bottom of the file.
+* And finally, the app your [Heroku](https://www.heroku.com) refers to, this is your [Heroku](https://www.heroku.com) space id. So, please, type it in next to `app: ` which is at the bottom of the file.
 
 ## Configuring Symfony for production
 
