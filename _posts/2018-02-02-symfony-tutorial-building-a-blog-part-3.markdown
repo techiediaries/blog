@@ -302,9 +302,9 @@ There are 3 parts of this file where you need to input unique details:
 
 ## Configuring Symfony for production
 
-Now we have set up and configured Heroku and [Travis CI](https://travis-ci.org/), we need to make some minor changes to our Symfony installation in order to be functional when hosted on [Heroku](https://www.heroku.com).
+Now that you have set up and configured Heroku and [Travis CI](https://travis-ci.org/), you need to make some changes to your Symfony installation in order to be functional when hosted by [Heroku](https://www.heroku.com).
 
-Let's make some changes to our `composer.json` file. Where it says:
+First, you will need to change your `composer.json` file. Where it says:
 
 ```json
 {
@@ -322,7 +322,7 @@ Change it to:
 }
 ```
 
-Let's add a compile command, that Heroku will understand when being deployed to, to update the schema of the database. So find the following:
+After that, you need to add a compile command that will tell Heroku to update the schema of the database. To do that, find the following:
 
 ```json
 "symfony-scripts": [
@@ -341,7 +341,7 @@ Let's add a compile command, that Heroku will understand when being deployed to,
 ]
 ```
 
-Add the compile entry at the bottom as shown below:
+Then, add the compile entry at the bottom as shown below:
 
 ```json
 "symfony-scripts": [
@@ -363,13 +363,13 @@ Add the compile entry at the bottom as shown below:
 ]
 ```
 
-Now let's update our composer lock file with the following command:
+Now, you have to update your `composer.lock` file with the following command:
 
 ```bash
 composer update
 ```
 
-We now need to exclude our DataFixtures from the services autowiring. Open the file: `app/config/services.yml` and find:
+After that, you need to exclude your *DataFixtures* from the services auto-wiring. Open the `app/config/services.yml` file and find:
 
 ```yml
 AppBundle\:
@@ -379,7 +379,7 @@ AppBundle\:
     exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
 ```
 
-In exclude, where it shows `{Entity,Repository,Tests}` add `DataFixtures`. This will look like:
+In exclude, where it shows `{Entity,Repository,Tests}`, add `DataFixtures`. This will look like:
 
 ```yml
 AppBundle\:
@@ -389,7 +389,7 @@ AppBundle\:
     exclude: '../../src/AppBundle/{Entity,Repository,Tests,DataFixtures}'
 ```
 
-Our doctrine configuration will be different in production than it is in development. So in `app/config/config.yml` you should find something similar to:
+Your Doctrine configuration will be different in production than it is in development. So, in the `app/config/config.yml` file, you should find something similar to:
 
 ```yml
 # Doctrine Configuration
@@ -409,9 +409,7 @@ doctrine:
         auto_mapping: true
 ```
 
-Move this to the dev config file: `app/config/config_dev.yml`.
-
-In `app/config/config_prod.yml` we need the configuration to be slightly different. Paste the following into the bottom of that file:
+Move this piece of Yaml configuration to the dev config `app/config/config_dev.yml` file. Then, in the `app/config/config_prod.yml` file, you need the configuration to be slightly different. Paste the following into the bottom of this file:
 
 ```yml
 # Doctrine Configuration
@@ -428,10 +426,9 @@ doctrine:
         auto_mapping: true
 ```
 
-As you can see from the above, we are no longer using the database host, port, name, user and password. Instead we need only 2 variables, these are url, dbname.
+As you can see from the above, you are no longer using the database host, port, name, user and password. Instead, you need only 2 variables, these are url, dbname.
 
-Let's change the location of the log file found in `app/config/config_prod.yml`.
-In this file, there will be something similar to:
+Now, change the location of the log file found in `app/config/config_prod.yml`. In this file, there will be something similar to:
 
 ```yml
 monolog:
@@ -451,10 +448,9 @@ Replace the last line with:
 path: 'php://stderr'
 ```
 
-One final change is to remove the current PHPUnit test, we previously removed the DefaultController, there is still a test for this which will attempt to run (and fail) when building in Travis-CI.
-So remove the following directory `tests/AppBundle/Controller`.
+The final change is to remove the current PHPUnit test. Previously, you have removed the DefaultController, there is still a test for this which will attempt to run (and fail) when building in Travis-CI. So, remove the following directory `tests/AppBundle/Controller`.
 
-It's time to commit all of our changes to our forked repository. This can be done by the following commands:
+It's time to commit all of your changes to your forked repository. This can be done by the following commands:
 
 ```bash
 git add .
