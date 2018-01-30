@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Symfony Tutorial: Building a Blog (Part 3)"
-description: "Let's create and deploy a secure blog engine with Symfony."
-longdescription: "Creating applications with Symfony is easy and can be scaled to be used in any requirement. The tools that it provides to create and maintain web applications is amazing and replaces repetitive tasks. Let's use Symfony to create a blog engine."
+description: "Learn how to create and deploy a secure blog engine with Symfony."
+longdescription: "Creating applications with Symfony is easy and can be scaled to be used in any requirement. The tools that it provides to create and maintain web applications is amazing and replaces repetitive tasks. In this series, you will use Symfony to create a production-ready blog engine and then you will deploy it to Heroku."
 date: 2018-01-25 22:05
 category: Technical Guide, PHP, Symfony
 author:
@@ -29,20 +29,20 @@ related:
 - 2017-05-08-the-ultimate-guide-to-deploying-php-applications
 ---
 
-**TL;DR:** Symfony is a PHP framework as well as a set of reusable PHP components and libraries. It uses the Model-View-Controller design pattern and can be scaled to be used in any requirement. It aims to speed up the creation and maintenance of web applications, replacing repetitive code. In this part of the series, we will cover deploying the blog engine that we have created in the previous parts on Heroku. The final code can be found at this [repository](https://github.com/auth0-blog/symfony-blog-part-3).
+**TL;DR:** Symfony is a PHP framework as well as a set of reusable PHP components and libraries. It uses the Model-View-Controller design pattern and can be scaled to be used in any requirement. It aims to speed up the creation and maintenance of web applications, replacing repetitive code. In this part of the series, you will learn how to deploy the blog engine that you have created in the previous parts on Heroku. The final code can be found at this [repository](https://github.com/auth0-blog/symfony-blog-part-3).
 
 ---
 
 ## Symfony Tutorial: About Part 1 and Part 2
 
-[In the first article](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/), we:
+[In the first article](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/), you:
 
 * installed and configured a Symfony installation;
 * created two new database tables: `author` and `blog_post`;
 * allowed users to authenticate with [Auth0](https://auth0.com);
 * and ensured that the authenticated users have `Author` instances associated with them before using the system.
 
-[In the second article](https://auth0.com/blog/creating-symfony-blog-part-2/), we covered installing [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. We also enhanced our blog engine to allow visitors to:
+[In the second article](https://auth0.com/blog/creating-symfony-blog-part-2/), you installed [Bootstrap, a UI framework for web applications](https://getbootstrap.com/), to make the blog engine look nicer visually. You also enhanced your blog engine to allow visitors to:
 
 * see a list of blog posts;
 * read a specific blog post;
@@ -54,7 +54,7 @@ Besides that, authenticated authors were able to:
 * see all of their own blog posts;
 * and delete their own blog posts from the system.
 
-In this third article, we will be covering deployments to two different environments: `staging` and `production`. We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and [Travis-CI](https://travis-ci.com/), which will allow us to:
+In this third article, you will be learning about deploying to two different environments: `staging` and `production`. You will be carrying this out by using two services, [Heroku](https://www.heroku.com) and [Travis-CI](https://travis-ci.com/), which will allow you to:
 
 * make code changes to the blog;
 * deploy these changes automatically by committing them to GitHub;
@@ -66,9 +66,9 @@ In this third article, we will be covering deployments to two different environm
 
 ## About Travis CI
 
-[Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. Travis CI allows us to build and test our software hosted on GitHub, allowing us to publicise projects comfortable in knowing that project is fully functional for others to use.
+[Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. Travis CI allows you to build and test your software hosted on GitHub, allowing you to publicise projects comfortable in knowing that project is fully functional for others to use.
 
-With Travis CI, there are two different sites to use. The [`travis-ci.org`](https://travis-ci.org/) site allows us test open source projects (public repositories). Whereas [`travis-ci.com`](https://travis-ci.com/) allows us to test private projects, but requires a fee dependant on the size of your project.
+With Travis CI, there are two different sites to use. The [`travis-ci.org`](https://travis-ci.org/) site allows you test open source projects (public repositories). Whereas [`travis-ci.com`](https://travis-ci.com/) allows you to test private projects, but requires a fee dependent on the size of your project.
 
 ## Building the Blog Engine
 
