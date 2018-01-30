@@ -74,18 +74,19 @@ With Travis CI, there are two different sites to use. The [`travis-ci.org`](http
 
 ### Before Starting
 
-For this tutorial, you will need a GitHub account. So head over to [sign up at GitHub](https://github.com/join?source=header-home).
+For this tutorial, you will need a GitHub account. So, if needed, head over to [sign up at GitHub](https://github.com/join?source=header-home) and complete the process.
 
-Once signed up, go to our example repository for the [Symfony blog part 2](https://github.com/auth0-blog/symfony-blog-part-2).
+Once signed up, go to the example repository for the [Symfony blog part 2](https://github.com/auth0-blog/symfony-blog-part-2).
 
-Click the "Fork" button, found in the top right-hand corner of the browser. As shown in the example below:
+Click the "Fork" button that appears in the top right-hand corner of the browser. As shown in the example below:
 
 ![Forking a repository on GitHub](https://cdn.auth0.com/blog/symfony-part-3/fork-repository.png)
 
 Make sure you have followed all instructions in the first two parts.
 
-You will find that you now have a repository of the same name but under your account. Click the "Clone or download" button and copy the URL found in there.
-Next is to clone this repository for yourself, so run the following two commands. However, replace the URL with your own one:
+You will find that you now have a repository of the same name, but under your account. Click the "Clone or download" button and copy the URL found in there.
+
+Next, you will need to clone this repository for yourself, so run the following two commands. However, replace the URL with your own one:
 
 ```bash
 git clone https://github.com/auth0-blog/symfony-blog-part-2
@@ -105,9 +106,9 @@ AUTH0_CLIENT_SECRET={AUTH0_CLIENT_SECRET}
 AUTH0_DOMAIN={AUTH0_DOMAIN}
 ```
 
-Note that you will have to replace the values above. [Check the first part to understand how to replace them](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/).
+Note that you will have to replace the values above. [Check the first article of this series to understand how to replace them](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/).
 
-__Pro Tip!__ If you do not have a MySQL database available, an easy way to bootstrap one is with Docker:
+__Pro Tip!__ The `DATABASE_*` keys, in the file above, refer to a MySQL database. If you do not have one available, an easy way to bootstrap one is with Docker:
 
 ```bash
 docker run --name symfony-blog-mysql \
@@ -119,7 +120,7 @@ docker run --name symfony-blog-mysql \
     -d mysql:5.7
 ```
 
-The last thing you will need to do is to use composer to install the dependencies:
+The last thing you will need to do is to use [composer](https://getcomposer.org/) to install the dependencies. Run the following command in the project root:
 
 ```bash
 composer install
@@ -144,9 +145,11 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
-__NOTE__ If you do not have [Yarn](https://yarnpkg.com), a Javascript package manager, installed, you will need to install and configure this. So go to their [Installation](https://yarnpkg.com/lang/en/docs/install/) page and follow the instructions for installing and configuring Yarn first.
+> If you get an error stating that `An exception occurred in driver: SQLSTATE[HY000] [2002] No such file or directory`, check your `.env` file and [replace `DATABASE_HOST=localhost` by `DATABASE_HOST=127.0.0.1`](https://stackoverflow.com/a/9251924/1232793).
 
-Let's install the third party libraries used to make the blog look nicer visually with the following command:
+> __NOTE:__ If you do not have [Yarn](https://yarnpkg.com) installed (a JavaScript package manager), you will need to install and configure this. So, go to their [installation](https://yarnpkg.com/lang/en/docs/install/) page and follow the instructions for installing and configuring Yarn first.
+
+Lastly, you will need to install third party libraries (used to make the blog look nicer visually) with the following command:
 
 ```bash
 yarn add @symfony/webpack-encore --dev
