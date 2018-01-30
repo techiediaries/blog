@@ -279,7 +279,6 @@ install:
 - composer install
 - php bin/console doctrine:database:create --env=test
 - php bin/console doctrine:schema:create --env=test
-- php bin/console doctrine:fixtures:load -n --env=test
 notifications:
 email:
 deploy:
@@ -409,7 +408,7 @@ doctrine:
         auto_mapping: true
 ```
 
-Move this piece of Yaml configuration to the dev config `app/config/config_dev.yml` file. Then, in the `app/config/config_prod.yml` file, you need the configuration to be slightly different. Paste the following into the bottom of this file:
+Move this piece of YAML configuration to the dev config (`app/config/config_dev.yml`) file. Then, in the `app/config/config_prod.yml` file, you need the configuration to be slightly different. Paste the following into the bottom of this file:
 
 ```yml
 # Doctrine Configuration
@@ -460,7 +459,7 @@ git push
 
 ## Instructions for Setting Up the Staging Environment
 
-If yu wish to make use of a staging environment for testing on, you are going to need to repeat some of the steps above. A staging environment allows you to make use of a direct replica of the production server, providing an environment for those with access to test new features before they're ready to be published for public.
+If you wish to make use of a staging environment for testing on, you are going to need to repeat some of the steps above. A staging environment allows you to make use of a direct replica of the production server, providing an environment for those with access to test new features before they're ready to be published for public.
 
 First, create your staging space on [Heroku](https://www.heroku.com) with the following command:
 
@@ -495,7 +494,7 @@ After that, you are going to need to create a staging area on Auth0, [log into y
 Once created, you need to make use of the Auth0 client Id, secret, and domain. You also need to make use of the database name returned to you when you ran the `cleardb:ignite` command. Replace the contents of the brackets in the examples below with these details. Then, run each of these commands:
 
 ```bash
-heroku config:set SYMFONY_ENV=staging
+heroku config:set SYMFONY_ENV=prod
 heroku config:set AUTH0_CLIENT_ID=(Your Auth0 Client ID)
 heroku config:set AUTH0_CLIENT_SECRET=(Your Auth0 client secret)
 heroku config:set AUTH0_DOMAIN=(Your Auth0 Domain)
