@@ -160,9 +160,9 @@ yarn run encore dev
 
 ### Installing Heroku CLI
 
-In order to use Heroku, we need to have an account. So [sign up here](https://signup.heroku.com/) and follow all instructions provided on the website.
+In order to use Heroku, you need to have an account. So, go to the [sign up page](https://signup.heroku.com/) and follow all instructions provided there.
 
-Once an account has been created, we're going to need to install the command line interface (CLI). Each operating system has a different method of installing Heroku CLI. So below is a list of the commands used to install this:
+Once your account has been created, you're going to need to install the Command Line Interface (CLI). Each operating system has a different method of installing the Heroku CLI. So, below is a list of the commands used to install this:
 
 * on MacOS: `brew install heroku/brew/heroku`
 * on Ubuntu Snap: `sudo snap install heroku --classic`
@@ -170,9 +170,9 @@ Once an account has been created, we're going to need to install the command lin
 * on Windows 64-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x64.exe)
 * on Windows 32-bit: [Installer](https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-x86.exe)
 
-Now we have an account and have the CLI installed on our system, we're going to need to create a space on Heroku. Running the following command will do this:
+Now that you have an account and have the CLI installed on your system, you're going to need to create a space on Heroku. Running the following command will do this:
 
-__NOTE__ Please change the `space-name-here` to be the space name you wish. Otherwise, you will find that the space name `space-name-here` is already in use by someone else.
+> __NOTE:__ Please change the `space-name-here` to be the space name you wish. Otherwise, you will find that the space name `space-name-here` is already in use by someone else.
 
 ```bash
 heroku apps:create space-name-here
@@ -180,32 +180,32 @@ heroku apps:create space-name-here
 
 ![Creating a Heroku space](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-space.png)
 
-Great, we can now access our website. If you take the URL that's given to you as a result of your command above, similar to the image above and put it into your browser, you should see the example page as shown in the image below:
+Great, you can now access your website. If you take the URL that's given to you as a result of your command above (similar to the previous image) and put it into your browser, you should see the example page as shown in the image below:
 
 ![Heroku space created](https://cdn.auth0.com/blog/symfony-part-3/heroku-space-browser.png)
 
-Now we have our space, we need to create our database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So please head over to [Heroku Verify](https://heroku.com/verify) to add your card details.
+Now that you have your space, you need to create your database. There are several different add-ons for Heroku in order to use a database in your package. However, although there are free plans, you still need to provide your card details. So, please, head over to [Heroku Verify](https://heroku.com/verify) to add your card details.
 
-Once verified, we're going to add the ClearDb add-on to our space. So in the Terminal let's run the following command to add a database to our blog to access:
+Once verified, you're going to add the [ClearDb add-on](https://elements.heroku.com/addons/cleardb) to your space. So, in the terminal, run the following command to add a database to support your blog engine:
 
 ```bash
 heroku addons:add cleardb:ignite
 ```
 
-When the command has finished running, we should see something similar to the image below:
+When the command has finished running, you should see something similar to the image below:
 
 ![Creating a ClearDB database](https://cdn.auth0.com/blog/symfony-part-3/create-heroku-database.png)
 
-Heroku stores the environment files themselves. So in order for our blog to use keys such as the database table name, user, password and so on. We need to store them as environment keys. Previously we placed this in a `.env` file.
+Heroku stores the environment files themselves. So, in order for your blog to use sensitive keys (such as the database table name, user, and password), you need to store them as environment keys. Previousl, you placed this in a `.env` file.
 
-The following is the structure of keys we're going to need to use:
+The following is the structure of keys you are going to need:
 
 ```bash
 heroku config:set SYMFONY_ENV=prod
 heroku config:set AUTH0_CLIENT_ID=(Your Auth0 Client ID)
 heroku config:set AUTH0_CLIENT_SECRET=(Your Auth0 client secret)
 heroku config:set AUTH0_DOMAIN=(Your Auth0 Domain)
-heroku config:set DATABASE_NAME=(Your database name shown in the image above)
+heroku config:set DATABASE_NAME=(Your database name, as shown by the heroku addons:add command)
 ```
 
 ### Installing Travis-ci
