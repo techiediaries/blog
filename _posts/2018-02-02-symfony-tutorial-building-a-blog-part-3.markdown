@@ -33,7 +33,6 @@ related:
 
 ---
 
-
 ## Symfony Tutorial: About Part 1 and Part 2
 
 [In the first article](https://auth0.com/blog/symfony-tutorial-building-a-blog-part-1/), we:
@@ -55,15 +54,15 @@ Besides that, authenticated authors were able to:
 * see all of their own blog posts;
 * and delete their own blog posts from the system.
 
-In this third article, we will be covering deployments to two different environments (`staging` and `production`). We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and [Travis-CI](https://travis-ci.com/)) allowing us to:
+In this third article, we will be covering deployments to two different environments: `staging` and `production`. We will be carrying this out by using two services, [Heroku](https://www.heroku.com) and [Travis-CI](https://travis-ci.com/), which will allow us to:
 
 * make code changes to the blog;
-* deploy these changes on committing them to GitHub
-* almost instantly see their changes in production and/or staging
+* deploy these changes automatically by committing them to GitHub;
+* and almost instantly see their changes in production and/or staging environments;
 
-## About [Heroku](https://www.heroku.com)
+## About Heroku
 
-[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). [Heroku](https://www.heroku.com) is used to deploy, manage and scale modern apps by developers. The service is very flexible, simple to use and quick to start allowing developers to focus more on the product rather than spending too much time on the technology. Added to this, [Heroku](https://www.heroku.com) is fully managed, this further reduces the time developers need to spend on maintaining servers and the hardware of the infrastructure.
+[Heroku](https://www.heroku.com) is a container-based cloud Platform as a Service (PaaS). Heroku is used to deploy, manage, and scale modern apps for developers. The service is very flexible, simple to use, and quick to start with. This allows developers to focus more on the product rather than spending too much time on the technology. Added to this, Heroku is fully managed, this further reduces the time developers need to spend on maintaining servers and the hardware of the infrastructure.
 
 ## About Travis CI
 
