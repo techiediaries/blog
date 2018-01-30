@@ -515,8 +515,6 @@ If you head over to your Heroku dashboard, you should see the build in progress 
 
 ## Conclusion
 
-The deployment process is a very broad subject. It can also be very daunting for someone who hasn't had any exposure to this part of development.
+The deployment process is a very broad subject. It can also be very daunting for someone who hasn't had any exposure to this part of development. Hopefully, this article will have given you a footstep into the world of deploying PHP applications.
 
-Hopefully, this article will have given you a footstep into the world of deploying PHP applications.
-
-With this article, you should have the foundation to creating, designing and deploying the blog you always wanted!
+With this article, you should have the foundation for creating, designing, and deploying the PHP application you always wanted!
