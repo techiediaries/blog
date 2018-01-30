@@ -156,7 +156,7 @@ yarn add @symfony/webpack-encore --dev
 yarn run encore dev
 ```
 
-## Install dependencies
+## Installing Dependencies
 
 ### Installing Heroku CLI
 
@@ -208,9 +208,9 @@ heroku config:set AUTH0_DOMAIN=(Your Auth0 Domain)
 heroku config:set DATABASE_NAME=(Your database name, as shown by the heroku addons:add command)
 ```
 
-### Installing Travis-ci
+### Installing Travis CI
 
-[Travis-ci](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please, make sure it is at least version 1.9.3 (2.0.0 recommended). You can check this by typing the following command in a terminal:
+[Travis CI](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please, make sure it is at least version 1.9.3 (2.0.0 recommended). You can check this by typing the following command in a terminal:
 
 ```bash
 ruby -v
@@ -300,7 +300,7 @@ There are 3 parts of this file where you need to input unique details:
 
 * And finally, the app your [Heroku](https://www.heroku.com) refers to, this is your [Heroku](https://www.heroku.com) space id. So, please, type it in next to `app: ` which is at the bottom of the file.
 
-## Configuring Symfony for production
+## Configuring Symfony for Production
 
 Now that you have set up and configured Heroku and [Travis CI](https://travis-ci.org/), you need to make some changes to your Symfony installation in order to be functional when hosted by [Heroku](https://www.heroku.com).
 
@@ -448,7 +448,7 @@ Replace the last line with:
 path: 'php://stderr'
 ```
 
-The final change is to remove the current PHPUnit test. Previously, you have removed the DefaultController, there is still a test for this which will attempt to run (and fail) when building in Travis-CI. So, remove the following directory `tests/AppBundle/Controller`.
+The final change is to remove the current PHPUnit test. Previously, you have removed the DefaultController, there is still a test for this which will attempt to run (and fail) when building in Travis CI. So, remove the following directory `tests/AppBundle/Controller`.
 
 It's time to commit all of your changes to your forked repository. This can be done by the following commands:
 
@@ -458,7 +458,7 @@ git commit -m "Added file changes to prepare for pushing to production"
 git push
 ```
 
-## Instructions for staging
+## Instructions for Setting Up the Staging Environment
 
 If yu wish to make use of a staging environment for testing on, you are going to need to repeat some of the steps above. A staging environment allows you to make use of a direct replica of the production server, providing an environment for those with access to test new features before they're ready to be published for public.
 
