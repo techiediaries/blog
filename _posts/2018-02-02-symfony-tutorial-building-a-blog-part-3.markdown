@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Symfony Tutorial: Deploying a blog (Part 3)"
+title: "Symfony Tutorial: Building a Blog (Part 3)"
 description: "Let's create and deploy a secure blog engine with Symfony."
 longdescription: "Creating applications with Symfony is easy and can be scaled to be used in any requirement. The tools that it provides to create and maintain web applications is amazing and replaces repetitive tasks. Let's use Symfony to create a blog engine."
 date: 2018-01-25 22:05
@@ -24,7 +24,7 @@ tags:
 - web-app
 related:
 - 2017-12-28-symfony-tutorial-building-a-blog-part-1
-- 2018-01-04creating-symfony-blog-part-2
+- 2018-01-04-creating-symfony-blog-part-2
 - 2016-06-23-creating-your-first-laravel-app-and-adding-authentication
 - 2017-05-08-the-ultimate-guide-to-deploying-php-applications
 ---
@@ -67,8 +67,8 @@ In this third article, we will be covering deployments to two different environm
 
 ## About Travis CI
 
-[Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. [Travis CI](https://travis-ci.org/) allows you to build and test your software hosted on GitHub, allowing you to publicise projects comfortable in knowing that project is fully functional for others to use. 
- 
+[Travis CI](https://travis-ci.org/) is a hosted, distributed, continuous integration service. [Travis CI](https://travis-ci.org/) allows you to build and test your software hosted on GitHub, allowing you to publicise projects comfortable in knowing that project is fully functional for others to use.
+
 With [Travis CI](https://travis-ci.org/), there are 2 different sites to use. [Travis-ci.org](https://travis-ci.org/) allows you test open source projects (public repositories). Whereas [Travis-ci.com](https://travis-ci.com/) allows you to test private projects but requires a fee dependant on the size of your project.
 
 ## Building the Blog Engine
@@ -83,7 +83,7 @@ Click the "Fork" button, found in the top right-hand corner of the browser. As s
 
 ![Forking a repository on GitHub](https://cdn.auth0.com/blog/symfony-part-3/fork-repository.png)
 
-Make sure you have followed all instructions in the first two parts. 
+Make sure you have followed all instructions in the first two parts.
 
 You will find that you now have a repository of the same name but under your account. Click the "Clone or download" button and copy the URL found in there.
 Next is to clone this repository for yourself, so run the following two commands. However, replace the URL with your own one:
@@ -209,7 +209,7 @@ heroku config:set DATABASE_NAME=(Your database name shown in the image above)
 ### Installing Travis-ci
 
 [Travis-ci](https://travis-ci.org/) can be installed via Ruby. If you have Ruby installed, please make sure it is at least version 1.9.3 (2.0.0 recommended).
-You can check this by typing in a Terminal: 
+You can check this by typing in a Terminal:
 
 ```bash
 ruby -v
@@ -279,18 +279,18 @@ install:
 - php bin/console doctrine:schema:create --env=test
 - php bin/console doctrine:fixtures:load -n --env=test
 notifications:
-email: 
+email:
 deploy:
   provider: heroku
   api_key:
-    secure: 
-  app: 
+    secure:
+  app:
 ```
 
 There are 3 parts of this file where we need to input unique details here:
 
 * First is our e-mail, please type in your e-mail next to the line: `email: `
-* Second is your secure api_key for [Heroku](https://www.heroku.com). If you run the following command, it'll put the encrypted [Heroku](https://www.heroku.com) API key for you: 
+* Second is your secure api_key for [Heroku](https://www.heroku.com). If you run the following command, it'll put the encrypted [Heroku](https://www.heroku.com) API key for you:
 
 ```bash
 travis encrypt $(heroku auth:token) --add deploy.api_key
@@ -512,11 +512,11 @@ git checkout -b staging
 git push --set-upstream origin staging
 ```
 
-If we head over to our Heroku dashboard, we should see the build in progress or complete. If we now head to the URL for our staging environment we'll see an exact duplicate of the production environment. 
+If we head over to our Heroku dashboard, we should see the build in progress or complete. If we now head to the URL for our staging environment we'll see an exact duplicate of the production environment.
 
 ## Conclusion
 
-The deployment process is a very broad subject. It can also be very daunting for someone who hasn't had any exposure to this part of development. 
+The deployment process is a very broad subject. It can also be very daunting for someone who hasn't had any exposure to this part of development.
 
 Hopefully, this article will have given you a footstep into the world of deploying PHP applications.
 
