@@ -41,6 +41,18 @@ As the prerequisites to follow this series, you will need some knowledge on web 
 
 Nevertheless, this series includes links to relevant articles, posts, and documents that provide better explanations of topics that deserve more attention.
 
+## Before Starting
+
+Although the previous section has not mentioned anything about [Git](https://git-scm.com/), this is a good tool to have around. All professional developers use Git (or another version control system like Mercurial or SVN) while developing, even for pet projects.
+
+Why would you start creating a project and don't back it up? You don't even have to pay for it. You can use services like [GitHub](https://github.com/) (the best!) or [BitBucket](https://bitbucket.org/) (not bad, to be honest) and save your code to trustworthy cloud infrastructures.
+
+Besides assuring that your code will remain safe, tools like that facilitate grasping the development process. For example, if you are using Git and you create a new buggy version of your app, you can easily move back to the previous code with just a couple of commands.
+
+Another great advantage (one that you will notice here) is that you can following each section of this series in separately and [easily see the changes between them](https://git-scm.com/docs/git-diff). This will make your life easier while learning through tutorials like this one.
+
+So, do yourself a favor and install Git. Also, create an account on GitHub (if you don't have one yet) and a repository to save your project. Then, after finishing each section, commit changes to this repository. Oh, and don't forget to [push these changes](https://help.github.com/articles/pushing-to-a-remote/).
+
 ## Bootstrapping a React Project with Create-React-App
 
 The very first thing you will do to create a game with React, Redux, and SVG is to use `create-react-app` to bootstrap your project. As you probably know (it doesn't matter if you don't), [`create-react-app` is an open-source tool, maintained by Facebook, that helps developers to start developing in React in no time](https://github.com/facebookincubator/create-react-app). Having Node.js and NPM installed locally (the latter has to be 5.2 and higher), you can use `create-react-app` without even installing it:
@@ -107,7 +119,7 @@ render() {
 // ... closing bracket and export statement
 ```
 
-Now is a good time to commit your files to Git or some other version control system (you do use a  version control system, right?).
+> **Don't forget** to commit your files to Git!
 
 ## Installing Redux and PropTypes
 
@@ -169,7 +181,7 @@ As you can see, defining what types your component is expecting is very easy wit
 Even though you have defined what the `App` component needs to render and what is the initial state of your Redux store, you still need a way to tie these elements together. That's exactly what *container* components do. To define a container in an organized fashion, you will want to create a directory called `containers` inside the `src` directory. Then, you can create a container called `Game` inside a file called `Game.js` in this new directory. This container will use the `connect` utility from `react-redux` to pass the `state.message` to the `message` props of the `App` component:
 
 ```js
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import App from '../App';
 
@@ -669,8 +681,239 @@ Running and checking your application now will bring an app that shows the follo
 
 ![Drawing SVG elements with React and Redux ](https://cdn.auth0.com/blog/aliens-go-home/cannon-react-component.png)
 
+### Making the Cannon Aim
+
+Your game is gaining ground. You have created the background elements (`Sky` and `Ground`) and your cannon. The problem now is that everything is inanimate. So, to make things interesting, you can focus on making your cannon aim. To do that, you could add the `onmousemove` event listener to your canvas and make it refresh on every event triggered (i.e. every time a user moves the mouse), but this would degrade the performance of your game.
+
+To overcome this situation, what you can do is to set an [uniform interval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) that checks the last mouse position to update the angle of your `CannonPipe` element. You are still going to use the `onmousemove` event listener in this strategy, the difference is that these events won't trigger a re-render. They will only update a property in your game and then the interval will use this property to trigger a re-render (by updating the Redux store).
+
+This is the first time that you will need a Redux *action* to update the state of your app (or the angle of your cannon). As such, you need to create a new directory called `actions` inside the `./src/` directory. In this new directory, you will need to create a file called `index.js` with the following code:
+
+```js
+export const MOVE_OBJECTS = 'MOVE_OBJECTS';
+
+export const moveObjects = mousePosition => ({
+  type: MOVE_OBJECTS,
+  mousePosition,
+});
+```
+
+Note that you are going to call this action `MOVE_OBJECTS` because you won't use this strategy to update only the cannon. In the next parts of this series, you will also use this same action to move cannon balls and flying objects.
+
+After defining this Redux action, you will have to refactor your reducer (the `index.js` file inside `./src/reducers/`) to deal with it:
+
+```js
+import { MOVE_OBJECTS } from '../actions';
+import moveObjects from './moveObjects';
+
+const initialState = {
+  angle: 45,
+};
+
+function reducer(state = initialState, action) {
+  switch (action.type) {
+    case MOVE_OBJECTS:
+      return moveObjects(state, action);
+    default:
+      return state;
+  }
+}
+
+export default reducer;
+```
+
+The new version of this file takes an action and, if its `type` is `MOVE_OBJECTS`, it calls a function called `moveObjects`. You still have to define this function but, before that, note that this new version also defines the initial state of your app to include a property called `angle` with the value `45`. This is the angle that your cannon will be aiming when your app starts.
+
+As you will see, the `moveObjects` function is also a Redux *reducer*. You will define this function in a new file because your game will have a good number of reducers and you want to keep things maintainable and organized. Therefore, create the `moveObjects.js` file inside the `./src/reducers/` and add the following code to it:
+
+```js
+import { calculateAngle } from '../utils/formulas';
+
+function moveObjects(state, action) {
+  if (!action.mousePosition) return state;
+  const { x, y } = action.mousePosition;
+  const angle = calculateAngle(0, 0, x, y);
+  return {
+    ...state,
+    angle,
+  };
+}
+
+export default moveObjects;
+```
+
+This code is quite simple, it just extracts the `x` and `y` properties from `mousePosition` and passes them to the `calculateAngle` function to get the new `angle`. Then, in the end, it generates a new state with the new angle.
+
+Now, you probably noticed that you haven't defined a `calculateAngle` function in your `formulas.js` file, right? The math behind calculating an angle based on two points is out of scope here, but if you are interested, you can check [this thread on StackExchange](https://math.stackexchange.com/questions/714378/find-the-angle-that-creating-with-y-axis-in-degrees) to understand how the magic happens. In the end, what you will need is to append the following functions to the `formulas.js` file (`./src/utils/formulas`):
+
+```js
+export const radiansToDegrees = radians => ((radians * 180) / Math.PI);
+
+// https://math.stackexchange.com/questions/714378/find-the-angle-that-creating-with-y-axis-in-degrees
+export const calculateAngle = (x1, y1, x2, y2) => {
+  if (x2 >= 0 && y2 >= 0) {
+    return 90;
+  } else if (x2 < 0 && y2 >= 0) {
+    return -90;
+  }
+
+  const dividend = x2 - x1;
+  const divisor = y2 - y1;
+  const quotient = dividend / divisor;
+  return radiansToDegrees(Math.atan(quotient)) * -1;
+};
+```
+
+> **Note:** The `atan` function, provided by the `Math` JavaScript object, returns results in radians. You will need this value converted to degrees. That's why you have to define (and use) the `radiansToDegrees` function.
+
+After defining both your new Redux action and your new Redux reducer, you will have to use them. As your game relies on Redux to manage its state, you need to map the `moveObjects` action to the `props` of your `App`. You will do this by refactoring the `Game` container. So, open the `Game.js` file (`./src/containers`) and replace its content with the following:
+
+```js
+import { connect } from 'react-redux';
+
+import App from '../App';
+import { moveObjects } from '../actions/index';
+
+const mapStateToProps = state => ({
+  angle: state.angle,
+});
+
+const mapDispatchToProps = dispatch => ({
+  moveObjects: (mousePosition) => {
+    dispatch(moveObjects(mousePosition));
+  },
+});
+
+const Game = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
+
+export default Game;
+```
+
+With these new mappings in place, you can focus on using them in the `App` component. So, open the `App.js` file (located at `./src/`) and replace its contents with this:
+
+```js
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import { getCanvasPosition } from './utils/formulas';
+import Canvas from './components/Canvas';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.trackMouse = this.trackMouse.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount() {
+    const self = this;
+    setInterval(() => {
+        self.props.moveObjects(self.canvasMousePosition);
+    }, 10);
+  }
+
+  trackMouse(event) {
+    this.canvasMousePosition = getCanvasPosition(event);
+  }
+
+  render() {
+    return (
+      <Canvas
+        angle={this.props.angle}
+        trackMouse={event => (this.trackMouse(event))}
+      />
+    );
+  }
+}
+
+App.propTypes = {
+  angle: PropTypes.number.isRequired,
+  moveObjects: PropTypes.func.isRequired,
+};
+
+export default App;
+```
+
+You will notice that this new version introduces a lot of changes. The following list summarizes them:
+
+- `constructor`: You need this method to bind the `this` reference of the `trackMouse` and `componentDidMount` methods to the correct object. If you don't understand what this means and you are curious, you can check [this doc](https://reactjs.org/docs/handling-events.html).
+- `componentDidMount`: You have defined [this lifecycle method](https://reactjs.org/docs/react-component.html#componentdidmount) to start the uniform interval that will trigger the `moveObjects` action.
+- `trackMouse`: You have defined this method to update the `canvasMousePosition` property of the `App` component. This property is used by the `moveObjects` action. Note that this property does not refer to the mouse position over the HTML document. [It refers to a relative position inside your canvas](https://stackoverflow.com/questions/10298658/mouse-position-inside-autoscaled-svg). You will define the `canvasMousePosition` function in a moment.
+- `render`: This method now passes the `angle` property and the `trackMouse` method to your `Canvas` component. This component will use `angle` to update the way it renders your cannon and the `trackMouse` to attach as an event listener to the `svg` element. You will update this component in a while.
+- `App.propTypes`: You now have two properties defined here, `angle` and `moveObjects`. The first one, `angle`, refers to the angle that your cannon is aiming to. The second one, `moveObjects`, is the function that is going to be triggered on an uniform interval to update your cannon.
+
+Now that you have updated your `App` component, you have to add the following function to the `formulas.js` file:
+
+```js
+export const getCanvasPosition = (event) => {
+  // mouse position on auto-scaling canvas
+  // https://stackoverflow.com/a/10298843/1232793
+
+  const svg = document.getElementById('aliens-go-home-canvas');
+  const point = svg.createSVGPoint();
+
+  point.x = event.clientX;
+  point.y = event.clientY;
+  const { x, y } = point.matrixTransform(svg.getScreenCTM().inverse());
+  return {x, y};
+};
+```
+
+If you are interested on why this is needed, [this StackOverflow thread is a good reference](https://stackoverflow.com/a/10298843/1232793).
+
+The last piece of software that you need to update to make your cannon aim is the `Canvas` component. Open the `Canvas.jsx` file (located at `./src/components`) and replace its contents with this:
+
+```js
+import React from 'react';
+import PropTypes from 'prop-types';
+import Sky from './Sky';
+import Ground from './Ground';
+import CannonBase from './CannonBase';
+import CannonPipe from './CannonPipe';
+
+const Canvas = (props) => {
+  const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
+  return (
+    <svg
+      id="aliens-go-home-canvas"
+      preserveAspectRatio="xMaxYMax none"
+      onMouseMove={props.trackMouse}
+      viewBox={viewBox}
+    >
+      <Sky />
+      <Ground />
+      <CannonPipe rotation={props.angle} />
+      <CannonBase />
+    </svg>
+  );
+};
+
+Canvas.propTypes = {
+  angle: PropTypes.number.isRequired,
+  trackMouse: PropTypes.func.isRequired,
+};
+
+export default Canvas;
+```
+
+The differences between the previous version and the new one are:
+
+- `CannonPipe.rotation`: This property is not hard-coded anymore. Now, it's tied to the state provided by the Redux store (through your `App` mappings).
+- `svg.onMouseMove`: You have added this event listener to your canvas to make your `App` component aware of the mouse position.
+- `Canvas.propTypes`: You have explicitly defined that this component needs `angle` and `trackMouse` to be happy.
+
+That's it! You are ready to see your cannon aiming feature in action. Go to your terminal, in the project root, and type `npm start` (if it's not running already). Then, open [http://localhost:3000/](http://localhost:3000/) in a web browser and move the mouse around. You cannon will keep rotating to follow your mouse.
+
+How fun is that!?
+
+{% include tweet_quote.html quote_text="I have created an animated cannon with React, Redux, and SVG! How fun is that!?" %}
+
 ## Conclusion and Next Steps
 
-In the first part of this series, you have learned about some important topics that will enable you to create the complete game. You have also used `create-react-app` to bootstrap your project and you have created some game elements like the cannon, the sky, and the ground. With these elements in place, you are ready to start adding some animation to your game.
+In the first part of this series, you have learned about some important topics that will enable you to create the complete game. You have also used `create-react-app` to bootstrap your project and you have created some game elements like the cannon, the sky, and the ground. In the end, you have added the aiming feature to your cannon. With these elements in place, you are ready to create the rest of the React components and to make them animated.
 
-In the next part, you will start by adding the aiming feature to your cannon and then you will define more game elements. For instance, you will create the flying objects, the cannon ball, and you will make them animated. Stay tuned!
+In the next article of this series, you are going to create these components, then you are going to make some flying discs appear randomly in some predefined positions. After that, you will also make your cannon shoot some cannon balls. This will be awesome!
+
+Stay tuned!
