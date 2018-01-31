@@ -96,7 +96,7 @@ Right now, what you will want to do is to remove some stuff that you won't need.
 - `App.test.js`: tests might be addressed in another article, but you won't use it for now;
 - `logo.svg`: you won't use React's logo in this game;
 
-Removing these files will probably generate an error if you try to execute you project. This is easily solved by removing two import statements from the `./src/App.js` file:
+Removing these files will probably generate an error if you try to execute your project. This is easily solved by removing two import statements from the `./src/App.js` file:
 
 ```js
 // remove both lines from ./src/App.js
@@ -236,15 +236,15 @@ Nevertheless, before creating your components with SVG and React, a quick review
 
 ### Quick Review on SVG
 
-SVG is one of the most cool and flexible web standards. SVG, which stands for Scalable Vector Graphics, is a markup language that allows developers to describe two dimensional based vector graphics. SVG is pretty similar to HTML. Both technologies are XML-based markup languages and work well with other web standards like CSS and the DOM. This means that you can apply CSS rules to SVG elements just like you would do with HTML elements, including animations.
+SVG is one of the coolest and flexible web standards. SVG, which stands for Scalable Vector Graphics, is a markup language that allows developers to describe two-dimensional based vector graphics. SVG is pretty similar to HTML. Both technologies are XML-based markup languages and work well with other web standards like CSS and the DOM. This means that you can apply CSS rules to SVG elements just like you would do with HTML elements, including animations.
 
 Throughout this series, you will create more than a dozen SVG components with React. You will even compose (group) SVG elements to form your game elements (like the cannon that shoots cannon balls).
 
-A thorough explanation about SVG is out of scope and would make this series too lengthy. So, if you are looking forward to learn the details of the SVG markup language, you can take a look at [the *SVG Tutorial* provided by Mozilla](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial) and at [this article about the SVG coordinate system](https://www.sarasoueidan.com/blog/svg-coordinate-systems/).
+A thorough explanation about SVG is out of scope and would make this series too lengthy. So, if you are looking forward to learning the details of the SVG markup language, you can take a look at [the *SVG Tutorial* provided by Mozilla](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial) and at [this article about the SVG coordinate system](https://www.sarasoueidan.com/blog/svg-coordinate-systems/).
 
 However, prior to start creating your components, there a few SVG characteristics that are important to understand. First, SVG and DOM enable developers to accomplish great things when combined. This makes using SVG with React very easy.
 
-Second, the SVG coordinate system is similar to the Cartesian plane, but upside-down. This means that negative vertical values are, by default, shown above the X axis. The horizontal values, on the other hand, are just like the Cartesian plane (i.e. negative values are shown to the left of the Y axis). This behavior could be easily changed by [applying a transformation to the SVG canvas](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform). However, in order not to confuse any other developer, it's better to stick with the default. You will get used soon.
+Second, the SVG coordinate system is similar to the Cartesian plane but upside-down. This means that negative vertical values are, by default, shown above the X-axis. The horizontal values, on the other hand, are just like the Cartesian plane (i.e. negative values are shown to the left of the Y-axis). This behavior could be easily changed by [applying a transformation to the SVG canvas](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform). However, in order not to confuse any other developer, it's better to stick with the default. You will get used soon.
 
 The third and last characteristic that you need to know is that SVG introduces a lot of new elements (e.g. `circle`, `rect`, and `path`). To use these elements, you cannot simply define them inside an HTML element. First, you must define an `svg` element (your canvas) where you will draw all your SVG components.
 
@@ -254,11 +254,11 @@ Drawing elements with SVG can be accomplished in three ways. First, you can use 
 
 The second way is to combine these basic elements to form more complex shapes. For example, you could use a `rect` with equals sides (this would be a square) and two lines to form the shape of a  house. However, this approach is still limited.
 
-The third and more flexible way is to use [`path` elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths). This kind of element allows developers to create fairly complex shapes. It does that by accepting a set of commands that instructs the browser how to draw a shape. For example, to draw an "L", you could create a `path` element that contains three commands:
+The third and more flexible way is to use [`path` elements](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths). This kind of element allows developers to create fairly complex shapes. It does that by accepting a set of commands that instruct the browser how to draw a shape. For example, to draw an "L", you could create a `path` element that contains three commands:
 
 1. `M 20 20`: this command instructs the browser to move its "pen" to the X and Y coordinates defined after `M` (i.e. `20, 20`);
-2. `V 80`: this command instructs the browser to draw a line from the previous point to the position `80` in the Y axis;
-3. `H 50`: this command instructs the browser to draw a line from the previous point to the position `50` in the X axis;
+2. `V 80`: this command instructs the browser to draw a line from the previous point to the position `80` in the Y-axis;
+3. `H 50`: this command instructs the browser to draw a line from the previous point to the position `50` in the X-axis;
 
 {% highlight html %}
 {% raw %}
@@ -291,7 +291,7 @@ In this case, the commands passed to the `path` element tell the browser:
 2. that the second control point lies on the point `110, 110`;
 4. to finish the curve on the point `110 20`;
 
-If you still don't understand exactly how Cubic Bezier curves work, don't worry. You will have the opportunity to practice during this series. Besides that, you can find a lot of tutorial around the web about this feature and you can always practice in tools like [JSFiddle](https://jsfiddle.net/) and [Codepen](https://codepen.io/).
+If you still don't understand exactly how Cubic Bezier curves work, don't worry. You will have the opportunity to practice during this series. Besides that, you can find a lot of tutorial on the web about this feature and you can always practice in tools like [JSFiddle](https://jsfiddle.net/) and [Codepen](https://codepen.io/).
 
 ### Creating the Canvas React Component
 
@@ -339,7 +339,7 @@ export default App;
 
 If your run (`npm start`) and check your application, you will see that the browser draws just a quarter of this circle. This happens because, by default, the origin axis is rendered in the top left corner of the window. Besides that, you will also see that the `svg` element does not fit the entire screen.
 
-To make things more interesting and easier to manage, you can make your canvas fit the entire screen. You will also want to reposition its origin to be on the center the X axis and to be near the bottom (you will add your cannon to the origin in a little while). To do both, you will need to change two files: `./src/components/Canvas.jsx` and `./src/index.css`.
+To make things more interesting and easier to manage, you can make your canvas fit the entire screen. You will also want to reposition its origin to be on the center the X-axis and to be near the bottom (you will add your cannon to the origin in a little while). To do both, you will need to change two files: `./src/components/Canvas.jsx` and `./src/index.css`.
 
 You can start by replacing the contents of the `Canvas` component with the following code:
 
@@ -366,7 +366,7 @@ In this new version, you have defined [the `viewBox` attribute](https://develope
 
 - `min-x`: This value defines what is the leftmost point that your users will see. So, to make the origin axis (and the circle) appear in the center of the screen, you divided your screen width by negative two (`window.innerWidth / -2`) to the get this attribute (`min-x`). Note that you need to use `-2` to make your canvas show the same amount of points to the left (negative) and to the right (positive) of the origin.
 - `min-y`: This value defines what will be the uppermost point of your canvas. Here, you have subtracted the `window.innerHeight` from `100` to give some area (`100` points) after the Y origin.
-- `width` and `height`: These are the values that define how many X and Y points your users will see in their screen.
+- `width` and `height`: These are the values that define how many X and Y points your users will see on their screen.
 
 Besides defining the `viewBox` attribute, you have also defined an attribute called [`preserveAspectRatio`](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio) in this new version. You have used `xMaxYMax none` on it to force uniform scaling of your canvas and its elements.
 
@@ -497,7 +497,7 @@ export const skyAndGroundWidth = 5000;
 
 After that, you can refactor both the `Sky` element and the `Ground` element to use this new constant.
 
-To wrap this section, don't forget to add the `Ground` element to your canvas (keep in mind that you need to add it between the `Sky` and the `circle` elements). [If you have any doubt about how to do these last steps, please take a look into this commit](https://github.com/auth0-blog/aliens-go-home-part-1/commit/f453eb5147821f0289ecd81b8ae8deb0b7941f0e).
+To wrap this section, don't forget to add the `Ground` element to your canvas (keep in mind that you need to add it between the `Sky` and the `circle` elements). [If you have any doubt about how to do these last steps, please take a look at this commit](https://github.com/auth0-blog/aliens-go-home-part-1/commit/f453eb5147821f0289ecd81b8ae8deb0b7941f0e).
 
 ### Creating the Cannon React Component
 
@@ -521,7 +521,7 @@ export const pathFromBezierCurve = (cubicBezierCurve) => {
 };
 ```
 
-This code is quite simple, it just extracts four attributes (`initialAxis`, `initialControlPoint`, `endingControlPoint`, `endingAxis`) from a parameter called `cubicBezierCurve` and pass them to a template literal that builds the Cubic Bezier curve representation.
+This code is quite simple, it just extracts four attributes (`initialAxis`, `initialControlPoint`, `endingControlPoint`, `endingAxis`) from a parameter called `cubicBezierCurve` and passes them to a template literal that builds the Cubic Bezier curve representation.
 
 With this file in place, you can start creating your cannon. To keep things more organized, you can divide your cannon into two parts: the `CannonBase` and the `CannonPipe`.
 
@@ -842,7 +842,7 @@ You will notice that this new version introduces a lot of changes. The following
 - `componentDidMount`: You have defined [this lifecycle method](https://reactjs.org/docs/react-component.html#componentdidmount) to start the uniform interval that will trigger the `moveObjects` action.
 - `trackMouse`: You have defined this method to update the `canvasMousePosition` property of the `App` component. This property is used by the `moveObjects` action. Note that this property does not refer to the mouse position over the HTML document. [It refers to a relative position inside your canvas](https://stackoverflow.com/questions/10298658/mouse-position-inside-autoscaled-svg). You will define the `canvasMousePosition` function in a moment.
 - `render`: This method now passes the `angle` property and the `trackMouse` method to your `Canvas` component. This component will use `angle` to update the way it renders your cannon and the `trackMouse` to attach as an event listener to the `svg` element. You will update this component in a while.
-- `App.propTypes`: You now have two properties defined here, `angle` and `moveObjects`. The first one, `angle`, refers to the angle that your cannon is aiming to. The second one, `moveObjects`, is the function that is going to be triggered on an uniform interval to update your cannon.
+- `App.propTypes`: You now have two properties defined here, `angle` and `moveObjects`. The first one, `angle`, refers to the angle that your cannon is aiming to. The second one, `moveObjects`, is the function that is going to be triggered on a uniform interval to update your cannon.
 
 Now that you have updated your `App` component, you have to add the following function to the `formulas.js` file:
 
@@ -861,7 +861,7 @@ export const getCanvasPosition = (event) => {
 };
 ```
 
-If you are interested on why this is needed, [this StackOverflow thread is a good reference](https://stackoverflow.com/a/10298843/1232793).
+If you are interested in why this is needed, [this StackOverflow thread is a good reference](https://stackoverflow.com/a/10298843/1232793).
 
 The last piece of software that you need to update to make your cannon aim is the `Canvas` component. Open the `Canvas.jsx` file (located at `./src/components`) and replace its contents with this:
 
