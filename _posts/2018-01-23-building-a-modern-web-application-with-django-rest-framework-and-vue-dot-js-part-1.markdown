@@ -151,6 +151,7 @@ django-admin startproject djangovuejsproject .
 Now, execute the following command to organize your Django project with [`catalog`](https://github.com/redsolution/django-catalog):
 
 ```bash
+pip install django-catalog
 python manage.py startapp catalog
 ```
 
