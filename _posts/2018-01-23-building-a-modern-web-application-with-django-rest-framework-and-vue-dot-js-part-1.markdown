@@ -119,10 +119,10 @@ Once you have all the back-end requirements installed, you will have to create a
 
 ```bash
 # create a directory to your project
-mkdir djangovuejsproject
+mkdir django-vue
 
 # move the cursor to it
-cd djangovuejsproject
+cd django-vue
 
 # initialize a virtual env on it
 python3 -m venv ./
@@ -145,13 +145,12 @@ pip install django
 The next step is to create the Django project using this command:
 
 ```bash
-django-admin startproject djangovuejsproject .
+django-admin startproject djangovue .
 ```
 
-Now, execute the following command to organize your Django project with [`catalog`](https://github.com/redsolution/django-catalog):
+Now, execute the following commands to organize your Django project with [`catalog`](https://github.com/redsolution/django-catalog):
 
 ```bash
-pip install django-catalog
 python manage.py startapp catalog
 ```
 
@@ -212,7 +211,7 @@ Vue.js will ask a bunch of questions while creating your project. You can answer
 * *Pick an ESLint preset:* Standard
 * *Set up unit tests:* No
 * *Setup e2e tests with Nightwatch?* No
-* *Should we run `npm install` for you after the project has been created? (recommended)* Yes, I use NPM
+* *Should we run `npm install` for you after the project has been created? (recommended)* Yes, use NPM
 
 Then, to run the initial Vue.js project, you can run the following code:
 
@@ -262,7 +261,7 @@ In the next part, you will build the API, but before that, you will add JWT auth
 
 For this reason, you will need to install the [Django REST framework](http://www.django-rest-framework.org/). You will also need to install the `djangorestframework-jwt` package for handling JWT authentication. You will set up `djangorestframework-jwt` to use Auth0 for signing the JWT tokens.
 
-To do that, head back to your terminal, make sure the virtual environment we previously created is activated, and then run the following commands to install both packages using `pip`:
+To do that, head back to your terminal, make sure the virtual environment we previously created is activated, and then run the following commands in the project root to install all packages using `pip`:
 
 ```bash
 pip install djangorestframework
@@ -283,7 +282,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-You will also need to the `REST_FRAMEWORK` application definition to `settings.py`:
+You will also need to add the `REST_FRAMEWORK` application definition to `settings.py`:
 
 ```python
 REST_FRAMEWORK = {
@@ -355,7 +354,7 @@ To do that, head over to your application and create a user with any valid usern
 python manage.py makemigrations --empty catalog
 ```
 
-This will generate the `catalog/migrations/0001_initial.py` file. In this file, you can add the following code:
+This will generate the `catalog/migrations/0001_initial.py` file. In this file, you can replace the content with the following code:
 
 ```python
 from django.db import migrations
@@ -399,13 +398,14 @@ To make sure the JWT authentication via Auth0 is working, you can add these two 
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
+
 def public(request):
     return HttpResponse("You don't need to be authenticated to see this")
 
 
 @api_view(['GET'])
 def private(request):
-    return HttpResponse("You should not see this message if not authenticated!");
+    return HttpResponse("You should not see this message if not authenticated!")
 ```
 
 Also, make sure to create the corresponding URLs in `urls.py`. You can replace the whole contents of this file with this:
@@ -421,7 +421,7 @@ urlpatterns = [
 ]
 ```
 
-If you rerun your Django project now (`python manage.py runserver`), you will have access only to the [http://127.0.0.1:8000/api/public/](http://127.0.0.1:8000/api/public/) URL. The other one, the `/api/private/`, will need a JWT to be accessed.
+If you rerun your Django project now (`python manage.py runserver`), you will have access only to the [http://127.0.0.1:8000/api/public/](http://127.0.0.1:8000/api/public/) URL. The other one (`/api/private/`) will need an access token to be accessed.
 
 ### Enabling CORS on Django
 
@@ -447,7 +447,6 @@ MIDDLEWARE = [  # Or MIDDLEWARE_CLASSES on Django < 1.10
     # ...
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # ...
 ]
 ```
 
