@@ -750,6 +750,8 @@ Auth0 login page.
 
 After authenticating, you will be redirected to your Vue.js application, where the *Call Private* and the *Log Out* buttons will appear. Clicking on the *Call Private* button will issue a GET request to the Django framework, alongside with an access token, and will fetch the secured message.
 
+![Django Vue](https://screenshotscdn.firefoxusercontent.com/images/ca2ea752-941c-408f-8743-914ac67db00d.png)
+
 {% include tweet_quote.html quote_text="I just learned how easy it is to integrate Django and Vue.js" %}
 
 ## Conclusion and Next Steps
