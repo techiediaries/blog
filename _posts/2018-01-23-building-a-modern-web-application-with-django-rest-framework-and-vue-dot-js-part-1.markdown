@@ -125,13 +125,13 @@ mkdir django-vue
 cd django-vue
 
 # initialize a virtual env on it
-python3 -m venv ./
+python3 -m venv ./env
 ```
 
 Next, you need to activate the virtual environment using `source`:
 
 ```bash
-source ./bin/activate
+source ./env/bin/activate
 ```
 
 ### Bootstrapping Django
@@ -142,15 +142,22 @@ You can now install Django using `pip`:
 pip install django
 ```
 
+Make sure you are inside the `django-vue` folder:
+
+```bash
+cd django-vue
+```
+
 The next step is to create the Django project using this command:
 
 ```bash
-django-admin startproject djangovue .
+django-admin startproject djangovue 
 ```
 
-Now, execute the following commands to organize your Django project with [`catalog`](https://github.com/redsolution/django-catalog):
+Now, navigate inside your Django project and execute the following commands to create the first Django application (You can name it catalog or whatever you want):
 
 ```bash
+cd djangovue
 python manage.py startapp catalog
 ```
 
@@ -167,6 +174,10 @@ INSTALLED_APPS = [
     'catalog'
 ]
 ```
+
+This is how the directory structure looks like at this point
+
+![django vue project structure](https://screenshotscdn.firefoxusercontent.com/images/b0dbb29e-3263-40ba-a719-aa0f0c1e9524.png)
 
 You can then migrate your database and start the development server:
 
@@ -227,6 +238,10 @@ After that, you should be able to visit the Vue.js application in your browser b
 
 ![Vue.js basic application](https://cdn.auth0.com/blog/django-vuejs/vuejs-basic-app.png)
 
+This is how the project directory structure looks like at this point 
+
+![django vue directory structure](https://screenshotscdn.firefoxusercontent.com/images/7070f9a7-5674-4749-b33e-1a328c684be3.png)
+
 ## Introduction to JWT
 
 [JWT](https://jwt.io/) stands for JSON Web Token and it's simply a JSON (JavaScript Object Notation) object that contains claims. Here it is the official definition in the [RFC 7519](https://tools.ietf.org/html/rfc7519):
@@ -278,7 +293,8 @@ Next, you'll need to add these packages to the list of installed apps in `settin
 INSTALLED_APPS = [
     #...
     'rest_framework',
-    'rest_framework_jwt'
+    'rest_framework_jwt',
+    'catalog'
 ]
 ```
 
@@ -593,7 +609,9 @@ export default class AuthService {
 }
 ```
 
-You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>`, and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejs.digituz.com.br`).
+You will need to replace `<YOUR_AUTH0_DOMAIN>`, `<YOUR_CLIENT_ID>`, `<YOUR_CALLBACK_URL>` ('http://localhost:8000'), and `<YOUR_AUDIENCE>` with the values from your client and API settings. The audience property refers to the identifier of your Auth0 API (i.e. if you followed the instructions, it will be `http://djangovuejs.digituz.com.br`).
+
+ 
 
 ### Creating the Homepage
 
